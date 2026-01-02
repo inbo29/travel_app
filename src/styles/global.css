@@ -2,11 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
 }
 
 body {
-  background-color: #020617;
-  color: white;
+  @apply bg-slate-950 text-white;
+  background-image: url('https://images.unsplash.com/photo-1533035353722-62db69c21d46?q=80&w=2574&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+#root {
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Overlay for readability */
+  min-height: 100%;
 }
