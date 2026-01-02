@@ -1,5 +1,7 @@
+import { glassClasses } from '@/styles/glass'
+
 export default function Home() {
-    const glassPanel = "bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-2xl"
+
 
     return (
         <main className="pt-20 pb-24 md:pb-10">
@@ -28,8 +30,8 @@ export default function Home() {
 
                         {/* 3. FEATURED CONTENT - Glass Card */}
                         <section>
-                            <h2 className="text-xl font-bold mb-4 drop-shadow-md">Editor's Pick</h2>
-                            <div className={`${glassPanel} overflow-hidden group`}>
+                            <h2 className="text-xl font-bold mb-4 drop-shadow-md text-slate-900 dark:text-white">Editor's Pick</h2>
+                            <div className={`${glassClasses} rounded-2xl overflow-hidden group`}>
                                 <div className="relative h-64 md:h-80 w-full">
                                     {/* Image underneath glass effect */}
                                     <img
@@ -66,8 +68,8 @@ export default function Home() {
                     <div className="lg:col-span-5 space-y-8">
 
                         {/* 2. QUICK ACTION HUB */}
-                        <div className={`${glassPanel} p-6`}>
-                            <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+                        <div className={`${glassClasses} rounded-2xl p-6`}>
+                            <h2 className="text-lg font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
                                 <span className="w-2 h-2 rounded-full bg-accent"></span>
                                 Quick Access
                             </h2>
@@ -102,15 +104,15 @@ export default function Home() {
 
                         {/* 4. SECONDARY SECTION - Nearby */}
                         <div>
-                            <h2 className="text-lg font-bold mb-4 drop-shadow-md">Nearby You</h2>
+                            <h2 className="text-lg font-bold mb-4 drop-shadow-md text-slate-900 dark:text-white">Nearby You</h2>
                             <div className="space-y-3">
                                 {[1, 2, 3].map(i => (
-                                    <div key={i} className={`${glassPanel} p-3 flex items-center gap-4 hover:bg-white/15 transition-colors cursor-pointer`}>
+                                    <div key={i} className={`${glassClasses} rounded-2xl p-3 flex items-center gap-4 hover:bg-white/80 dark:hover:bg-white/10 transition-colors cursor-pointer`}>
                                         <div className="w-16 h-16 rounded-lg bg-gray-500 overflow-hidden shrink-0">
                                             <img src={`https://source.unsplash.com/random/200x200?mongolia,${i}`} className="w-full h-full object-cover" />
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <h4 className="font-bold truncate">Nomad Home Stay #{i}</h4>
+                                            <h4 className="font-bold truncate text-slate-900 dark:text-white">Nomad Home Stay #{i}</h4>
                                             <p className="text-xs text-sub-light dark:text-sub-dark">2.5km away • Cultural</p>
                                         </div>
                                         <div className="text-accent font-bold text-sm">$25</div>
