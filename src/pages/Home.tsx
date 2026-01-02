@@ -1,8 +1,8 @@
 export default function Home() {
-    const glassPanel = "bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl"
+    const glassPanel = "bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-2xl"
 
     return (
-        <main className="pt-20 pb-24 md:pb-10 min-h-screen text-white">
+        <main className="pt-20 pb-24 md:pb-10">
 
             <div className="max-w-7xl mx-auto px-4 md:px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -18,10 +18,10 @@ export default function Home() {
                             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4 drop-shadow-lg">
                                 Everything floats <br /> on nature.
                             </h1>
-                            <p className="text-lg text-white/90 mb-8 max-w-lg drop-shadow-md">
+                            <p className="text-lg text-sub-light dark:text-sub-dark mb-8 max-w-lg drop-shadow-md">
                                 Experience the vast steppes and crystal clear lakes through transparent calmness.
                             </p>
-                            <button className="px-8 py-3 bg-white/10 backdrop-blur-md border border-accent text-accent font-bold rounded-xl hover:bg-accent hover:text-white transition-all">
+                            <button className="px-8 py-3 bg-black/5 dark:bg-white/10 backdrop-blur-md border border-accent text-accent font-bold rounded-xl hover:bg-accent hover:text-white transition-all">
                                 Start Journey
                             </button>
                         </section>
@@ -39,11 +39,11 @@ export default function Home() {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-                                    <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold border border-white/20">
+                                    <div className="absolute top-4 left-4 bg-black/10 dark:bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold border border-white/20 text-white">
                                         Recommended
                                     </div>
 
-                                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                                         <h3 className="text-2xl font-bold mb-2">Hidden Valley Trek</h3>
                                         <div className="flex items-center justify-between">
                                             <div className="flex gap-3 text-sm text-white/80">
@@ -85,7 +85,7 @@ export default function Home() {
                                         key={item.name}
                                         className={`
                         flex flex-col items-start justify-center p-4 rounded-xl
-                        bg-white/5 hover:bg-white/10 transition-all border border-white/5
+                        bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all border border-black/5 dark:border-white/5
                         text-left group relative overflow-hidden
                         ${idx === 0 ? 'col-span-2 flex-row items-center gap-4' : ''}
                       `}
@@ -93,7 +93,7 @@ export default function Home() {
                                         <div className="text-2xl mb-1 group-hover:scale-110 transition-transform">{item.icon}</div>
                                         <div>
                                             <span className="font-bold block text-sm">{item.name}</span>
-                                            <span className="text-xs text-white/50">{item.desc}</span>
+                                            <span className="text-xs text-sub-light dark:text-sub-dark">{item.desc}</span>
                                         </div>
                                     </button>
                                 ))}
@@ -111,7 +111,7 @@ export default function Home() {
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <h4 className="font-bold truncate">Nomad Home Stay #{i}</h4>
-                                            <p className="text-xs text-white/60">2.5km away • Cultural</p>
+                                            <p className="text-xs text-sub-light dark:text-sub-dark">2.5km away • Cultural</p>
                                         </div>
                                         <div className="text-accent font-bold text-sm">$25</div>
                                     </div>

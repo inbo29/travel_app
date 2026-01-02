@@ -5,7 +5,7 @@ import Header from '@/components/Header'
 
 export default function App() {
     return (
-        <>
+        <div className="min-h-screen bg-bg-light dark:bg-bg-dark text-text-light dark:text-text-dark transition-colors duration-300">
             <Header />
             <Routes>
                 <Route path="/" element={<Navigate to="/home" />} />
@@ -17,6 +17,6 @@ export default function App() {
             </Routes>
 
             <BottomNav />
-        </>
+        </div>
     )
 }
