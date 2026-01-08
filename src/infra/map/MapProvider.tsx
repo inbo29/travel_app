@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
-import { MapState, LatLng } from './types'
+import { MapState, LatLng, DEFAULT_CENTER, DEFAULT_ZOOM } from './types'
 
 type MapContextType = {
     state: MapState
@@ -15,8 +15,8 @@ const MapContext = createContext<MapContextType | null>(null)
 
 export const MapProvider = ({ children }: { children: React.ReactNode }) => {
     const [state, setState] = useState<MapState>({
-        center: { lat: 47.9186, lng: 106.9170 }, // Ulaanbaatar
-        zoom: 13,
+        center: DEFAULT_CENTER,
+        zoom: DEFAULT_ZOOM,
     })
 
     return (

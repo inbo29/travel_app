@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useI18n } from '@/hooks/useI18n'
-import PaymentProcess from '@/components/payment/PaymentProcess'
+import { PaymentProcess } from '@/infra/payment'
 
 export default function TicketCheckout() {
     const { t } = useI18n()

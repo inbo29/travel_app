@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/context/ThemeContext'
 import { LanguageProvider } from '@/context/LanguageContext'
 import './styles/global.css'
 
-import { MapProvider } from '@/maps/MapProvider'
+import { MapProvider } from '@/infra/map'
 
 const queryClient = new QueryClient()
 

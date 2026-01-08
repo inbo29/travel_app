@@ -178,5 +178,36 @@
             "submit": "Submit Review",
             "skip": "Skip for now"
         }
+    },
+    "tour": {
+        "title": "Discover New Adventures",
+        "book": "Book Now",
+        "category": {
+            "all": "All",
+            "history": "History",
+            "nature": "Nature",
+            "food": "Food",
+            "adventure": "Adventure"
+        },
+        "details": {
+            "overview": "Overview",
+            "itinerary": "Itinerary",
+            "included": "Included"
+        }
+    },
+    "guide": {
+        "title": "Find Your Perfect Guide",
+        "hire": "Hire Guide",
+        "verified": "Verified Expert",
+        "about": "About Me",
+        "languages": "Languages",
+        "services": "Services Offered",
+        "rate": "Price per hour"
+    },
+    "booking": {
+        "summary": "Booking Summary",
+        "pay": "Confirm & Pay",
+        "success": "You're All Set!",
+        "id": "Booking ID"
     }
 }

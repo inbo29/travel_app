@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import { ThemeToggle } from '@/components/ThemeToggle'
-import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { ThemeToggle } from '@/ui/ThemeToggle'
+import { LanguageSwitcher } from '@/ui/LanguageSwitcher'
 import { useI18n } from '@/hooks/useI18n'
 
 export default function Header() {

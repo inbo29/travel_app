@@ -178,5 +178,36 @@
             "submit": "후기 제출",
             "skip": "다음에 하기"
         }
+    },
+    "tour": {
+        "title": "새로운 모험 발견",
+        "book": "지금 예약하기",
+        "category": {
+            "all": "전체",
+            "history": "역사",
+            "nature": "자연",
+            "food": "음식",
+            "adventure": "모험"
+        },
+        "details": {
+            "overview": "개요",
+            "itinerary": "일정",
+            "included": "포함 내역"
+        }
+    },
+    "guide": {
+        "title": "완벽한 가이드 찾기",
+        "hire": "가이드 고용하기",
+        "verified": "인증된 전문가",
+        "about": "자기소개",
+        "languages": "지원 언어",
+        "services": "제공 서비스",
+        "rate": "시간당 요금"
+    },
+    "booking": {
+        "summary": "예약 요약",
+        "pay": "결제 및 확인",
+        "success": "예약이 완료되었습니다!",
+        "id": "예약 ID"
     }
 }

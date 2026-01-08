@@ -11,3 +11,10 @@ export type MapState = {
     route?: LatLng[]
     driverPosition?: LatLng
 }
+
+export const DEFAULT_CENTER: LatLng = {
+    lat: 47.8864,
+    lng: 106.9057,
+}
+
+export const DEFAULT_ZOOM = 13

@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from '@/layouts/MainLayout'
-import Home from '@/pages/Home'
+import Home from '@/pages/home'
 import { useI18n } from '@/hooks/useI18n'
 
 // Tickets Module
@@ -17,6 +17,15 @@ import TaxiMatching from '@/pages/taxi/TaxiMatching'
 import TaxiRide from '@/pages/taxi/TaxiRide'
 import TaxiCompletion from '@/pages/taxi/TaxiCompletion'
 import TaxiHistory from '@/pages/taxi/TaxiHistory'
+
+// Tour & Guide Module
+import TourList from '@/pages/tours/index'
+import TourDetail from '@/pages/tours/[id]'
+import GuideList from '@/pages/guides/index'
+import GuideDetail from '@/pages/guides/[id]'
+import InterpreterService from '@/pages/interpreter/service'
+import BookingSummary from '@/pages/booking/summary'
+import BookingSuccess from '@/pages/booking/success'
 
 export default function App() {
     const { t } = useI18n()
@@ -42,6 +51,19 @@ export default function App() {
                 <Route path="/taxi/ride" element={<TaxiRide />} />
                 <Route path="/taxi/completion" element={<TaxiCompletion />} />
                 <Route path="/taxi/history" element={<TaxiHistory />} />
+
+                {/* Tour & Guide Module Routes */}
+                <Route path="/tours" element={<TourList />} />
+                <Route path="/tours/:id" element={<TourDetail />} />
+                <Route path="/guides" element={<GuideList />} />
+                <Route path="/guides/:id" element={<GuideDetail />} />
+
+                {/* Interpreter Module Routes */}
+                <Route path="/interpreter/service" element={<InterpreterService />} />
+
+                {/* Unified Booking Routes */}
+                <Route path="/booking/summary" element={<BookingSummary />} />
+                <Route path="/booking/success" element={<BookingSuccess />} />
 
                 <Route path="/translator" element={<div className="pt-24 px-6 text-white text-2xl font-bold">{t('nav.translate')}</div>} />
                 <Route path="/map" element={<div className="pt-24 px-6 text-white text-2xl font-bold">{t('nav.map')}</div>} />

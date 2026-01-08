@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { glassClasses } from '@/styles/glass'
 import { useI18n } from '@/hooks/useI18n'
 import { useTaxiStore } from '@/store/taxiStore'
-import PaymentProcess from '@/components/payment/PaymentProcess'
+import { PaymentProcess } from '@/infra/payment'
 
 export default function TaxiCompletion() {
     const { t } = useI18n()

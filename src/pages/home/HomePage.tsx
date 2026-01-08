@@ -1,7 +1,7 @@
 import { Routes, Route, Outlet } from 'react-router-dom'
 import HomeMain from './HomeMain'
 
-export default function Home() {
+export default function HomePage() {
     return (
         <main className="pt-24 pb-24 lg:pt-32 min-h-screen">
             <div className="max-w-7xl mx-auto px-4 md:px-6">
