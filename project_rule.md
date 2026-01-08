@@ -375,6 +375,89 @@ Copy code
 const IS_DEMO = import.meta.env.VITE_APP_ENV === 'demo'
 
 
+10. ROUTING & LAYOUT RULE (추가)
+10.1 Routing 기본 원칙
+
+모든 화면은 src/pages 기준으로 관리한다
+
+pages 폴더는 Route 단위 화면만 포함
+
+재사용 UI는 절대 pages에 두지 않는다
+
+10.2 Layout 규칙 (중요)
+
+Header / Bottom Navigation은 Layout 책임
+
+각 화면(pages)은 Layout을 직접 제어하지 않는다
+
+📁 디렉토리 추가 (권장):
+
+src
+ ├── layouts
+ │   └── MainLayout.tsx   # Header + BottomNav 포함
+
+10.3 Route 계층 구조 (확정)
+/
+├─ /home                (메인 허브)
+│   ├─ /home/travel-log
+│   ├─ /home/tickets
+│   ├─ /home/store
+│   └─ /home/rates
+│
+├─ /translator
+├─ /map
+├─ /exchange
+└─ /mypage
+    ├─ /mypage/settings
+    ├─ /mypage/settings/theme
+    └─ /mypage/settings/language
+
+
+⚠️ Taxi / Tickets / Store는 최상위 Route 금지
+
+10.4 Bottom Navigation 규칙
+
+Bottom Navigation은 다음 Route만 직접 연결한다:
+
+/home
+/translator
+/map
+/exchange
+/mypage
+
+
+Bottom Tab은 5개 초과 금지
+
+기능성 화면은 반드시 /home/* 또는 /map/* 하위로 이동
+
+10.5 Pages 내부 구조 규칙
+
+📁 예시:
+
+pages
+ ├── home
+ │   ├── Home.tsx        # 내부 라우터
+ │   ├── HomeMain.tsx    # 실제 홈 화면
+ │   ├── Tickets.tsx
+ │   ├── TravelLog.tsx
+ │   └── Rates.tsx
+
+
+Home.tsx는 Router 역할만 담당
+
+실제 UI는 HomeMain.tsx에 구현
+
+10.6 Navigation 규칙
+
+모든 이동은 navigate() 기반
+
+URL 하드코딩 금지
+
+Quick Access / Card / Button은 항상 Route 기반 이동
+
+navigate('/home/tickets')
+navigate('/map/safety')
+
 [추가] 11. GLOBAL STATE SYSTEM RULE
 ## 11. GLOBAL STATE SYSTEM RULE
 

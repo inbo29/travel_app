@@ -7,20 +7,20 @@ export default {
         extend: {
             colors: {
                 bg: {
-                    dark: '#020617',   // slate-950
-                    light: '#F8FAFC'   // slate-50
+                    dark: '#0B1120',   // Deep Navy/Slate
+                    light: '#F8F9FA'   // Nature Warm Grey
                 },
                 card: {
-                    dark: '#020617',
-                    light: '#FFFFFF'
+                    dark: 'rgba(255, 255, 255, 0.05)',
+                    light: 'rgba(255, 255, 255, 0.7)'
                 },
                 text: {
-                    dark: '#E5E7EB',
-                    light: '#020617'
+                    dark: '#FFFFFF',
+                    light: '#0F172A'   // slate-900
                 },
                 sub: {
-                    dark: '#94A3B8',
-                    light: '#475569'
+                    dark: '#94A3B8',   // slate-400
+                    light: '#475569'   // slate-600
                 },
                 accent: '#22C55E'
             }

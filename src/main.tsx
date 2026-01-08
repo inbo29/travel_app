@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ThemeProvider>
             <LanguageProvider>
                 <QueryClientProvider client={queryClient}>
-                    <BrowserRouter basename="/smart-tourism">
+                    <BrowserRouter basename="/travel_app">
                         <App />
                     </BrowserRouter>
                 </QueryClientProvider>

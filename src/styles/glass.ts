@@ -1,2 +1,2 @@
 
-export const glassClasses = "backdrop-blur-md border border-white/20 bg-white/70 text-slate-900 dark:bg-black/40 dark:text-white"
+export const glassClasses = "backdrop-blur-md border border-white/10 dark:border-white/5 bg-white/70 dark:bg-white/[0.05] shadow-sm transition-all duration-300"

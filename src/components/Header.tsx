@@ -1,54 +1,43 @@
 import { ThemeToggle } from '@/components/ThemeToggle'
 
 export default function Header() {
-
     return (
-        <header className="fixed top-0 left-0 right-0 z-40 h-14 bg-white/70 dark:bg-black/30 backdrop-blur-md border-b border-black/5 dark:border-white/10 transition-colors duration-300">
-            <div className="max-w-7xl mx-auto h-full px-4 flex items-center justify-between">
+        <header className="fixed top-0 left-0 right-0 z-50 h-16 bg-white/70 dark:bg-bg-dark/50 backdrop-blur-xl border-b border-black/[0.03] dark:border-white/[0.03] transition-all duration-300">
+            <div className="max-w-7xl mx-auto h-full px-4 md:px-6 flex items-center justify-between gap-4">
                 {/* Left: Logo */}
-                <div className="flex items-center gap-2">
-                    <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white drop-shadow-md">
+                <div className="flex items-center gap-2 shrink-0">
+                    <span className="font-bold text-2xl tracking-tighter text-slate-900 dark:text-white">
                         Trap
                     </span>
                 </div>
 
-                {/* Center: Search (Desktop only) */}
-                <div className="hidden md:flex flex-1 max-w-md mx-8 relative">
-                    <input
-                        type="text"
-                        placeholder="Search for trips, guides..."
-                        className="w-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/20 rounded-full py-2 pl-4 pr-10 text-sm focus:ring-2 focus:ring-accent/50 outline-none text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-white/60"
-                    />
-                    <button className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-white/70 hover:text-slate-900 dark:hover:text-white">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {/* Center: Search (PC/Mobile unified but responsive) */}
+                <div className="flex-1 max-w-xl relative group">
+                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                        <svg className="w-4 h-4 text-slate-400 dark:text-white/40 group-focus-within:text-accent transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                    </button>
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Search Trip / Guide / Place"
+                        className="w-full bg-black/[0.03] dark:bg-white/[0.05] backdrop-blur-md border border-black/5 dark:border-white/10 rounded-2xl py-2.5 pl-11 pr-4 text-sm focus:ring-2 focus:ring-accent/30 focus:bg-white/90 dark:focus:bg-white/10 outline-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/30 transition-all font-medium"
+                    />
                 </div>
 
                 {/* Right: Actions */}
-                <div className="flex items-center gap-3">
-                    {/* Mobile Search Icon */}
-                    <button className="md:hidden p-2 text-slate-700 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10 rounded-full">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </button>
-
-                    {/* Theme Toggle */}
+                <div className="flex items-center gap-2 md:gap-4 shrink-0">
                     <ThemeToggle />
 
-                    {/* Notification */}
-                    <button className="p-2 text-slate-700 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10 rounded-full relative">
+                    <button className="hidden sm:flex p-2.5 text-slate-600 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10 rounded-xl transition-colors relative">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                         </svg>
-                        <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500/90 rounded-full border border-white/20" />
+                        <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-accent rounded-full border-2 border-white dark:border-bg-dark" />
                     </button>
 
-                    {/* Profile */}
-                    <button className="w-8 h-8 rounded-full bg-black/10 dark:bg-white/20 overflow-hidden ring-2 ring-transparent hover:ring-accent/50 transition-all">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Profile" className="w-full h-full object-cover" />
+                    <button className="w-9 h-9 rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden ring-2 ring-transparent hover:ring-accent/50 transition-all group p-0.5">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Profile" className="w-full h-full object-cover rounded-[10px]" />
                     </button>
                 </div>
             </div>
