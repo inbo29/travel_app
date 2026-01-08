@@ -1,0 +1,51 @@
+{
+    "header": {
+        "searchPlaceholder": "여행 / 가이드 / 명소 검색"
+    },
+    "nav": {
+        "home": "홈",
+        "translate": "번역",
+        "map": "지도",
+        "payme": "페이메",
+        "my": "마이"
+    },
+    "home": {
+        "tag": "몽골 발견하기",
+        "title": "모든 것이 자연 위를",
+        "titleAccent": "유영합니다.",
+        "subtitle": "광활한 초원과 수정처럼 맑은 호수를 프리미엄하고 투명한 평온함 속에서 경험해 보세요.",
+        "start": "여행 시작하기",
+        "explore": "여행지 탐색"
+    },
+    "quick": {
+        "taxi": "택시",
+        "guide": "가이드",
+        "payme": "결제 및 환전",
+        "tickets": "티켓",
+        "translate": "번역",
+        "market": "시세",
+        "map": "지도",
+        "travelLog": "여행 기록"
+    },
+    "sections": {
+        "editorsPick": "에디터 추천",
+        "recommended": "추천 여행지",
+        "nearby": "내 주변",
+        "viewAll": "전체 보기",
+        "seeMore": "더 보기"
+    },
+    "mock": {
+        "trekTitle": "히든 밸리 트레킹 체험",
+        "trekFeatures": "3일 • 전문 가이드 동행",
+        "bookNow": "지금 예약하기",
+        "altaiTitle": "알타이 산맥 원정대",
+        "altaiFeatures": "오지 탐험 • 12일",
+        "nomadTitle": "유목민 홈스테이",
+        "nomadFeatures": "2.5km 거리 • 초원 전망",
+        "night": "박",
+        "person": "인",
+        "cultural": "문화 체험",
+        "localStay": "현지 숙박",
+        "highlyRecommended": "강력 추천"
+    }
+}

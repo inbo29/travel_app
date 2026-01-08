@@ -1,0 +1,51 @@
+{
+    "header": {
+        "searchPlaceholder": "旅行 / ガイド / スポットを検索"
+    },
+    "nav": {
+        "home": "ホーム",
+        "translate": "翻訳",
+        "map": "マップ",
+        "payme": "ペイメ",
+        "my": "マイ"
+    },
+    "home": {
+        "tag": "モンゴルを発見する",
+        "title": "すべてが自然の上に",
+        "titleAccent": "浮かんでいます。",
+        "subtitle": "広大な草原と水晶のように澄んだ湖を、プレミアムで透明感のある静寂の中で体験してください。",
+        "start": "旅を始める",
+        "explore": "目的地を探す"
+    },
+    "quick": {
+        "taxi": "タクシー",
+        "guide": "ガイド",
+        "payme": "決済・両替",
+        "tickets": "チケット",
+        "translate": "翻訳",
+        "market": "相場",
+        "map": "マップ",
+        "travelLog": "旅行記"
+    },
+    "sections": {
+        "editorsPick": "エディターのおすすめ",
+        "recommended": "おすすめ",
+        "nearby": "周辺スポット",
+        "viewAll": "すべて表示",
+        "seeMore": "もっと見る"
+    },
+    "mock": {
+        "trekTitle": "ヒドゥンバレー・トレッキング",
+        "trekFeatures": "3日間 • 専門ガイド同行",
+        "bookNow": "今すぐ予約",
+        "altaiTitle": "アルタイ山脈遠征隊",
+        "altaiFeatures": "秘境体験 • 12日間",
+        "nomadTitle": "遊牧民ホームステイ",
+        "nomadFeatures": "2.5km先 • 草原の眺め",
+        "night": "泊",
+        "person": "名",
+        "cultural": "文化",
+        "localStay": "現地滞在",
+        "highlyRecommended": "おすすめ"
+    }
+}

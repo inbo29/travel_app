@@ -1,0 +1,51 @@
+{
+    "header": {
+        "searchPlaceholder": "Search Trip / Guide / Place"
+    },
+    "nav": {
+        "home": "Home",
+        "translate": "Translate",
+        "map": "Map",
+        "payme": "Payme",
+        "my": "My"
+    },
+    "home": {
+        "tag": "DISCOVER MONGOLIA",
+        "title": "Everything floats",
+        "titleAccent": "on nature.",
+        "subtitle": "Experience the vast steppes and crystal clear lakes through premium, transparent calmness.",
+        "start": "Start Journey",
+        "explore": "Explore Destinations"
+    },
+    "quick": {
+        "taxi": "Taxi",
+        "guide": "Guide",
+        "payme": "Pay & Exchange",
+        "tickets": "Tickets",
+        "translate": "Translate",
+        "market": "Market",
+        "map": "Map",
+        "travelLog": "Travel Log"
+    },
+    "sections": {
+        "editorsPick": "Editor's Pick",
+        "recommended": "Recommended",
+        "nearby": "Nearby You",
+        "viewAll": "View All",
+        "seeMore": "See More"
+    },
+    "mock": {
+        "trekTitle": "Hidden Valley Trek Experience",
+        "trekFeatures": "3 Days • Professional Guide",
+        "bookNow": "Book Now",
+        "altaiTitle": "Altai Mountains Expedition",
+        "altaiFeatures": "Remote experience • 12 Days",
+        "nomadTitle": "Nomad Home Stay",
+        "nomadFeatures": "2.5km away • Steppe View",
+        "night": "Night",
+        "person": "Person",
+        "cultural": "Cultural",
+        "localStay": "Local Stay",
+        "highlyRecommended": "Highly Recommended"
+    }
+}

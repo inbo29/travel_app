@@ -7,7 +7,7 @@ interface LanguageContextValue {
     setLang: (lang: Language) => void
 }
 
-const LanguageContext = createContext<LanguageContextValue | null>(null)
+export const LanguageContext = createContext<LanguageContextValue | null>(null)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const [lang, setLangState] = useState<Language>('en')
@@ -17,8 +17,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         if (stored) {
             setLangState(stored)
         } else {
-            const browserLang = navigator.language.slice(0, 2) as Language
-            setLangState(browserLang || 'en')
+            const browserLang = navigator.language.slice(0, 2)
+            if (['en', 'mn', 'ko', 'ja', 'zh'].includes(browserLang)) {
+                setLangState(browserLang as Language)
+            } else {
+                setLangState('en')
+            }
         }
     }, [])
 

@@ -1,14 +1,17 @@
 import { NavLink } from 'react-router-dom'
+import { useI18n } from '@/hooks/useI18n'
 
 const tabs = [
-    { to: '/home', label: 'Home' },
-    { to: '/translator', label: 'Translate' },
-    { to: '/map', label: 'Map' },
-    { to: '/exchange', label: 'Exchange' },
-    { to: '/profile', label: 'My' }
+    { to: '/home', key: 'home' },
+    { to: '/translator', key: 'translate' },
+    { to: '/map', key: 'map' },
+    { to: '/exchange', key: 'payme' },
+    { to: '/profile', key: 'my' }
 ]
 
 export default function BottomNav() {
+    const { t } = useI18n()
+
     return (
         <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg bg-white/70 dark:bg-bg-dark/50 backdrop-blur-xl border border-black/[0.03] dark:border-white/[0.03] rounded-3xl shadow-2xl shadow-black/10">
             <ul className="flex justify-around items-center py-3 px-2">
@@ -23,7 +26,7 @@ export default function BottomNav() {
                         >
                             {({ isActive }) => (
                                 <>
-                                    <span className="text-[10px] font-bold tracking-tighter uppercase">{tab.label}</span>
+                                    <span className="text-[10px] font-bold tracking-tighter uppercase">{t(`nav.${tab.key}`)}</span>
                                     {isActive && <div className="w-1.5 h-1.5 rounded-full bg-accent mt-0.5" />}
                                 </>
                             )}

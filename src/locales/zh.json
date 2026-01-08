@@ -1,0 +1,51 @@
+{
+    "header": {
+        "searchPlaceholder": "搜索 行程 / 向导 / 地点"
+    },
+    "nav": {
+        "home": "首页",
+        "translate": "翻译",
+        "map": "地图",
+        "payme": "支付",
+        "my": "我的"
+    },
+    "home": {
+        "tag": "发现蒙古",
+        "title": "万物皆漂浮",
+        "titleAccent": "于自然之上。",
+        "subtitle": "在高端透明的宁静中，体验广袤的草原和晶莹剔透的湖泊。",
+        "start": "开始旅程",
+        "explore": "探索目的地"
+    },
+    "quick": {
+        "taxi": "出租车",
+        "guide": "向导",
+        "payme": "支付与汇率",
+        "tickets": "票务",
+        "translate": "翻译",
+        "market": "行情",
+        "map": "地图",
+        "travelLog": "日志"
+    },
+    "sections": {
+        "editorsPick": "编辑精选",
+        "recommended": "为您推荐",
+        "nearby": "附近推荐",
+        "viewAll": "查看全部",
+        "seeMore": "查看更多"
+    },
+    "mock": {
+        "trekTitle": "幽谷徒步体验",
+        "trekFeatures": "3天 • 专业向导",
+        "bookNow": "立即预订",
+        "altaiTitle": "阿尔泰山脉探险",
+        "altaiFeatures": "深度体验 • 12天",
+        "nomadTitle": "游牧民寄宿家庭",
+        "nomadFeatures": "2.5km外 • 草原景观",
+        "night": "晚",
+        "person": "位",
+        "cultural": "文化",
+        "localStay": "当地住宿",
+        "highlyRecommended": "特别推荐"
+    }
+}

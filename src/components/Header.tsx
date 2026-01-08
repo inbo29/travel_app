@@ -1,11 +1,15 @@
 import { ThemeToggle } from '@/components/ThemeToggle'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { useI18n } from '@/hooks/useI18n'
 
 export default function Header() {
+    const { t } = useI18n()
+
     return (
         <header className="fixed top-0 left-0 right-0 z-50 h-16 bg-white/70 dark:bg-bg-dark/50 backdrop-blur-xl border-b border-black/[0.03] dark:border-white/[0.03] transition-all duration-300">
             <div className="max-w-7xl mx-auto h-full px-4 md:px-6 flex items-center justify-between gap-4">
                 {/* Left: Logo */}
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-2 shrink-0 cursor-pointer hover:opacity-80 transition-opacity">
                     <span className="font-bold text-2xl tracking-tighter text-slate-900 dark:text-white">
                         Trap
                     </span>
@@ -20,13 +24,14 @@ export default function Header() {
                     </div>
                     <input
                         type="text"
-                        placeholder="Search Trip / Guide / Place"
+                        placeholder={t('header.searchPlaceholder')}
                         className="w-full bg-black/[0.03] dark:bg-white/[0.05] backdrop-blur-md border border-black/5 dark:border-white/10 rounded-2xl py-2.5 pl-11 pr-4 text-sm focus:ring-2 focus:ring-accent/30 focus:bg-white/90 dark:focus:bg-white/10 outline-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/30 transition-all font-medium"
                     />
                 </div>
 
                 {/* Right: Actions */}
                 <div className="flex items-center gap-2 md:gap-4 shrink-0">
+                    <LanguageSwitcher />
                     <ThemeToggle />
 
                     <button className="hidden sm:flex p-2.5 text-slate-600 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10 rounded-xl transition-colors relative">
