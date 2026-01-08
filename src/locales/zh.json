@@ -6,7 +6,7 @@
         "home": "首页",
         "translate": "翻译",
         "map": "地图",
-        "payme": "支付",
+        "payme": "PayMe",
         "my": "我的"
     },
     "home": {
@@ -18,16 +18,41 @@
         "explore": "探索目的地"
     },
     "quick": {
-        "taxi": "出租车",
-        "guide": "向导",
-        "payme": "支付与汇率",
-        "tickets": "票务",
-        "translate": "翻译",
-        "market": "行情",
-        "map": "地图",
-        "travelLog": "日志"
+        "taxi": {
+            "title": "出租车",
+            "subtitle": "即刻用车"
+        },
+        "guide": {
+            "title": "向导",
+            "subtitle": "旅游与匹配"
+        },
+        "payme": {
+            "title": "PayMe",
+            "subtitle": "支付与汇率"
+        },
+        "tickets": {
+            "title": "票务",
+            "subtitle": "公交/火车/演出"
+        },
+        "translate": {
+            "title": "翻译",
+            "subtitle": "语音与识图"
+        },
+        "market": {
+            "title": "行情",
+            "subtitle": "当地汇率"
+        },
+        "map": {
+            "title": "地图",
+            "subtitle": "安全区域"
+        },
+        "travelLog": {
+            "title": "日志",
+            "subtitle": "我的历史"
+        }
     },
     "sections": {
+        "quickAccess": "快捷功能",
         "editorsPick": "编辑精选",
         "recommended": "为您推荐",
         "nearby": "附近推荐",
@@ -47,5 +72,58 @@
         "cultural": "文化",
         "localStay": "当地住宿",
         "highlyRecommended": "特别推荐"
+    },
+    "tickets": {
+        "title": "票务",
+        "search": "搜索活动或路线",
+        "trending": "热门推荐",
+        "upcoming": "附近活动",
+        "recommended": "为您推荐",
+        "categories": {
+            "all": "全部",
+            "performance": "演出",
+            "bus": "巴士",
+            "train": "火车",
+            "flight": "航班",
+            "museum": "博物馆"
+        },
+        "details": {
+            "about": "关于",
+            "selectDate": "选择日期与时间",
+            "chooseTicket": "选择门票",
+            "location": "地点",
+            "provider": "提供商"
+        },
+        "options": {
+            "title": "选择选项",
+            "date": "日期",
+            "time": "时间段",
+            "seat": "座位类型",
+            "quantity": "数量",
+            "next": "前往结账"
+        },
+        "checkout": {
+            "title": "结账",
+            "step": "第 {{current}} 步（共 {{total}} 步）",
+            "travelerInfo": "出行人信息",
+            "payment": "支付方式",
+            "recommended": "推荐",
+            "total": "总价",
+            "complete": "完成购买",
+            "methods": {
+                "payme": "PayMe",
+                "card": "信用卡/借记卡",
+                "apple": "Apple Pay",
+                "samsung": "Samsung Pay"
+            }
+        },
+        "success": {
+            "title": "预订成功！",
+            "qr": "请向工作人员出示此二维码",
+            "wallet": "添加到钱包",
+            "viewMy": "查看我的票务"
+        },
+        "bookNow": "立即预订",
+        "bookTicket": "预订门票"
     }
 }

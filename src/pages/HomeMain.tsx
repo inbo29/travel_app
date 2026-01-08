@@ -1,19 +1,21 @@
+import { useNavigate } from 'react-router-dom'
 import { glassClasses } from '@/styles/glass'
 import { useI18n } from '@/hooks/useI18n'
 
-const QUICK_ACCESS_ITEMS = [
+const QUICK_ACCESS_ITEMS: { key: string, icon: string, highlighted?: boolean, path?: string }[] = [
     { key: 'taxi', icon: '🚕', highlighted: true },
     { key: 'guide', icon: '🧭', highlighted: true },
-    { key: 'payme', icon: '💳', highlighted: true },
-    { key: 'tickets', icon: '🎫' },
-    { key: 'translate', icon: '🌐' },
+    { key: 'payme', icon: '💳', highlighted: true, path: '/exchange' },
+    { key: 'tickets', icon: '🎫', path: '/tickets' },
+    { key: 'translate', icon: '🌐', path: '/translator' },
     { key: 'market', icon: '📊' },
-    { key: 'map', icon: '🗺️' },
+    { key: 'map', icon: '🗺️', path: '/map' },
     { key: 'travelLog', icon: '📔' },
 ]
 
 export default function HomeMain() {
     const { t } = useI18n()
+    const navigate = useNavigate()
 
     return (
         <div className="space-y-20">
@@ -65,28 +67,40 @@ export default function HomeMain() {
                         {QUICK_ACCESS_ITEMS.map((item) => (
                             <button
                                 key={item.key}
+                                onClick={() => item.path && navigate(item.path)}
                                 className={`
                                     ${glassClasses}
-                                    group relative flex flex-col items-start gap-3 p-5 rounded-[2rem]
-                                    hover:translate-y-[-4px] hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-white/5
-                                    ${item.highlighted ? 'border-accent/40 bg-accent/[0.03] dark:bg-accent/[0.1]' : 'border-white/10 dark:border-white/5 bg-white/5'}
+                                    group relative flex flex-col items-center justify-center gap-3 p-5 rounded-[2rem] h-[180px] text-center
+                                    hover:translate-y-[-4px] transition-all duration-300
+                                    ${item.highlighted
+                                        ? 'border-accent/50 bg-accent/[0.05] dark:bg-accent/[0.1] shadow-[0_0_20px_rgba(34,197,94,0.1)] dark:shadow-[0_0_20px_rgba(34,197,94,0.05)]'
+                                        : 'border-white/10 dark:border-white/5 bg-white/5'
+                                    }
                                 `}
                             >
-                                <div className={`w-12 h-12 flex items-center justify-center text-3xl bg-black/[0.03] dark:bg-white/[0.05] rounded-2xl group-hover:scale-110 ${item.highlighted ? 'text-accent group-hover:bg-accent/20' : 'group-hover:bg-accent/10'} transition-all duration-500`}>
+                                <div className={`w-14 h-14 flex items-center justify-center text-4xl bg-black/[0.03] dark:bg-white/[0.05] rounded-2xl group-hover:scale-110 transition-all duration-500 ${item.highlighted ? 'text-accent bg-accent/10' : ''}`}>
                                     {item.icon}
                                 </div>
-                                <div className="text-left">
-                                    <h4 className={`font-bold leading-tight flex items-center gap-2 ${item.highlighted ? 'text-accent' : 'text-slate-900 dark:text-white'}`}>
-                                        {t(`quick.${item.key}`)}
-                                        {item.highlighted && <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>}
+                                <div className="space-y-1">
+                                    <h4 className={`font-bold leading-tight flex items-center justify-center gap-2 ${item.highlighted ? 'text-accent' : 'text-slate-900 dark:text-white'}`}>
+                                        {t(`quick.${item.key}.title`)}
+                                        {item.highlighted && <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>}
                                     </h4>
-                                    <p className="text-[11px] font-medium text-slate-500 dark:text-white/40 mt-0.5">{t(`quick.${item.key}`)}</p>
+                                    <p className="text-[11px] font-semibold text-slate-500 dark:text-white/40 leading-tight px-1">
+                                        {t(`quick.${item.key}.subtitle`)}
+                                    </p>
                                 </div>
-                                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <svg className={`w-4 h-4 ${item.highlighted ? 'text-accent' : 'text-slate-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                                {/* Highly requested: Centered Arrow on hover */}
+                                <div className="opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                    <svg className={`w-5 h-5 ${item.highlighted ? 'text-accent' : 'text-slate-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                     </svg>
                                 </div>
+
+                                {item.highlighted && (
+                                    <div className="absolute inset-0 rounded-[2rem] border-2 border-accent/20 pointer-events-none group-hover:border-accent/40 transition-colors"></div>
+                                )}
                             </button>
                         ))}
                     </div>
@@ -103,7 +117,7 @@ export default function HomeMain() {
                     <button className="text-accent font-bold text-sm hover:underline decoration-2 underline-offset-4">{t('sections.viewAll')}</button>
                 </div>
 
-                <div className={`${glassClasses} rounded-[2.5rem] overflow-hidden group border-white/20 dark:border-white/5`}>
+                <div className={`${glassClasses} rounded-[2.5rem] overflow-hidden group border-white/20 dark:border-white/5 shadow-2xl shadow-black/5`}>
                     <div className="relative h-[400px] md:h-[500px] w-full cursor-pointer">
                         <img
                             src={`${import.meta.env.BASE_URL}nature/nt2.png`}
@@ -145,20 +159,20 @@ export default function HomeMain() {
                     </div>
                     <div className="grid grid-cols-1 gap-4">
                         {[1, 2].map(i => (
-                            <div key={i} className={`${glassClasses} group rounded-3xl p-4 flex items-center gap-5 hover:bg-white dark:hover:bg-white/10 cursor-pointer`}>
-                                <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0">
+                            <div key={i} className={`${glassClasses} group rounded-3xl p-4 flex items-center gap-5 hover:bg-white dark:hover:bg-white/10 cursor-pointer transition-all duration-300`}>
+                                <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-lg">
                                     <img src={`${import.meta.env.BASE_URL}nature/nt3.png`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2 mb-1">
-                                        <span className="text-[10px] font-bold text-accent px-2 py-0.5 rounded-md bg-accent/10 border border-accent/20 uppercase">{t('mock.cultural')}</span>
+                                        <span className="text-[10px] font-bold text-accent px-2 py-0.5 rounded-md bg-accent/10 border border-accent/20 uppercase tracking-wider">{t('mock.cultural')}</span>
                                     </div>
                                     <h4 className="font-bold text-lg truncate text-slate-900 dark:text-white">{t('mock.altaiTitle')}</h4>
                                     <p className="text-sm text-slate-500 dark:text-white/40 font-medium">{t('mock.altaiFeatures')}</p>
                                 </div>
-                                <div className="text-right px-2">
+                                <div className="text-right px-2 min-w-[70px]">
                                     <div className="text-accent font-black text-lg">$1,200</div>
-                                    <div className="text-[10px] text-slate-400 font-bold uppercase mt-1">{t('mock.person')}</div>
+                                    <div className="text-[10px] text-slate-400 font-bold uppercase mt-1 tracking-tighter">{t('mock.person')}</div>
                                 </div>
                             </div>
                         ))}
@@ -173,20 +187,20 @@ export default function HomeMain() {
                     </div>
                     <div className="grid grid-cols-1 gap-4">
                         {[1, 2].map(i => (
-                            <div key={i} className={`${glassClasses} group rounded-3xl p-4 flex items-center gap-5 hover:bg-white dark:hover:bg-white/10 cursor-pointer`}>
-                                <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0">
+                            <div key={i} className={`${glassClasses} group rounded-3xl p-4 flex items-center gap-5 hover:bg-white dark:hover:bg-white/10 cursor-pointer transition-all duration-300`}>
+                                <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-lg">
                                     <img src={`${import.meta.env.BASE_URL}city/ct1.png`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2 mb-1">
-                                        <span className="text-[10px] font-bold text-blue-500 px-2 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/20 uppercase">{t('mock.localStay')}</span>
+                                        <span className="text-[10px] font-bold text-blue-500 px-2 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/20 uppercase tracking-wider">{t('mock.localStay')}</span>
                                     </div>
                                     <h4 className="font-bold text-lg truncate text-slate-900 dark:text-white">{t('mock.nomadTitle')} #{i}</h4>
                                     <p className="text-sm text-slate-500 dark:text-white/40 font-medium">{t('mock.nomadFeatures')}</p>
                                 </div>
-                                <div className="text-right px-2">
+                                <div className="text-right px-2 min-w-[70px]">
                                     <div className="text-accent font-black text-lg">$25</div>
-                                    <div className="text-[10px] text-slate-400 font-bold uppercase mt-1">{t('mock.night')}</div>
+                                    <div className="text-[10px] text-slate-400 font-bold uppercase mt-1 tracking-tighter">{t('mock.night')}</div>
                                 </div>
                             </div>
                         ))}

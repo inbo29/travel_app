@@ -6,28 +6,53 @@
         "home": "ホーム",
         "translate": "翻訳",
         "map": "マップ",
-        "payme": "ペイメ",
+        "payme": "PayMe",
         "my": "マイ"
     },
     "home": {
         "tag": "モンゴルを発見する",
         "title": "すべてが自然の上に",
         "titleAccent": "浮かんでいます。",
-        "subtitle": "広大な草原と水晶のように澄んだ湖を、プレミアムで透明感のある静寂の中で体験してください。",
-        "start": "旅を始める",
+        "subtitle": "広大な草原と水晶のように澄んだ湖를、プレミアムで透明感のある静寂の中で体験してください。",
+        "start": "旅을始める",
         "explore": "目的地を探す"
     },
     "quick": {
-        "taxi": "タクシー",
-        "guide": "ガイド",
-        "payme": "決済・両替",
-        "tickets": "チケット",
-        "translate": "翻訳",
-        "market": "相場",
-        "map": "マップ",
-        "travelLog": "旅行記"
+        "taxi": {
+            "title": "タクシー",
+            "subtitle": "今すぐ呼ぶ"
+        },
+        "guide": {
+            "title": "ガイド",
+            "subtitle": "ツアー＆マッチング"
+        },
+        "payme": {
+            "title": "PayMe",
+            "subtitle": "決済・両替"
+        },
+        "tickets": {
+            "title": "チケット",
+            "subtitle": "バス / 列車 / ショー"
+        },
+        "translate": {
+            "title": "翻訳",
+            "subtitle": "音声＆OCR"
+        },
+        "market": {
+            "title": "相場",
+            "subtitle": "現地レート"
+        },
+        "map": {
+            "title": "マップ",
+            "subtitle": "セーフティゾーン"
+        },
+        "travelLog": {
+            "title": "旅行記",
+            "subtitle": "マイヒストリー"
+        }
     },
     "sections": {
+        "quickAccess": "クイックアクセス",
         "editorsPick": "エディターのおすすめ",
         "recommended": "おすすめ",
         "nearby": "周辺スポット",
@@ -47,5 +72,58 @@
         "cultural": "文化",
         "localStay": "現地滞在",
         "highlyRecommended": "おすすめ"
+    },
+    "tickets": {
+        "title": "チケット",
+        "search": "イベントまたはルートを検索",
+        "trending": "今、人気",
+        "upcoming": "近くの予定",
+        "recommended": "おすすめ",
+        "categories": {
+            "all": "すべて",
+            "performance": "公演",
+            "bus": "バス",
+            "train": "列車",
+            "flight": "航空",
+            "museum": "博物館"
+        },
+        "details": {
+            "about": "詳細",
+            "selectDate": "日付と時間を選択",
+            "chooseTicket": "チケットを選択",
+            "location": "場所",
+            "provider": "提供者"
+        },
+        "options": {
+            "title": "オプションを選択",
+            "date": "日付",
+            "time": "時間枠",
+            "seat": "座席タイプ",
+            "quantity": "数量",
+            "next": "決済へ進む"
+        },
+        "checkout": {
+            "title": "決済",
+            "step": "{{total}}ステップ中の{{current}}",
+            "travelerInfo": "旅行者情報",
+            "payment": "決済方法",
+            "recommended": "おすすめ",
+            "total": "合計金額",
+            "complete": "購入を完了する",
+            "methods": {
+                "payme": "PayMe",
+                "card": "カード",
+                "apple": "Apple Pay",
+                "samsung": "Samsung Pay"
+            }
+        },
+        "success": {
+            "title": "チケットが確定しました！",
+            "qr": "このQRコードを提供者に提示してください",
+            "wallet": "Walletに追加",
+            "viewMy": "マイチケットを表示"
+        },
+        "bookNow": "今すぐ予約",
+        "bookTicket": "チケットを予約する"
     }
 }

@@ -6,7 +6,7 @@
         "home": "Нүүр",
         "translate": "Орчуулга",
         "map": "Газрын зураг",
-        "payme": "Төлбөр",
+        "payme": "PayMe",
         "my": "Миний"
     },
     "home": {
@@ -18,16 +18,41 @@
         "explore": "Аялах газрууд"
     },
     "quick": {
-        "taxi": "Такси",
-        "guide": "Хөтөч",
-        "payme": "Төлбөр ба Солилцоо",
-        "tickets": "Тасалбар",
-        "translate": "Орчуулга",
-        "market": "Ханш",
-        "map": "Газрын зураг",
-        "travelLog": "Тэмдэглэл"
+        "taxi": {
+            "title": "Такси",
+            "subtitle": "Шуурхай дуудлага"
+        },
+        "guide": {
+            "title": "Хөтөч",
+            "subtitle": "Аялал ба Хослол"
+        },
+        "payme": {
+            "title": "PayMe",
+            "subtitle": "Төлбөр ба Солилцоо"
+        },
+        "tickets": {
+            "title": "Тасалбар",
+            "subtitle": "Автобус / Галт тэрэг / Үзвэр"
+        },
+        "translate": {
+            "title": "Орчуулга",
+            "subtitle": "Дуу хоолой ба Текст"
+        },
+        "market": {
+            "title": "Ханш",
+            "subtitle": "Дотоод ханш"
+        },
+        "map": {
+            "title": "Газрын зураг",
+            "subtitle": "Аюулгүйн бүс"
+        },
+        "travelLog": {
+            "title": "Тэмдэглэл",
+            "subtitle": "Миний түүх"
+        }
     },
     "sections": {
+        "quickAccess": "Шуурхай хандалт",
         "editorsPick": "Редакторын сонголт",
         "recommended": "Санал болгож буй",
         "nearby": "Ойр байгаа",
@@ -47,5 +72,58 @@
         "cultural": "Соёл",
         "localStay": "Орон нутаг",
         "highlyRecommended": "Санал болгож буй"
+    },
+    "tickets": {
+        "title": "Тасалбар",
+        "search": "Арга хэмжээ эсвэл чиглэл хайх",
+        "trending": "Одоо тренд",
+        "upcoming": "Ойролцоох арга хэмжээ",
+        "recommended": "Санал болгох",
+        "categories": {
+            "all": "Бүгд",
+            "performance": "Тоглолт",
+            "bus": "Автобус",
+            "train": "Галт тэрэг",
+            "flight": "Нислэг",
+            "museum": "Музей"
+        },
+        "details": {
+            "about": "Тухай",
+            "selectDate": "Өдөр ба цаг сонгох",
+            "chooseTicket": "Тасалбар сонгох",
+            "location": "Байршил",
+            "provider": "Үйлчилгээ үзүүлэгч"
+        },
+        "options": {
+            "title": "Сонголтууд",
+            "date": "Өдөр",
+            "time": "Цаг",
+            "seat": "Суудлын төрөл",
+            "quantity": "Тоо ширхэг",
+            "next": "Төлбөр төлөх"
+        },
+        "checkout": {
+            "title": "Төлбөр",
+            "step": "{{total}}-аас {{current}}-р алхам",
+            "travelerInfo": "Аялагчийн мэдээлэл",
+            "payment": "Төлбөрийн хэлбэр",
+            "recommended": "Санал болгох",
+            "total": "Нийт үнэ",
+            "complete": "Худалдан авах",
+            "methods": {
+                "payme": "PayMe",
+                "card": "Карт",
+                "apple": "Apple Pay",
+                "samsung": "Samsung Pay"
+            }
+        },
+        "success": {
+            "title": "Тасалбар баталгаажлаа!",
+            "qr": "Энэхүү QR кодыг үйлчилгээ үзүүлэгчид үзүүлнэ үү",
+            "wallet": "Wallet-д нэмэх",
+            "viewMy": "Миний тасалбарууд"
+        },
+        "bookNow": "Одоо захиалах",
+        "bookTicket": "Тасалбар захиалах"
     }
 }

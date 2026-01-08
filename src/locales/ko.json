@@ -6,7 +6,7 @@
         "home": "홈",
         "translate": "번역",
         "map": "지도",
-        "payme": "페이메",
+        "payme": "PayMe",
         "my": "마이"
     },
     "home": {
@@ -18,16 +18,41 @@
         "explore": "여행지 탐색"
     },
     "quick": {
-        "taxi": "택시",
-        "guide": "가이드",
-        "payme": "결제 및 환전",
-        "tickets": "티켓",
-        "translate": "번역",
-        "market": "시세",
-        "map": "지도",
-        "travelLog": "여행 기록"
+        "taxi": {
+            "title": "택시",
+            "subtitle": "즉시 호출"
+        },
+        "guide": {
+            "title": "가이드",
+            "subtitle": "투어 및 매칭"
+        },
+        "payme": {
+            "title": "PayMe",
+            "subtitle": "결제 및 환전"
+        },
+        "tickets": {
+            "title": "티켓",
+            "subtitle": "버스 / 기차 / 공연"
+        },
+        "translate": {
+            "title": "번역",
+            "subtitle": "음성 및 OCR"
+        },
+        "market": {
+            "title": "시세",
+            "subtitle": "현지 환율"
+        },
+        "map": {
+            "title": "지도",
+            "subtitle": "안전 구역"
+        },
+        "travelLog": {
+            "title": "여행 기록",
+            "subtitle": "나의 히스토리"
+        }
     },
     "sections": {
+        "quickAccess": "퀵 메뉴",
         "editorsPick": "에디터 추천",
         "recommended": "추천 여행지",
         "nearby": "내 주변",
@@ -47,5 +72,58 @@
         "cultural": "문화 체험",
         "localStay": "현지 숙박",
         "highlyRecommended": "강력 추천"
+    },
+    "tickets": {
+        "title": "티켓",
+        "search": "공연 또는 노선 검색",
+        "trending": "현재 인기",
+        "upcoming": "내 주변 예정",
+        "recommended": "추천 티켓",
+        "categories": {
+            "all": "전체",
+            "performance": "공연",
+            "bus": "버스",
+            "train": "기차",
+            "flight": "항공",
+            "museum": "박물관"
+        },
+        "details": {
+            "about": "상세 정보",
+            "selectDate": "날짜 및 시간 선택",
+            "chooseTicket": "티켓 선택",
+            "location": "위치",
+            "provider": "제공자"
+        },
+        "options": {
+            "title": "옵션 선택",
+            "date": "날짜",
+            "time": "시간 슬롯",
+            "seat": "좌석 유형",
+            "quantity": "수량",
+            "next": "결제로 이동"
+        },
+        "checkout": {
+            "title": "결제",
+            "step": "{{total}}단계 중 {{current}}단계",
+            "travelerInfo": "여행자 정보",
+            "payment": "결제 수단",
+            "recommended": "추천",
+            "total": "총 결제 금액",
+            "complete": "결제 완료",
+            "methods": {
+                "payme": "PayMe",
+                "card": "신용/체크카드",
+                "apple": "Apple Pay",
+                "samsung": "Samsung Pay"
+            }
+        },
+        "success": {
+            "title": "티켓 확정!",
+            "qr": "제공자에게 이 QR 코드를 보여주세요",
+            "wallet": "월렛에 추가",
+            "viewMy": "내 티켓 보기"
+        },
+        "bookNow": "지금 예약",
+        "bookTicket": "티켓 예약하기"
     }
 }

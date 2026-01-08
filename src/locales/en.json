@@ -6,7 +6,7 @@
         "home": "Home",
         "translate": "Translate",
         "map": "Map",
-        "payme": "Payme",
+        "payme": "PayMe",
         "my": "My"
     },
     "home": {
@@ -18,16 +18,41 @@
         "explore": "Explore Destinations"
     },
     "quick": {
-        "taxi": "Taxi",
-        "guide": "Guide",
-        "payme": "Pay & Exchange",
-        "tickets": "Tickets",
-        "translate": "Translate",
-        "market": "Market",
-        "map": "Map",
-        "travelLog": "Travel Log"
+        "taxi": {
+            "title": "Taxi",
+            "subtitle": "Instant ride"
+        },
+        "guide": {
+            "title": "Guide",
+            "subtitle": "Tours & Match"
+        },
+        "payme": {
+            "title": "PayMe",
+            "subtitle": "Pay & Exchange"
+        },
+        "tickets": {
+            "title": "Tickets",
+            "subtitle": "Bus / Train / Show"
+        },
+        "translate": {
+            "title": "Translate",
+            "subtitle": "Voice & OCR"
+        },
+        "market": {
+            "title": "Market",
+            "subtitle": "Local rates"
+        },
+        "map": {
+            "title": "Map",
+            "subtitle": "Safety Zones"
+        },
+        "travelLog": {
+            "title": "Travel Log",
+            "subtitle": "My History"
+        }
     },
     "sections": {
+        "quickAccess": "Quick Access",
         "editorsPick": "Editor's Pick",
         "recommended": "Recommended",
         "nearby": "Nearby You",
@@ -47,5 +72,58 @@
         "cultural": "Cultural",
         "localStay": "Local Stay",
         "highlyRecommended": "Highly Recommended"
+    },
+    "tickets": {
+        "title": "Tickets",
+        "search": "Search for events or routes",
+        "trending": "Trending Now",
+        "upcoming": "Upcoming Near You",
+        "recommended": "Recommended",
+        "categories": {
+            "all": "All",
+            "performance": "Performance",
+            "bus": "Bus",
+            "train": "Train",
+            "flight": "Flight",
+            "museum": "Museum"
+        },
+        "details": {
+            "about": "About",
+            "selectDate": "Select Date & Time",
+            "chooseTicket": "Choose Ticket",
+            "location": "Location",
+            "provider": "Provider"
+        },
+        "options": {
+            "title": "Select Options",
+            "date": "Date",
+            "time": "Time Slot",
+            "seat": "Seat Type",
+            "quantity": "Quantity",
+            "next": "Continue to Checkout"
+        },
+        "checkout": {
+            "title": "Checkout",
+            "step": "Step {{current}} of {{total}}",
+            "travelerInfo": "Traveler Info",
+            "payment": "Payment Method",
+            "recommended": "Recommended",
+            "total": "Total Price",
+            "complete": "Complete Purchase",
+            "methods": {
+                "payme": "PayMe",
+                "card": "Credit/Debit Card",
+                "apple": "Apple Pay",
+                "samsung": "Samsung Pay"
+            }
+        },
+        "success": {
+            "title": "Ticket Confirmed!",
+            "qr": "Show this QR to the provider",
+            "wallet": "Add to Wallet",
+            "viewMy": "View My Tickets"
+        },
+        "bookNow": "Book Now",
+        "bookTicket": "Book Ticket"
     }
 }

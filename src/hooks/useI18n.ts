@@ -15,8 +15,15 @@ export function useI18n() {
     const { lang, setLang } = context
     const dict = DICT[lang] || DICT.en
 
-    const t = (path: string) =>
-        path.split('.').reduce((acc: any, key) => acc?.[key], dict) ?? path
+    const t = (path: string, vars?: Record<string, any>) => {
+        let text = path.split('.').reduce((acc: any, key) => acc?.[key], dict) ?? path
+        if (vars) {
+            Object.entries(vars).forEach(([key, val]) => {
+                text = text.replace(`{{${key}}}`, val)
+            })
+        }
+        return text
+    }
 
     return { t, lang, setLang }
 }
