@@ -7,7 +7,8 @@
         "translate": "翻译",
         "map": "地图",
         "payme": "PayMe",
-        "my": "我的"
+        "my": "我的",
+        "taxi": "出租车"
     },
     "home": {
         "tag": "发现蒙古",
@@ -125,5 +126,57 @@
         },
         "bookNow": "立即预订",
         "bookTicket": "预订门票"
+    },
+    "taxi": {
+        "title": "Taxi Call",
+        "searching": "Searching for Drivers...",
+        "found": "Driver Found",
+        "arriving": "Driver is Arriving",
+        "inProgress": "On the Way",
+        "completed": "Trip Completed",
+        "cancelled": "Trip Cancelled",
+        "origin": "Current Location",
+        "originPlaceholder": "Detecting location...",
+        "destination": "Where to?",
+        "destinationPlaceholder": "Enter destination (e.g., Opera House)",
+        "estimatedFare": "Estimated Fare",
+        "callButton": "Call Taxi",
+        "noResults": "No results found",
+        "matching": {
+            "title": "Matching your ride",
+            "eta": "Arriving in {{time}} mins"
+        },
+        "ride": {
+            "stop": "Stop Request",
+            "safety": "Safety Center",
+            "realtime": "Real-time Tracker",
+            "distance": "Distance Left",
+            "time": "Est. Time"
+        },
+        "payment": {
+            "title": "Payment",
+            "automatic": "Automatic Payment",
+            "total": "Total Fare",
+            "breakdown": "Fare Breakdown",
+            "base": "Base Fare",
+            "distance": "Distance",
+            "time": "Time"
+        },
+        "history": {
+            "title": "Taxi History",
+            "empty": "No recent trips",
+            "rebook": "Rebook"
+        },
+        "types": {
+            "standard": "Standard",
+            "comfort": "Comfort",
+            "premium": "Premium"
+        },
+        "review": {
+            "title": "Rate your ride",
+            "comment": "Leave a comment (optional)",
+            "submit": "Submit Review",
+            "skip": "Skip for now"
+        }
     }
 }

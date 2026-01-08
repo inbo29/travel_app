@@ -7,6 +7,8 @@ import { ThemeProvider } from '@/context/ThemeContext'
 import { LanguageProvider } from '@/context/LanguageContext'
 import './styles/global.css'
 
+import { MapProvider } from '@/maps/MapProvider'
+
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -14,9 +16,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ThemeProvider>
             <LanguageProvider>
                 <QueryClientProvider client={queryClient}>
-                    <BrowserRouter basename="/travel_app">
-                        <App />
-                    </BrowserRouter>
+                    <MapProvider>
+                        <BrowserRouter basename="/travel_app">
+                            <App />
+                        </BrowserRouter>
+                    </MapProvider>
                 </QueryClientProvider>
             </LanguageProvider>
         </ThemeProvider>

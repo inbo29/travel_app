@@ -7,7 +7,8 @@
         "translate": "번역",
         "map": "지도",
         "payme": "PayMe",
-        "my": "마이"
+        "my": "마이",
+        "taxi": "택시"
     },
     "home": {
         "tag": "몽골 발견하기",
@@ -125,5 +126,57 @@
         },
         "bookNow": "지금 예약",
         "bookTicket": "티켓 예약하기"
+    },
+    "taxi": {
+        "title": "택시 호출",
+        "searching": "드라이버를 찾는 중...",
+        "found": "드라이버 매칭 완료",
+        "arriving": "드라이버 도착 중",
+        "inProgress": "이동 중",
+        "completed": "운행 완료",
+        "cancelled": "호출 취소됨",
+        "origin": "출발지",
+        "originPlaceholder": "위치 인식 중...",
+        "destination": "어디로 갈까요?",
+        "destinationPlaceholder": "목적지 입력 (예: 국립 오페라 하우스)",
+        "estimatedFare": "예상 요금",
+        "callButton": "택시 호출하기",
+        "noResults": "검색 결과 없음",
+        "matching": {
+            "title": "드라이버 매칭 중",
+            "eta": "{{time}}분 후 도착"
+        },
+        "ride": {
+            "stop": "정차 요청",
+            "safety": "안전 센터",
+            "realtime": "실시간 트래커",
+            "distance": "남은 거리",
+            "time": "예상 시간"
+        },
+        "payment": {
+            "title": "결제",
+            "automatic": "자동 결제",
+            "total": "최종 요금",
+            "breakdown": "요금 상세",
+            "base": "기본 요금",
+            "distance": "거리 요금",
+            "time": "시간 요금"
+        },
+        "history": {
+            "title": "택시 이용 기록",
+            "empty": "최근 이용 기록이 없습니다",
+            "rebook": "다시 호출"
+        },
+        "types": {
+            "standard": "일반",
+            "comfort": "컴포트",
+            "premium": "프리미엄"
+        },
+        "review": {
+            "title": "운행 평가",
+            "comment": "코멘트 남기기 (선택사항)",
+            "submit": "후기 제출",
+            "skip": "다음에 하기"
+        }
     }
 }

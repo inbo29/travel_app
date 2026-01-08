@@ -11,6 +11,13 @@ import TicketCheckout from '@/pages/tickets/TicketCheckout'
 import TicketSuccess from '@/pages/tickets/TicketSuccess'
 import MyTickets from '@/pages/tickets/MyTickets'
 
+// Taxi Module
+import TaxiHome from '@/pages/taxi/TaxiHome'
+import TaxiMatching from '@/pages/taxi/TaxiMatching'
+import TaxiRide from '@/pages/taxi/TaxiRide'
+import TaxiCompletion from '@/pages/taxi/TaxiCompletion'
+import TaxiHistory from '@/pages/taxi/TaxiHistory'
+
 export default function App() {
     const { t } = useI18n()
 
@@ -28,6 +35,13 @@ export default function App() {
                 <Route path="/tickets/checkout/:id" element={<TicketCheckout />} />
                 <Route path="/tickets/success/:id" element={<TicketSuccess />} />
                 <Route path="/my/tickets" element={<MyTickets />} />
+
+                {/* Taxi Module Routes */}
+                <Route path="/taxi" element={<TaxiHome />} />
+                <Route path="/taxi/matching" element={<TaxiMatching />} />
+                <Route path="/taxi/ride" element={<TaxiRide />} />
+                <Route path="/taxi/completion" element={<TaxiCompletion />} />
+                <Route path="/taxi/history" element={<TaxiHistory />} />
 
                 <Route path="/translator" element={<div className="pt-24 px-6 text-white text-2xl font-bold">{t('nav.translate')}</div>} />
                 <Route path="/map" element={<div className="pt-24 px-6 text-white text-2xl font-bold">{t('nav.map')}</div>} />

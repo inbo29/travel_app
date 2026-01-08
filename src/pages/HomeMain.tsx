@@ -3,7 +3,7 @@ import { glassClasses } from '@/styles/glass'
 import { useI18n } from '@/hooks/useI18n'
 
 const QUICK_ACCESS_ITEMS: { key: string, icon: string, highlighted?: boolean, path?: string }[] = [
-    { key: 'taxi', icon: '🚕', highlighted: true },
+    { key: 'taxi', icon: '🚕', highlighted: true, path: '/taxi' },
     { key: 'guide', icon: '🧭', highlighted: true },
     { key: 'payme', icon: '💳', highlighted: true, path: '/exchange' },
     { key: 'tickets', icon: '🎫', path: '/tickets' },
