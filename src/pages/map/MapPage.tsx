@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { MapView } from '@/infra/map/MapView'
 import { useI18n } from '@/hooks/useI18n'
 
 export default function MapPage() {
@@ -8,23 +7,7 @@ export default function MapPage() {
 
     return (
         <div className="h-screen w-full relative">
-            {/* Header */}
-            <div className="absolute top-0 left-0 right-0 z-[1000] p-6 pt-12 pointer-events-none">
-                <div className="flex items-center justify-between pointer-events-auto">
-                    <button
-                        onClick={() => navigate('/home')}
-                        className="w-12 h-12 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur shadow-lg flex items-center justify-center text-xl"
-                    >
-                        🔙
-                    </button>
-                    <div className="bg-white/90 dark:bg-black/50 backdrop-blur px-6 py-3 rounded-full shadow-lg">
-                        <h1 className="font-bold text-lg">{t('nav.map')}</h1>
-                    </div>
-                    <div className="w-12" />
-                </div>
-            </div>
-
-            <MapView showUser showMarketPois className="w-full h-full" />
+            {/* UI content - Map is provided by ExploreMapLayout background */}
 
             {/* Legend / Overlay */}
             <div className="absolute bottom-24 left-6 right-6 z-[1000] pointer-events-none">

@@ -4,8 +4,7 @@ import { glassClasses } from '@/styles/glass'
 import { useI18n } from '@/hooks/useI18n'
 import { useTaxiStore } from '@/store/taxiStore'
 import { requestTaxi } from '@/services/taxi.service'
-import { MapView } from '@/infra/map/MapView'
-import { MapProvider, useMap } from '@/infra/map/MapProvider'
+import { useMap } from '@/infra/map/MapProvider'
 import { MOCK_PLACES } from '@/mocks/taxi/places.mock'
 
 
