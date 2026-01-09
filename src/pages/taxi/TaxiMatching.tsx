@@ -1,73 +1,112 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { glassClasses } from '@/styles/glass'
 import { useI18n } from '@/hooks/useI18n'
 import { useTaxiStore } from '@/store/taxiStore'
 
 export default function TaxiMatching() {
+    return <TaxiMatchingContent />
+}
+
+function TaxiMatchingContent() {
     const { t } = useI18n()
     const navigate = useNavigate()
-    const { ride, reset } = useTaxiStore()
-    // const [matchingStep, setMatchingStep] = useState(0) // Logic moved to store
+    const { ride, reset, setStatus } = useTaxiStore()
 
+    // Note: useTaxiSimulator is running globally in MainLayout. No need to invoke it here.
+    // Map control is also global.
+
+    // Reactive Navigation (Step Restoration)
     useEffect(() => {
         if (!ride || ride.status === 'IDLE') {
             navigate('/taxi')
             return
         }
 
-        // Reactive Navigation
-        if (ride.status === 'IN_RIDE') {
-            navigate('/taxi/ride')
+        switch (ride.status) {
+            case 'IN_RIDE':
+                navigate('/taxi/ride')
+                break
+            case 'COMPLETED':
+                navigate('/taxi/completion')
+                break
+            case 'PAYING':
+                navigate('/taxi/payment')
+                break
+            default:
+                break
         }
     }, [ride?.status, navigate])
+
+    const handleAccept = () => {
+        setStatus('MATCH_ACCEPTED')
+        // Global MapController should switch focus to Driver -> User path
+    }
+
+    const handleReject = () => {
+        setStatus('SEARCHING')
+    }
 
     const handleCancel = () => {
         reset()
         navigate('/taxi')
     }
 
+    // Determine visibility of the Driver Card
+    const showDriverCard = ride?.status === 'MATCHED' || ride?.status === 'MATCH_ACCEPTED' || ride?.status === 'DRIVER_ARRIVING'
+
     return (
-        <div className="fixed inset-0 bg-bg-light dark:bg-bg-dark z-[100] overflow-hidden">
-            {/* Immersive Map Background */}
-            <div className="absolute inset-0 grayscale opacity-40 dark:opacity-20 pointer-events-none">
-                <div className="w-full h-full bg-[radial-gradient(circle,theme(colors.slate.300)_1px,transparent_1px)] bg-[size:24px_24px]" />
-            </div>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Transparent overlay over global map */}
 
-            <div className="relative h-full flex flex-col pt-24 pb-12 px-6 max-w-2xl mx-auto">
-                {/* Status Indicator */}
+            {/* Radar Overlay for Searching (CENTER) */}
+            {ride?.status === 'SEARCHING' && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-96 h-96 rounded-full border-4 border-accent/30 animate-ping" />
+                    <div className="absolute w-64 h-64 rounded-full border-4 border-accent/50 animate-[ping_3s_linear_infinite]" />
+                </div>
+            )}
+
+            <div className="relative h-full flex flex-col pt-24 pb-12 px-6 max-w-2xl mx-auto pointer-events-none">
+                {/* Status Indicator (TOP) */}
                 <div className="flex-1 flex flex-col items-center justify-center space-y-12">
-                    <div className="relative">
-                        <div className="w-48 h-48 rounded-full border-4 border-accent/20 flex items-center justify-center animate-[spin_10s_linear_infinite]">
-                            <div className="absolute -top-2 left-1/2 -ml-2 w-4 h-4 bg-accent rounded-full shadow-lg shadow-accent/50" />
+                    <div className="text-center space-y-4 pointer-events-auto">
+                        <div className={`${glassClasses} inline-block px-8 py-4 rounded-full bg-black/80 text-white backdrop-blur-xl border-white/10`}>
+                            <h2 className="text-2xl font-black tracking-tight animate-pulse flex items-center gap-3">
+                                {ride?.status === 'SEARCHING' && (
+                                    <>
+                                        <span className="animate-spin">⏳</span>
+                                        {t('taxi.searching')}
+                                    </>
+                                )}
+                                {ride?.status === 'MATCHED' && (
+                                    <>
+                                        <span>🎉</span>
+                                        {t('taxi.matchFound') || 'Match Found!'}
+                                    </>
+                                )}
+                                {(ride?.status === 'MATCH_ACCEPTED' || ride?.status === 'DRIVER_ARRIVING') && (
+                                    <>
+                                        <span>🚕</span>
+                                        {t('taxi.driverArriving') || 'Driver is coming...'}
+                                    </>
+                                )}
+                            </h2>
                         </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className={`w-32 h-32 rounded-full ${glassClasses} border-white/20 flex items-center justify-center text-4xl shadow-2xl`}>
-                                🚕
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="text-center space-y-4">
-                        <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight animate-pulse">
-                            {ride?.status === 'SEARCHING' ? t('taxi.searching') : t('taxi.found')}
-                        </h2>
-                        <p className="text-slate-500 dark:text-white/40 font-bold uppercase tracking-widest text-xs">
-                            {t('taxi.matching.title')}
-                        </p>
                     </div>
                 </div>
 
                 {/* Driver Card Found (Bottom Slide Up) */}
                 <div className={`
-                    ${glassClasses} p-8 rounded-[3rem] border-slate-200 dark:border-white/20 bg-white/90 dark:bg-bg-bg-dark/80 shadow-2xl space-y-6
-                    transition-all duration-700
-                    ${ride?.status === 'MATCHED' || ride?.status === 'DRIVER_ARRIVING' ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}
+                    pointer-events-auto
+                    ${glassClasses} p-8 rounded-[3rem] border-slate-200 dark:border-white/20 bg-white/90 dark:bg-bg-dark/95 shadow-2xl space-y-6
+                    transition-all duration-500 transform
+                    ${showDriverCard ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 hidden'}
                 `}>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             <div className="w-16 h-16 rounded-2xl bg-accent/20 overflow-hidden border-2 border-accent/30">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Batu" alt="Driver" className="w-full h-full object-cover" />
+                                <img src={ride?.driver?.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=Batu"} alt="Driver" className="w-full h-full object-cover" />
                             </div>
                             <div>
                                 <h3 className="text-xl font-black text-slate-900 dark:text-white">{ride?.driver?.name}</h3>
@@ -79,14 +118,36 @@ export default function TaxiMatching() {
                             </div>
                         </div>
                         <div className="text-right">
-                            <p className="text-[10px] font-black text-accent uppercase tracking-widest">{t('taxi.matching.eta', { time: 3 })}</p>
+                            <p className="text-[10px] font-black text-accent uppercase tracking-widest">ETA 3 min</p>
                             <p className="text-xl font-black text-slate-900 dark:text-white">{ride?.driver?.plateNumber}</p>
                         </div>
                     </div>
 
+                    {/* Action Buttons */}
+                    {ride?.status === 'MATCHED' ? (
+                        <div className="grid grid-cols-2 gap-4">
+                            <button
+                                onClick={handleReject}
+                                className="py-4 rounded-2xl bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-white/60 font-black hover:bg-slate-200 dark:hover:bg-white/20 transition-all uppercase tracking-widest text-xs"
+                            >
+                                {t('taxi.reject') || 'Reject'}
+                            </button>
+                            <button
+                                onClick={handleAccept}
+                                className="py-4 rounded-2xl bg-accent text-white font-black hover:scale-105 transition-all shadow-lg shadow-accent/30 uppercase tracking-widest text-xs"
+                            >
+                                {t('taxi.accept') || 'Accept Ride'}
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="text-center">
+                            <p className="text-accent font-bold animate-pulse">Driver is on the way!</p>
+                        </div>
+                    )}
+
                     <button
                         onClick={handleCancel}
-                        className="w-full py-4 rounded-2xl border-2 border-slate-200 dark:border-white/10 text-slate-400 dark:text-white/40 font-bold hover:bg-red-500 hover:text-white hover:border-red-500 transition-all uppercase tracking-widest text-xs"
+                        className="w-full py-2 text-slate-400 dark:text-white/30 font-bold hover:text-red-500 transition-all text-[10px] uppercase tracking-widest"
                     >
                         Cancel Request
                     </button>

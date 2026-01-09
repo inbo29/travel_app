@@ -172,6 +172,10 @@
             "comfort": "Comfort",
             "premium": "Premium"
         },
+        "matchFound": "Match Found!",
+        "reject": "Reject",
+        "accept": "Accept Ride",
+        "driverArriving": "Driver is on the way",
         "review": {
             "title": "Rate your ride",
             "comment": "Leave a comment (optional)",

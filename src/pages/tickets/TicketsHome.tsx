@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { glassClasses } from '@/styles/glass'
 import { useI18n } from '@/hooks/useI18n'
+import { TicketService } from '@/services/tickets.service'
 
 const CATEGORIES = ['all', 'performance', 'bus', 'train', 'flight', 'museum']
 
@@ -62,11 +63,38 @@ export default function TicketsHome() {
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(type)
 
-    const filteredTickets = activeTab === 'all'
-        ? MOCK_TICKETS
-        : MOCK_TICKETS.filter(t => t.type === activeTab)
+    // Data State
+    const [tickets, setTickets] = useState<any[]>([])
+    const [loading, setLoading] = useState(true)
+    const [searchQuery, setSearchQuery] = useState('')
 
-    const trendingTickets = MOCK_TICKETS.filter(t => t.trending)
+    // Fetch Tickets
+    useEffect(() => {
+        const fetchTickets = async () => {
+            setLoading(true)
+            try {
+                // For 'all' tab, we pass undefined or 'all' to service
+                // If query is empty, it returns list. Service handles delay.
+                const data = await TicketService.list(searchQuery, activeTab === 'all' ? undefined : activeTab)
+                setTickets(data)
+            } catch (err) {
+                console.error(err)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        // Debounce
+        const timer = setTimeout(fetchTickets, 300)
+        return () => clearTimeout(timer)
+    }, [activeTab, searchQuery])
+
+    // Update active tab when URL param changes
+    useEffect(() => {
+        if (type) setActiveTab(type)
+    }, [type])
+
+    const trendingTickets = tickets.filter(t => t.trending)
 
     return (
         <div className="pt-24 pb-32 px-6 max-w-7xl mx-auto space-y-10">
@@ -74,7 +102,7 @@ export default function TicketsHome() {
             <div className="space-y-4">
                 <div className="flex items-center gap-4">
                     <button
-                        onClick={() => navigate(-1)}
+                        onClick={() => navigate('/home')}
                         className="w-10 h-10 rounded-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all shrink-0"
                     >
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -87,9 +115,14 @@ export default function TicketsHome() {
                     <span className="text-2xl">🔍</span>
                     <input
                         type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder={t('tickets.search')}
                         className="bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 flex-1 font-medium"
                     />
+                    {searchQuery && (
+                        <button onClick={() => setSearchQuery('')} className="text-slate-400 hover:text-slate-900 dark:hover:text-white">✕</button>
+                    )}
                 </div>
             </div>
 
@@ -115,94 +148,118 @@ export default function TicketsHome() {
                 ))}
             </div>
 
-            {/* Trending Section (Only on 'All') */}
-            {activeTab === 'all' && (
-                <section className="space-y-6">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t('tickets.trending')}</h2>
-                        <button className="text-accent text-sm font-bold uppercase tracking-widest">{t('sections.viewAll')}</button>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {trendingTickets.map(ticket => (
-                            <div
-                                key={ticket.id}
-                                onClick={() => navigate(`/tickets/detail/${ticket.id}`)}
-                                className={`${glassClasses} group relative rounded-[2.5rem] overflow-hidden cursor-pointer border-white/20`}
-                            >
-                                <div className="aspect-[16/10] overflow-hidden">
-                                    <img
-                                        src={`${import.meta.env.BASE_URL}${ticket.image}`}
-                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                                    />
-                                </div>
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-
-                                <div className="absolute top-6 left-6">
-                                    <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold text-white border border-white/30">
-                                        {ticket.date}
-                                    </div>
-                                </div>
-
-                                <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
-                                    <div className="space-y-1">
-                                        <h3 className="text-2xl font-black text-white leading-tight">{ticket.title}</h3>
-                                        <p className="text-white/70 text-sm font-medium flex items-center gap-2">
-                                            📍 {ticket.location}
-                                        </p>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-accent font-black text-2xl">${ticket.price}</div>
-                                        <button className="mt-2 text-[10px] font-bold uppercase bg-accent text-white px-4 py-2 rounded-lg">
-                                            {t('tickets.bookNow')}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-            )}
-
-            {/* Main List */}
-            <section className="space-y-6">
-                <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-                        {activeTab === 'all' ? t('tickets.recommended') : t(`tickets.categories.${activeTab}`)}
-                    </h2>
+            {loading ? (
+                <div className="py-20 text-center">
+                    <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <p className="text-slate-400">Finding best tickets...</p>
                 </div>
+            ) : (
+                <>
+                    {/* Trending Section (Only on 'All' and when not searching) */}
+                    {activeTab === 'all' && !searchQuery && trendingTickets.length > 0 && (
+                        <section className="space-y-6">
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t('tickets.trending')}</h2>
+                                <button className="text-accent text-sm font-bold uppercase tracking-widest">{t('sections.viewAll')}</button>
+                            </div>
 
-                <div className="grid grid-cols-1 gap-4">
-                    {filteredTickets.map(ticket => (
-                        <div
-                            key={ticket.id}
-                            onClick={() => navigate(`/tickets/detail/${ticket.id}`)}
-                            className={`${glassClasses} group p-4 rounded-3xl flex items-center gap-5 hover:bg-slate-50 dark:hover:bg-white/10 transition-all cursor-pointer border-slate-200 dark:border-white/10`}
-                        >
-                            <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-xl shrink-0">
-                                <img
-                                    src={`${import.meta.env.BASE_URL}${ticket.image}`}
-                                    className="w-full h-full object-cover"
-                                />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {trendingTickets.map(ticket => (
+                                    <div
+                                        key={ticket.id}
+                                        onClick={() => navigate(`/tickets/detail/${ticket.id}`)}
+                                        className={`${glassClasses} group relative rounded-[2.5rem] overflow-hidden cursor-pointer border-white/20`}
+                                    >
+                                        <div className="aspect-[16/10] overflow-hidden">
+                                            <img
+                                                src={`${ticket.image}`}
+                                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                            />
+                                        </div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+
+                                        <div className="absolute top-6 left-6">
+                                            {ticket.dateRange && (
+                                                <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold text-white border border-white/30">
+                                                    {Array.isArray(ticket.dateRange) ? ticket.dateRange[0] : ticket.dateRange}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+                                            <div className="space-y-1">
+                                                <h3 className="text-2xl font-black text-white leading-tight">{ticket.title}</h3>
+                                                <p className="text-white/70 text-sm font-medium flex items-center gap-2">
+                                                    📍 {ticket.location}
+                                                </p>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-accent font-black text-2xl">${ticket.priceFrom}</div>
+                                                <button className="mt-2 text-[10px] font-bold uppercase bg-accent text-white px-4 py-2 rounded-lg">
+                                                    {t('tickets.bookNow')}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                            <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span className="text-[10px] font-bold text-accent px-2 py-0.5 rounded-md bg-accent/10 border border-accent/20 uppercase tracking-widest">
-                                        {t(`tickets.categories.${ticket.type}`)}
-                                    </span>
-                                    <span className="text-slate-500 dark:text-white/40 text-[10px] font-bold">• {ticket.date}</span>
-                                </div>
-                                <h4 className="font-bold text-lg truncate text-slate-900 dark:text-white">{ticket.title}</h4>
-                                <p className="text-sm text-slate-500 dark:text-white/40 font-medium truncate">📍 {ticket.location}</p>
-                            </div>
-                            <div className="text-right shrink-0 px-2">
-                                <div className="text-accent font-black text-lg">${ticket.price}</div>
-                                <div className="text-[10px] text-slate-400 dark:text-white/30 font-bold uppercase mt-1">Per Ticket</div>
-                            </div>
+                        </section>
+                    )}
+
+                    {/* Main List */}
+                    <section className="space-y-6">
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                                {searchQuery
+                                    ? `Search Results for "${searchQuery}"`
+                                    : (activeTab === 'all' ? t('tickets.recommended') : t(`tickets.categories.${activeTab}`))
+                                }
+                            </h2>
                         </div>
-                    ))}
-                </div>
-            </section>
+
+                        {tickets.length === 0 ? (
+                            <div className="text-center py-20 bg-slate-50 dark:bg-white/5 rounded-[3rem] border-2 border-dashed border-slate-200 dark:border-white/10">
+                                <p className="text-4xl mb-4">🏜️</p>
+                                <p className="font-bold text-slate-900 dark:text-white">No tickets found</p>
+                                <p className="text-slate-500 text-sm">Try exploring different categories.</p>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 gap-4">
+                                {tickets.map(ticket => (
+                                    <div
+                                        key={ticket.id}
+                                        onClick={() => navigate(`/tickets/detail/${ticket.id}`)}
+                                        className={`${glassClasses} group p-4 rounded-3xl flex items-center gap-5 hover:bg-slate-50 dark:hover:bg-white/10 transition-all cursor-pointer border-slate-200 dark:border-white/10`}
+                                    >
+                                        <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-xl shrink-0">
+                                            <img
+                                                src={`${ticket.image}`}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <span className="text-[10px] font-bold text-accent px-2 py-0.5 rounded-md bg-accent/10 border border-accent/20 uppercase tracking-widest">
+                                                    {t(`tickets.categories.${ticket.category.toLowerCase()}`) || ticket.category}
+                                                </span>
+                                                <span className="text-slate-500 dark:text-white/40 text-[10px] font-bold">
+                                                    • {Array.isArray(ticket.dateRange) ? ticket.dateRange.join(' ~ ') : ticket.dateRange}
+                                                </span>
+                                            </div>
+                                            <h4 className="font-bold text-lg truncate text-slate-900 dark:text-white">{ticket.title}</h4>
+                                            <p className="text-sm text-slate-500 dark:text-white/40 font-medium truncate">📍 {ticket.location}</p>
+                                        </div>
+                                        <div className="text-right shrink-0 px-2">
+                                            <div className="text-accent font-black text-lg">${ticket.priceFrom}</div>
+                                            <div className="text-[10px] text-slate-400 dark:text-white/30 font-bold uppercase mt-1">Starting</div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </section>
+                </>
+            )}
         </div>
     )
 }

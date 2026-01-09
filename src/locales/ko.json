@@ -172,6 +172,10 @@
             "comfort": "컴포트",
             "premium": "프리미엄"
         },
+        "matchFound": "드라이버 매칭 완료!",
+        "reject": "거절",
+        "accept": "수락",
+        "driverArriving": "드라이버가 오는 중입니다",
         "review": {
             "title": "운행 평가",
             "comment": "코멘트 남기기 (선택사항)",

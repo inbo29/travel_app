@@ -4,18 +4,60 @@ import { glassClasses } from '@/styles/glass'
 import { useI18n } from '@/hooks/useI18n'
 import { useTaxiStore } from '@/store/taxiStore'
 import { requestTaxi } from '@/services/taxi.service'
-import { useTaxiSimulator } from '@/hooks/useTaxiSimulator'
+import { MapView } from '@/infra/map/MapView'
+import { MapProvider, useMap } from '@/infra/map/MapProvider'
+import { MOCK_PLACES } from '@/mocks/taxi/places.mock'
+
+
 
 export default function TaxiHome() {
+    return <TaxiHomeContent />
+}
+
+function TaxiHomeContent() {
     const { t } = useI18n()
     const navigate = useNavigate()
-    const { setRide } = useTaxiStore()
+    const { ride, setRide } = useTaxiStore()
+    const { setDestination: setMapDestination, setOrigin: setMapOrigin } = useMap()
 
-    const [destination, setDestination] = useState('')
+    const [origin, setOrigin] = useState<{ name: string, lat: number, lng: number }>({ name: 'Gobi Hotel (Current)', lat: 47.9186, lng: 106.9170 })
+    const [destination, setDestination] = useState<{ name: string, lat: number, lng: number } | null>(null)
     const [searchQuery, setSearchQuery] = useState('')
+    const [searchMode, setSearchMode] = useState<'origin' | 'destination'>('destination')
     const [vehicleType, setVehicleType] = useState<'standard' | 'comfort' | 'premium'>('standard')
-    const [isSearching, setIsSearching] = useState(false)
-    const [results, setResults] = useState<{ name: string, dist: string }[]>([])
+    const [results, setResults] = useState(MOCK_PLACES)
+
+    // Active Ride Redirection (Step Restoration)
+    useEffect(() => {
+        if (!ride) return
+
+        switch (ride.status) {
+            case 'SEARCHING':
+            case 'MATCHED':
+            case 'MATCH_ACCEPTED':
+            case 'DRIVER_ARRIVING':
+                navigate('/taxi/matching')
+                break
+            case 'IN_RIDE':
+                navigate('/taxi/ride')
+                break
+            case 'COMPLETED':
+                navigate('/taxi/completion')
+                break
+            case 'PAYING':
+                navigate('/taxi/payment')
+                break
+            default:
+                break
+        }
+    }, [ride?.status, navigate])
+
+    // Initial Focus
+    useEffect(() => {
+        if (!ride || ride.status === 'IDLE') {
+            // Initial focus on "current location" (Mocked at DEFAULT_CENTER)
+        }
+    }, [ride?.status])
 
     const fares = {
         standard: 12.5,
@@ -29,24 +71,33 @@ export default function TaxiHome() {
             setResults([])
             return
         }
-        const timer = setTimeout(() => {
-            setResults([
-                { name: 'State Opera & Ballet Theatre', dist: '1.2km' },
-                { name: 'Sukhbaatar Square', dist: '2.4km' },
-                { name: 'Zaisan Memorial', dist: '5.8km' },
-                { name: 'Chinggis Khaan International Airport', dist: '24km' }
-            ].filter(r => r.name.toLowerCase().includes(searchQuery.toLowerCase())))
-        }, 300)
-        return () => clearTimeout(timer)
+        const filtered = MOCK_PLACES.filter(p =>
+            p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            p.address.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        setResults(filtered)
     }, [searchQuery])
+
+    const handleSelectPlace = (place: typeof MOCK_PLACES[0]) => {
+        const selected = { name: place.name, lat: place.lat, lng: place.lng }
+        if (searchMode === 'origin') {
+            setOrigin(selected)
+            setMapOrigin(selected)
+        } else {
+            setDestination(selected)
+            setMapDestination(selected)
+        }
+        setSearchQuery('')
+        setResults([])
+    }
 
     const handleCallTaxi = async () => {
         if (!destination) return
 
         try {
             const ride = await requestTaxi(
-                { lat: 47.9186, lng: 106.9170 }, // Current (Mock)
-                { lat: 47.92, lng: 106.93 }      // Dest (Mock)
+                { lat: origin.lat, lng: origin.lng },
+                { lat: destination.lat, lng: destination.lng }
             )
             setRide(ride)
             navigate('/taxi/matching')
@@ -56,95 +107,93 @@ export default function TaxiHome() {
     }
 
     return (
-        <div className="pt-24 pb-40 px-6 max-w-7xl mx-auto h-full">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,0.8fr] gap-10 items-start">
+        <div className="pt-4 pb-20 px-4 lg:px-6 max-w-7xl mx-auto h-full flex flex-col pointer-events-none overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,0.8fr] gap-6 lg:gap-10 items-start h-full">
 
-                {/* Left Side: Map & Search (PC View) */}
-                <div className="space-y-6">
-                    <div className="flex items-center gap-6 mb-4">
-                        <button onClick={() => navigate('/home')} className="w-12 h-12 rounded-2xl bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all">
-                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                            </svg>
+                {/* Left Side: Search Bar (Floating over map) */}
+                <div className="space-y-6 flex flex-col pointer-events-none">
+                    <div className="flex items-center justify-between mb-4 flex-none pointer-events-auto">
+                        <div className="flex items-center gap-6">
+                            <button onClick={() => navigate('/home')} className="w-12 h-12 rounded-2xl bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all">
+                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t('taxi.title')}</h1>
+                        </div>
+
+                        {/* History Button */}
+                        <button
+                            onClick={() => navigate('/taxi/history')}
+                            className={`${glassClasses} bg-white/5 dark:bg-white/10 px-4 py-2 rounded-xl text-sm font-bold text-slate-900 dark:text-white hover:bg-white/20`}
+                        >
+                            History
                         </button>
-                        <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t('taxi.title')}</h1>
                     </div>
 
-                    {/* Advanced Map Mock */}
-                    <div className={`aspect-video lg:aspect-auto lg:h-[60vh] rounded-[3rem] ${glassClasses} border-slate-200 dark:border-white/10 overflow-hidden relative shadow-2xl bg-slate-100 dark:bg-slate-800`}>
-                        <div className="absolute inset-0 opacity-40 dark:opacity-20">
-                            <div className="w-full h-full bg-[radial-gradient(circle,theme(colors.slate.300)_1px,transparent_1px)] bg-[size:40px_40px]" />
-                        </div>
-                        {/* Map UI Elements */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                            <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center animate-ping" />
-                            <div className="absolute inset-0 w-12 h-12 bg-accent rounded-full border-4 border-white shadow-xl flex items-center justify-center">
-                                <span className="text-white text-xl">📍</span>
-                            </div>
-                        </div>
-
-                        {/* Top Search Bar (Floating over map) */}
-                        <div className="absolute top-6 left-6 right-6 lg:left-10 lg:right-10 z-20">
-                            <div className={`${glassClasses} bg-white/90 dark:bg-bg-dark/80 p-2 rounded-3xl border-slate-200 dark:border-white/20 shadow-2xl`}>
-                                <div className="flex items-center gap-4 px-4 py-2">
-                                    <span className="text-accent text-xl">🏁</span>
-                                    <input
-                                        type="text"
-                                        value={searchQuery}
-                                        onChange={(e) => setSearchQuery(e.target.value)}
-                                        placeholder={t('taxi.destinationPlaceholder')}
-                                        className="flex-1 bg-transparent border-none outline-none font-bold text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/20 text-lg"
-                                    />
-                                    {searchQuery && (
-                                        <button onClick={() => setSearchQuery('')} className="text-slate-400">✕</button>
-                                    )}
-                                </div>
-
-                                {results.length > 0 && (
-                                    <div className="mt-2 pt-2 border-t border-slate-100 dark:border-white/5 max-h-60 overflow-y-auto">
-                                        {results.map((res, i) => (
-                                            <button
-                                                key={i}
-                                                onClick={() => {
-                                                    setDestination(res.name)
-                                                    setSearchQuery(res.name)
-                                                    setResults([])
-                                                }}
-                                                className="w-full p-4 hover:bg-black/5 dark:hover:bg-white/5 flex items-center justify-between transition-colors text-left"
-                                            >
-                                                <div>
-                                                    <p className="font-bold text-slate-900 dark:text-white">{res.name}</p>
-                                                    <p className="text-xs text-slate-400">Ulaanbaatar, Mongolia</p>
-                                                </div>
-                                                <span className="text-xs font-black text-accent">{res.dist}</span>
-                                            </button>
-                                        ))}
-                                    </div>
+                    {/* Search Input Area - Positioned relatively in the grid but visually floating */}
+                    <div className="relative z-[1000] pointer-events-auto">
+                        <div className={`${glassClasses} bg-white/90 dark:bg-bg-dark/80 p-2 rounded-3xl border-slate-200 dark:border-white/20 shadow-2xl overflow-hidden`}>
+                            <div className="flex items-center gap-4 px-4 py-2">
+                                <span className="text-accent text-xl">{searchMode === 'origin' ? '📍' : '🏁'}</span>
+                                <input
+                                    type="text"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    placeholder={searchMode === 'origin' ? t('taxi.originPlaceholder') : t('taxi.destinationPlaceholder')}
+                                    className="flex-1 bg-transparent border-none outline-none font-bold text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/20 text-lg"
+                                />
+                                {searchQuery && (
+                                    <button onClick={() => setSearchQuery('')} className="text-slate-400">✕</button>
                                 )}
                             </div>
+
+                            {searchQuery && results.length > 0 && (
+                                <div className="mt-2 pt-2 border-t border-slate-100 dark:border-white/5 max-h-60 overflow-y-auto">
+                                    {results.map((res) => (
+                                        <button
+                                            key={res.id}
+                                            onClick={() => handleSelectPlace(res)}
+                                            className="w-full p-4 hover:bg-black/5 dark:hover:bg-white/5 flex items-center justify-between transition-colors text-left"
+                                        >
+                                            <div>
+                                                <p className="font-bold text-slate-900 dark:text-white">{res.name}</p>
+                                                <p className="text-xs text-slate-400">{res.address}</p>
+                                            </div>
+                                            <span className="text-xs font-black text-accent">{res.dist}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
 
-                {/* Right Side: Ride Details (PC View) or Bottom Sheet (Mobile View) */}
-                <div className={`${glassClasses} p-10 rounded-[4rem] border-slate-200 dark:border-white/20 bg-white/80 dark:bg-bg-dark/50 shadow-[0_30px_60px_rgba(0,0,0,0.1)] space-y-10 lg:sticky lg:top-24`}>
+                {/* Right Side: Ride Panel - Pointer Events Auto to allow interaction */}
+                <div className={`${glassClasses} p-10 rounded-[4rem] border-slate-200 dark:border-white/20 bg-white/80 dark:bg-bg-dark/50 shadow-[0_30px_60px_rgba(0,0,0,0.1)] space-y-10 lg:sticky lg:top-4 pointer-events-auto`}>
                     <div className="space-y-6">
-                        <div className="flex items-center gap-4 p-5 rounded-3xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 group">
-                            <div className="w-10 h-10 rounded-2xl bg-accent/20 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">📍</div>
+                        <button
+                            onClick={() => { setSearchMode('origin'); setSearchQuery(''); }}
+                            className={`w-full text-left flex items-center gap-4 p-5 rounded-3xl border-2 transition-all ${searchMode === 'origin' ? 'border-accent bg-accent/5' : 'bg-slate-50 dark:bg-white/5 border-slate-100 dark:border-white/10'}`}
+                        >
+                            <div className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-transform ${searchMode === 'origin' ? 'bg-accent text-white scale-110 shadow-lg' : 'bg-accent/20 text-accent'}`}>📍</div>
                             <div className="flex-1">
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('taxi.origin')}</p>
-                                <p className="font-black text-slate-900 dark:text-white">Gobi Hotel (Current)</p>
+                                <p className={`font-black ${searchMode === 'origin' ? 'text-accent' : 'text-slate-900 dark:text-white'}`}>{origin.name}</p>
                             </div>
-                        </div>
-                        <div className={`flex items-center gap-4 p-5 rounded-3xl border-2 transition-all ${destination ? 'border-accent bg-accent/5' : 'border-dashed border-slate-200 dark:border-white/10 shadow-inner'}`}>
-                            <div className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${destination ? 'bg-accent text-white scale-110' : 'bg-slate-200 dark:bg-white/10 text-slate-400'}`}>🏁</div>
+                        </button>
+                        <button
+                            onClick={() => { setSearchMode('destination'); setSearchQuery(''); }}
+                            className={`w-full text-left flex items-center gap-4 p-5 rounded-3xl border-2 transition-all ${destination ? (searchMode === 'destination' ? 'border-accent bg-accent/5' : 'border-slate-100 dark:border-white/10 bg-slate-50 dark:bg-white/5') : 'border-dashed border-slate-200 dark:border-white/10 shadow-inner'}`}
+                        >
+                            <div className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${destination ? (searchMode === 'destination' ? 'bg-accent text-white scale-110 shadow-lg' : 'bg-slate-200 dark:bg-white/10 text-slate-400') : 'bg-slate-200 dark:bg-white/10 text-slate-400'}`}>🏁</div>
                             <div className="flex-1">
                                 <p className={`text-[10px] font-black uppercase tracking-widest ${destination ? 'text-accent' : 'text-slate-400'}`}>{t('taxi.destination')}</p>
-                                <p className={`font-black ${destination ? 'text-slate-900 dark:text-white text-lg' : 'text-slate-300 dark:text-white/10'}`}>
-                                    {destination || "Select destination..."}
+                                <p className={`font-black ${destination ? (searchMode === 'destination' ? 'text-accent text-lg' : 'text-slate-900 dark:text-white text-lg') : 'text-slate-300 dark:text-white/10'}`}>
+                                    {destination?.name || t('taxi.destinationPlaceholder')}
                                 </p>
                             </div>
-                        </div>
+                        </button>
                     </div>
 
                     <div className="space-y-4">

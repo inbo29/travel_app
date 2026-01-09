@@ -12,7 +12,7 @@ export default function Header() {
     const [isSearchOpen, setIsSearchOpen] = useState(false)
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 h-16 bg-white/70 dark:bg-bg-dark/50 backdrop-blur-xl border-b border-black/[0.03] dark:border-white/[0.03] transition-all duration-300">
+        <header className="relative w-full z-50 h-16 bg-white/70 dark:bg-bg-dark/50 backdrop-blur-xl border-b border-black/[0.03] dark:border-white/[0.03] transition-all duration-300">
             <div className="max-w-7xl mx-auto h-full px-4 md:px-6 flex items-center justify-between gap-4">
                 {/* Left: Logo */}
                 <div

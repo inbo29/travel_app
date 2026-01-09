@@ -6,6 +6,8 @@ export type TaxiStatus =
     | 'IN_RIDE'
     | 'COMPLETED'
     | 'CANCELLED'
+    | 'MATCH_ACCEPTED'
+    | 'PAYING'
 
 export interface LatLng {
     lat: number
@@ -29,6 +31,8 @@ export interface TaxiRide {
     origin: LatLng
     destination?: LatLng
     driver?: Driver
+    currentLocation?: LatLng // Taxi's current location (updates during ride)
+    driverLocation?: LatLng // Driver's location (during arriving phase)
     // Trip details
     distanceKm: number
     durationMin: number
@@ -36,4 +40,6 @@ export interface TaxiRide {
     estimatedFare: number
     startTime?: number
     endTime?: number
+    routePath?: LatLng[]
+    routeIndex?: number
 }

@@ -19,4 +19,5 @@ export const baseRideMock: TaxiRide = {
     durationMin: 0,
     currentFare: 0,
     estimatedFare: 15000,
+    currentLocation: { lat: 47.9186, lng: 106.9170 }
 }
