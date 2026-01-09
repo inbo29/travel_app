@@ -8,7 +8,7 @@ import { PaymentProcess } from '@/infra/payment'
 export default function TaxiCompletion() {
     const { t } = useI18n()
     const navigate = useNavigate()
-    const { driver, fare, origin, destination, resetRide, addHistory } = useTaxiStore()
+    const { ride, reset } = useTaxiStore()
 
     const [step, setStep] = useState<'PAYMENT' | 'RATING'>('PAYMENT')
     const [rating, setRating] = useState(0)
@@ -18,20 +18,12 @@ export default function TaxiCompletion() {
     }
 
     const handleComplete = () => {
-        addHistory({
-            id: `TX-${Date.now()}`,
-            date: new Date().toLocaleDateString(),
-            origin,
-            destination,
-            fare,
-            driverName: driver?.name,
-            status: 'Completed'
-        })
-        resetRide()
+        // Mock add history
+        reset()
         navigate('/taxi/history')
     }
 
-    if (!driver) return null
+    if (!ride?.driver) return null
 
     return (
         <div className="pt-24 pb-40 px-6 max-w-2xl mx-auto space-y-10 min-h-screen">
@@ -48,26 +40,26 @@ export default function TaxiCompletion() {
 
             {step === 'PAYMENT' ? (
                 <PaymentProcess
-                    amount={fare}
+                    amount={ride.currentFare}
                     title={t('taxi.payment.total')}
                     onComplete={handlePaymentComplete}
                     onCancel={() => navigate('/home')}
                     items={[
-                        { label: t('taxi.origin'), value: origin },
-                        { label: t('taxi.destination'), value: destination },
-                        { label: 'Driver', value: driver.name }
+                        { label: t('taxi.origin'), value: 'Current Location' },
+                        { label: t('taxi.destination'), value: 'Selected Destination' },
+                        { label: 'Driver', value: ride.driver.name }
                     ]}
                 />
             ) : (
                 /* Rating Card */
-                <div className={`${glassClasses} p-10 rounded-[3rem] border-slate-200 dark:border-white/20 bg-white/80 dark:bg-bg-bg-dark/50 shadow-2xl space-y-10 text-center`}>
+                <div className={`${glassClasses} p-10 rounded-[3rem] border-slate-200 dark:border-white/20 bg-white/80 dark:bg-bg-dark/50 shadow-2xl space-y-10 text-center`}>
                     <div className="space-y-4">
                         <div className="w-24 h-24 rounded-3xl bg-accent/20 mx-auto overflow-hidden border-4 border-accent/20 p-1">
-                            <img src={driver.photo} alt="Driver" className="w-full h-full object-cover rounded-2xl" />
+                            <img src={ride.driver.avatar} alt="Driver" className="w-full h-full object-cover rounded-2xl" />
                         </div>
                         <div className="space-y-1">
                             <h3 className="text-2xl font-black text-slate-900 dark:text-white">{t('taxi.review.title')}</h3>
-                            <p className="text-sm font-bold text-slate-400">{driver.name}</p>
+                            <p className="text-sm font-bold text-slate-400">{ride.driver.name}</p>
                         </div>
                     </div>
 

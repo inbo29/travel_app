@@ -1,11 +1,15 @@
 import { useNavigate } from 'react-router-dom'
-import { ThemeToggle } from '@/ui/ThemeToggle'
-import { LanguageSwitcher } from '@/ui/LanguageSwitcher'
+import { ThemeToggle } from './ThemeToggle'
+import { LanguageSwitcher } from './LanguageSwitcher'
 import { useI18n } from '@/hooks/useI18n'
+
+import { useState } from 'react'
+import { SearchModal } from './SearchModal'
 
 export default function Header() {
     const { t } = useI18n()
     const navigate = useNavigate()
+    const [isSearchOpen, setIsSearchOpen] = useState(false)
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 h-16 bg-white/70 dark:bg-bg-dark/50 backdrop-blur-xl border-b border-black/[0.03] dark:border-white/[0.03] transition-all duration-300">
@@ -21,17 +25,20 @@ export default function Header() {
                 </div>
 
                 {/* Center: Search (PC/Mobile unified but responsive) */}
-                <div className="flex-1 max-w-xl relative group">
-                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                        <svg className="w-4 h-4 text-slate-400 dark:text-white/40 group-focus-within:text-accent transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {/* Center: Search Icon (Click to verify) */}
+                <div className="flex-1 flex justify-end md:justify-center">
+                    <button
+                        onClick={() => setIsSearchOpen(true)}
+                        className="p-3 text-slate-400 hover:text-accent hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-all group lg:w-full lg:max-w-xl lg:bg-black/[0.03] lg:dark:bg-white/[0.05] lg:rounded-2xl lg:px-4 lg:py-2.5 lg:flex lg:items-center lg:gap-3 lg:hover:text-slate-400 lg:hover:bg-black/[0.05] lg:dark:hover:bg-white/[0.1]"
+                    >
+                        <svg className="w-6 h-6 lg:w-5 lg:h-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                    </div>
-                    <input
-                        type="text"
-                        placeholder={t('header.searchPlaceholder')}
-                        className="w-full bg-black/[0.03] dark:bg-white/[0.05] backdrop-blur-md border border-black/5 dark:border-white/10 rounded-2xl py-2.5 pl-11 pr-4 text-sm focus:ring-2 focus:ring-accent/30 focus:bg-white/90 dark:focus:bg-white/10 outline-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/30 transition-all font-medium"
-                    />
+                        <span className="hidden lg:block text-sm font-medium text-slate-400 dark:text-white/40">
+                            {t('header.searchPlaceholder')}
+                        </span>
+                    </button>
+                    <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
                 </div>
 
                 {/* Right: Actions */}

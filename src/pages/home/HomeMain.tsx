@@ -1,14 +1,25 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { glassClasses } from '@/styles/glass'
 import { useI18n } from '@/hooks/useI18n'
 
+// Mock Data Type
+interface Recommendation {
+    id: number
+    image: string
+    tag: string
+    title: string
+    features: string
+    price: number
+}
+
 const QUICK_ACCESS_ITEMS: { key: string, icon: string, highlighted?: boolean, path?: string }[] = [
     { key: 'taxi', icon: '🚕', highlighted: true, path: '/taxi' },
-    { key: 'guide', icon: '🧭', highlighted: true },
+    { key: 'guide', icon: '🧭', highlighted: true, path: '/guides' },
     { key: 'payme', icon: '💳', highlighted: true, path: '/exchange' },
     { key: 'tickets', icon: '🎫', path: '/tickets' },
     { key: 'translate', icon: '🌐', path: '/translator' },
-    { key: 'market', icon: '📊' },
+    { key: 'market', icon: '📊', path: '/market-rates' },
     { key: 'map', icon: '🗺️', path: '/map' },
     { key: 'travelLog', icon: '📔' },
 ]
@@ -16,6 +27,56 @@ const QUICK_ACCESS_ITEMS: { key: string, icon: string, highlighted?: boolean, pa
 export default function HomeMain() {
     const { t } = useI18n()
     const navigate = useNavigate()
+
+    // Slide State
+    const [recommendations, setRecommendations] = useState<Recommendation[]>([])
+    const [currentIndex, setCurrentIndex] = useState(0)
+
+    // Mock Data Fetching
+    useEffect(() => {
+        const fetchRecommendations = async () => {
+            // Simulate API latency
+            await new Promise(resolve => setTimeout(resolve, 800))
+
+            setRecommendations([
+                {
+                    id: 1,
+                    image: `${import.meta.env.BASE_URL}nature/nt2.png`,
+                    tag: 'mock.highlyRecommended',
+                    title: 'mock.trekTitle',
+                    features: 'mock.trekFeatures',
+                    price: 450
+                },
+                {
+                    id: 2,
+                    image: `${import.meta.env.BASE_URL}nature/nt3.png`,
+                    tag: 'mock.cultural',
+                    title: 'mock.altaiTitle',
+                    features: 'mock.altaiFeatures',
+                    price: 1200
+                },
+                {
+                    id: 3,
+                    image: `${import.meta.env.BASE_URL}city/ct1.png`,
+                    tag: 'mock.localStay',
+                    title: 'UB City Tour', // Fallback if no translation key
+                    features: 'Full Day • Private Car',
+                    price: 85
+                }
+            ])
+        }
+        fetchRecommendations()
+    }, [])
+
+    // Infinite Slide Logic
+    useEffect(() => {
+        if (recommendations.length === 0) return
+        const interval = setInterval(() => {
+            setCurrentIndex(prev => (prev + 1) % recommendations.length)
+        }, 5000)
+        return () => clearInterval(interval)
+    }, [recommendations])
+
 
     return (
         <div className="space-y-20">
@@ -117,34 +178,62 @@ export default function HomeMain() {
                     <button className="text-accent font-bold text-sm hover:underline decoration-2 underline-offset-4">{t('sections.viewAll')}</button>
                 </div>
 
-                <div className={`${glassClasses} rounded-[2.5rem] overflow-hidden group border-white/20 dark:border-white/5 shadow-2xl shadow-black/5`}>
-                    <div className="relative h-[400px] md:h-[500px] w-full cursor-pointer">
-                        <img
-                            src={`${import.meta.env.BASE_URL}nature/nt2.png`}
-                            alt="Featured"
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                {/* Dynamic Infinite Slider Container */}
+                <div className={`${glassClasses} rounded-[2.5rem] overflow-hidden group border-white/20 dark:border-white/5 shadow-2xl shadow-black/5 relative h-[400px] md:h-[500px]`}>
+                    {recommendations.length > 0 ? (
+                        recommendations.map((item, index) => (
+                            <div
+                                key={item.id}
+                                className={`absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out ${index === currentIndex ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 z-0'
+                                    }`}
+                            >
+                                <img
+                                    src={item.image}
+                                    alt={item.title}
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
-                        <div className="absolute top-8 left-8">
-                            <span className={`${glassClasses} block px-4 py-2 rounded-xl text-xs font-bold text-white border-white/20 uppercase tracking-widest`}>
-                                {t('mock.highlyRecommended')}
-                            </span>
-                        </div>
+                                <div className="absolute top-8 left-8">
+                                    <span className={`${glassClasses} block px-4 py-2 rounded-xl text-xs font-bold text-white border-white/20 uppercase tracking-widest`}>
+                                        {t(item.tag) !== item.tag ? t(item.tag) : item.tag}
+                                    </span>
+                                </div>
 
-                        <div className="absolute bottom-10 left-8 right-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
-                            <div className="space-y-3">
-                                <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
-                                    {t('mock.trekTitle')}
-                                </h3>
-                                <div className="flex items-center gap-4 text-white/70 font-semibold text-sm">
-                                    {t('mock.trekFeatures')}
+                                <div className="absolute bottom-10 left-8 right-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                                    <div className={`space-y-3 transition-all duration-700 delay-300 transform ${index === currentIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                                        <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
+                                            {t(item.title) !== item.title ? t(item.title) : item.title}
+                                        </h3>
+                                        <div className="flex items-center gap-4 text-white/70 font-semibold text-sm">
+                                            {t(item.features) !== item.features ? t(item.features) : item.features}
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => navigate('/guides')}
+                                        className={`bg-accent text-white px-10 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-xl shadow-accent/20 whitespace-nowrap transform duration-700 delay-500 ${index === currentIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                                    >
+                                        {t('mock.bookNow')} — ${item.price}
+                                    </button>
                                 </div>
                             </div>
-                            <button className="bg-accent text-white px-10 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-xl shadow-accent/20 whitespace-nowrap">
-                                {t('mock.bookNow')} — $450
-                            </button>
+                        ))
+                    ) : (
+                        // Loading Skeleton
+                        <div className="absolute inset-0 bg-black/5 animate-pulse flex items-center justify-center">
+                            <div className="text-slate-400 font-bold">Loading recommendations...</div>
                         </div>
+                    )}
+
+                    {/* Slide Indicators */}
+                    <div className="absolute right-8 top-8 z-20 flex gap-2">
+                        {recommendations.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setCurrentIndex(idx)}
+                                className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'bg-white w-6' : 'bg-white/40 hover:bg-white/80'}`}
+                            />
+                        ))}
                     </div>
                 </div>
             </section>

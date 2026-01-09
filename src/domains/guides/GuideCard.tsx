@@ -12,7 +12,7 @@ export const GuideCard = ({ guide }: GuideCardProps) => {
 
     return (
         <div
-            onClick={() => navigate(`/guides/${guide.id}`)}
+            onClick={() => navigate(`/guides/guides/${guide.id}`)}
             className="group bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-5 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:bg-white/15"
         >
             <div className="flex items-start gap-5">

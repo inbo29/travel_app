@@ -209,5 +209,20 @@
         "pay": "Confirm & Pay",
         "success": "You're All Set!",
         "id": "Booking ID"
+    },
+    "marketPage": {
+        "title": "Market Rates",
+        "subtitle": "Average local prices",
+        "updated": "Last updated: {{date}}",
+        "aboveAverage": "Above local average",
+        "disclaimer": "Prices may vary by location",
+        "source": "Source",
+        "convert": "Convert USD → MNT",
+        "categories": {
+            "transport": "Transport",
+            "food": "Food & Drink",
+            "accommodation": "Stay",
+            "dailyGoods": "Daily Goods"
+        }
     }
 }

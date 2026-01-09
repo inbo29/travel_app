@@ -1,64 +1,36 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { TaxiRide, TaxiStatus } from '@/types/taxi'
+import { TaxiScenario } from '@/mocks/taxi/scenarios'
 
-export type RideStatus = 'IDLE' | 'REQUESTED' | 'DRIVER_FOUND' | 'DRIVER_ARRIVING' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED'
+interface TaxiStore {
+    ride: TaxiRide | null
+    scenario: TaxiScenario | null
 
-interface Driver {
-    name: string
-    photo: string
-    car: string
-    plate: string
-    rating: number
-    eta: number
+    // Actions
+    setRide: (ride: TaxiRide | null) => void
+    setStatus: (status: TaxiStatus) => void
+    setScenario: (scenario: TaxiScenario) => void
+    updateRideProgress: (data: Partial<TaxiRide>) => void
+    reset: () => void
 }
 
-interface RideState {
-    status: RideStatus
-    origin: string
-    destination: string
-    vehicleType: 'standard' | 'comfort'
-    driver: Driver | null
-    fare: number
-    distance: number
-    duration: number
-    history: any[]
-}
+export const useTaxiStore = create<TaxiStore>((set) => ({
+    ride: null,
+    scenario: null,
 
-interface TaxiActions {
-    setStatus: (status: RideStatus) => void
-    setRideInfo: (info: Partial<RideState>) => void
-    resetRide: () => void
-    addHistory: (ride: any) => void
-}
+    setRide: (ride) => set({ ride }),
 
-export const useTaxiStore = create<RideState & TaxiActions>()(
-    persist(
-        (set) => ({
-            status: 'IDLE',
-            origin: '',
-            destination: '',
-            vehicleType: 'standard',
-            driver: null,
-            fare: 0,
-            distance: 0,
-            duration: 0,
-            history: [],
+    setStatus: (status) =>
+        set((state) => ({
+            ride: state.ride ? { ...state.ride, status } : null,
+        })),
 
-            setStatus: (status) => set({ status }),
-            setRideInfo: (info) => set((state) => ({ ...state, ...info })),
-            resetRide: () => set({
-                status: 'IDLE',
-                origin: '',
-                destination: '',
-                driver: null,
-                fare: 0,
-                distance: 0,
-                duration: 0
-            }),
-            addHistory: (ride) => set((state) => ({ history: [ride, ...state.history] }))
-        }),
-        {
-            name: 'taxi-storage',
-        }
-    )
-)
+    setScenario: (scenario) => set({ scenario }),
+
+    updateRideProgress: (data) =>
+        set((state) => ({
+            ride: state.ride ? { ...state.ride, ...data } : null,
+        })),
+
+    reset: () => set({ ride: null, scenario: null }),
+}))

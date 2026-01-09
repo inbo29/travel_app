@@ -22,6 +22,7 @@ interface MapViewProps {
     showUser?: boolean
     showDestination?: boolean
     showTaxi?: boolean
+    showMarketPois?: boolean
     className?: string
 }
 
@@ -29,6 +30,7 @@ export const MapView = ({
     showUser = true,
     showDestination = false,
     showTaxi = false,
+    showMarketPois = false,
     className = 'w-full h-full',
 }: MapViewProps) => {
     const { state } = useMap()
@@ -65,6 +67,23 @@ export const MapView = ({
             {showTaxi && state.driverPosition && (
                 <Marker position={[state.driverPosition.lat, state.driverPosition.lng]} icon={defaultIcon}>
                     <Popup>🚕 Driver</Popup>
+                </Marker>
+            )}
+
+            {showMarketPois && (
+                <Marker position={[47.9186, 106.9170]} icon={defaultIcon}>
+                    <Popup>
+                        <div className="text-center p-1">
+                            <h3 className="font-bold text-sm">Sukhbaatar Square</h3>
+                            <div className="mt-1 text-xs text-slate-600">
+                                <p>Avg Taxi: ₮1,500/km</p>
+                                <p>Coffee: ₮8,000</p>
+                                <div className="mt-1 text-[10px] text-green-600 font-bold bg-green-100 px-1 py-0.5 rounded">
+                                    ✅ Fair Price Zone
+                                </div>
+                            </div>
+                        </div>
+                    </Popup>
                 </Marker>
             )}
         </MapContainer>

@@ -1,3 +1,2 @@
-// Home Page
+// Home Page - Route Entry Point Only
 export { default } from './HomePage'
-export { default as HomeMain } from './HomeMain'

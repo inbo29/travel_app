@@ -178,5 +178,26 @@
             "submit": "Submit Review",
             "skip": "Skip for now"
         }
+    },
+    "booking": {
+        "summary": "Захиалгын тойм",
+        "pay": "Төлбөр төлөх",
+        "success": "Амжилттай!",
+        "id": "Захиалгын ID"
+    },
+    "marketPage": {
+        "title": "Зах зээлийн ханш",
+        "subtitle": "Албан ёсны дундаж үнэ",
+        "updated": "Сүүлд шинэчилсэн: {{date}}",
+        "aboveAverage": "Дунджаас дээгүүр",
+        "disclaimer": "Байршлаас хамааран үнэ өөр байж болно",
+        "source": "Эх сурвалж",
+        "convert": "USD → MNT хөрвүүлэх",
+        "categories": {
+            "transport": "Тээвэр",
+            "food": "Хоол хүнс",
+            "accommodation": "Байр",
+            "dailyGoods": "Өргөн хэрэглээ"
+        }
     }
 }

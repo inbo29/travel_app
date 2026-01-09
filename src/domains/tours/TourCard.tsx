@@ -13,7 +13,7 @@ export const TourCard = ({ tour }: TourCardProps) => {
 
     return (
         <div
-            onClick={() => navigate(`/tours/${tour.id}`)}
+            onClick={() => navigate(`/guides/tours/${tour.id}`)}
             className="group relative bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:bg-white/15"
         >
             <div className="relative h-48 w-full overflow-hidden">

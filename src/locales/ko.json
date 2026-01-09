@@ -209,5 +209,20 @@
         "pay": "결제 및 확인",
         "success": "예약이 완료되었습니다!",
         "id": "예약 ID"
+    },
+    "marketPage": {
+        "title": "현지 시세",
+        "subtitle": "공식 통계 기준 평균",
+        "updated": "최종 업데이트: {{date}}",
+        "aboveAverage": "평균보다 높음",
+        "disclaimer": "지역에 따라 가격이 상이할 수 있습니다",
+        "source": "출처",
+        "convert": "USD → MNT 환전하기",
+        "categories": {
+            "transport": "교통",
+            "food": "식음료",
+            "accommodation": "숙박",
+            "dailyGoods": "생필품"
+        }
     }
 }

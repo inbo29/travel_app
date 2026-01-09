@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { glassClasses } from '@/styles/glass'
 import { useI18n } from '@/hooks/useI18n'
 import { useTaxiStore } from '@/store/taxiStore'
+import { requestTaxi } from '@/services/taxi.service'
+import { useTaxiSimulator } from '@/hooks/useTaxiSimulator'
 
 export default function TaxiHome() {
     const { t } = useI18n()
     const navigate = useNavigate()
-    const { setRideInfo, setStatus } = useTaxiStore()
+    const { setRide } = useTaxiStore()
 
     const [destination, setDestination] = useState('')
     const [searchQuery, setSearchQuery] = useState('')
@@ -38,18 +40,19 @@ export default function TaxiHome() {
         return () => clearTimeout(timer)
     }, [searchQuery])
 
-    const handleCallTaxi = () => {
+    const handleCallTaxi = async () => {
         if (!destination) return
-        setRideInfo({
-            origin: 'Gobi Hotel (Current)',
-            destination,
-            vehicleType: vehicleType as 'standard' | 'comfort', // cast for now
-            fare: fares[vehicleType],
-            distance: 4.2,
-            duration: 15
-        })
-        setStatus('REQUESTED')
-        navigate('/taxi/matching')
+
+        try {
+            const ride = await requestTaxi(
+                { lat: 47.9186, lng: 106.9170 }, // Current (Mock)
+                { lat: 47.92, lng: 106.93 }      // Dest (Mock)
+            )
+            setRide(ride)
+            navigate('/taxi/matching')
+        } catch (error) {
+            console.error('Failed to request taxi', error)
+        }
     }
 
     return (
@@ -82,7 +85,7 @@ export default function TaxiHome() {
 
                         {/* Top Search Bar (Floating over map) */}
                         <div className="absolute top-6 left-6 right-6 lg:left-10 lg:right-10 z-20">
-                            <div className={`${glassClasses} bg-white/90 dark:bg-bg-bg-dark/80 p-2 rounded-3xl border-slate-200 dark:border-white/20 shadow-2xl`}>
+                            <div className={`${glassClasses} bg-white/90 dark:bg-bg-dark/80 p-2 rounded-3xl border-slate-200 dark:border-white/20 shadow-2xl`}>
                                 <div className="flex items-center gap-4 px-4 py-2">
                                     <span className="text-accent text-xl">🏁</span>
                                     <input
@@ -124,7 +127,7 @@ export default function TaxiHome() {
                 </div>
 
                 {/* Right Side: Ride Details (PC View) or Bottom Sheet (Mobile View) */}
-                <div className={`${glassClasses} p-10 rounded-[4rem] border-slate-200 dark:border-white/20 bg-white/80 dark:bg-bg-bg-dark/50 shadow-[0_30px_60px_rgba(0,0,0,0.1)] space-y-10 lg:sticky lg:top-24`}>
+                <div className={`${glassClasses} p-10 rounded-[4rem] border-slate-200 dark:border-white/20 bg-white/80 dark:bg-bg-dark/50 shadow-[0_30px_60px_rgba(0,0,0,0.1)] space-y-10 lg:sticky lg:top-24`}>
                     <div className="space-y-6">
                         <div className="flex items-center gap-4 p-5 rounded-3xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 group">
                             <div className="w-10 h-10 rounded-2xl bg-accent/20 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">📍</div>
@@ -163,6 +166,8 @@ export default function TaxiHome() {
                                     <div className="text-center">
                                         <p className="text-[10px] font-black text-slate-900 dark:text-white uppercase truncate w-full">{t(`taxi.types.${type}`)}</p>
                                         <p className="text-accent font-black text-lg">${fares[type]}</p>
+                                        {/* Market Rate Hint */}
+                                        <p className="text-[9px] text-slate-400 mt-1">Avg ₮1,500/km</p>
                                     </div>
                                 </button>
                             ))}
