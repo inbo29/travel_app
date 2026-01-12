@@ -96,17 +96,16 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        placeholder={isSearching ? "Finding best matches..." : "Search for guides, tickets, or places..."}
+                        placeholder={isSearching ? t('header.searching') : t('header.searchPlaceholder')}
                         className="w-full bg-black/5 dark:bg-white/5 border-2 border-transparent focus:border-accent/50 rounded-2xl py-4 pl-14 pr-4 text-lg outline-none text-slate-900 dark:text-white placeholder-slate-400 transition-all font-medium"
                         disabled={isSearching}
                     />
                 </div>
 
-                {/* Results / Sorting Animation */}
                 <div className="space-y-3 min-h-[300px]">
                     <div className="flex items-center justify-between px-2 text-sm font-bold text-slate-400 uppercase tracking-wider">
-                        <span>{isSearching ? 'Sorting by relevance...' : 'Suggested'}</span>
-                        {isSearching && <span className="text-accent animate-pulse">Processing...</span>}
+                        <span>{isSearching ? t('header.sorting') : 'Suggested'}</span>
+                        {isSearching && <span className="text-accent animate-pulse">{t('header.processing')}</span>}
                     </div>
 
                     <div className="grid gap-3 transition-all">
@@ -137,8 +136,8 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-black/5 dark:border-white/5 flex justify-end gap-2 text-xs font-medium text-slate-400">
-                    <span className="px-2 py-1 bg-black/5 dark:bg-white/10 rounded-md">ESC to close</span>
-                    <span className="px-2 py-1 bg-black/5 dark:bg-white/10 rounded-md">ENTER to search</span>
+                    <span className="px-2 py-1 bg-black/5 dark:bg-white/10 rounded-md">{t('header.escToClose')}</span>
+                    <span className="px-2 py-1 bg-black/5 dark:bg-white/10 rounded-md">{t('header.enterToSearch')}</span>
                 </div>
             </div>
         </div>,

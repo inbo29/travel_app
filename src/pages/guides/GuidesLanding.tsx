@@ -67,23 +67,11 @@ export default function GuidesLanding() {
     }, [searchQuery, activeTab])
 
     return (
-        <div className="min-h-screen pt-24 pb-32 px-6">
+        <div className="min-h-screen pt-4 pb-32 px-6">
             <div className="max-w-7xl mx-auto space-y-10">
-                {/* Search Header */}
-                <div className="text-center space-y-6 max-w-3xl mx-auto relative">
-                    {/* Back Button */}
-                    <button
-                        onClick={() => navigate(-1)}
-                        className="absolute left-0 top-2 w-10 h-10 rounded-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all md:hidden"
-                    >
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-
-                    <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight pt-12 md:pt-0">
-                        Find your <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-emerald-400">Guide / Tour</span>
-                    </h1>
+                {/* Search Area */}
+                <div className="max-w-3xl mx-auto relative">
+                    {/* Centered large title removed per user feedback (logo always on left, title centered in header) */}
 
                     <div className="relative group">
                         <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-slate-400">

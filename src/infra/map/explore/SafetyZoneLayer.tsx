@@ -7,14 +7,20 @@ const SAFETY_ICONS: Record<string, string> = {
     hospital: '🏥',
     police: '👮',
     safe_area: '✅',
+    danger: '⚠️'
 }
 
-const createSafetyIcon = (type: string) => L.divIcon({
-    className: 'safety-marker',
-    html: `<div style="font-size: 20px; background: #22c55e; padding: 8px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">${SAFETY_ICONS[type] || '✅'}</div>`,
-    iconSize: [40, 40],
-    iconAnchor: [20, 20],
-})
+const createSafetyIcon = (type: string) => {
+    const isDanger = type === 'danger'
+    const bgColor = isDanger ? '#ef4444' : '#22c55e'
+
+    return L.divIcon({
+        className: 'safety-marker',
+        html: `<div style="font-size: 20px; background: ${bgColor}; padding: 8px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">${SAFETY_ICONS[type] || '✅'}</div>`,
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+    })
+}
 
 interface SafetyZoneLayerProps {
     zones: SafetyZone[]
@@ -23,33 +29,39 @@ interface SafetyZoneLayerProps {
 export function SafetyZoneLayer({ zones }: SafetyZoneLayerProps) {
     return (
         <>
-            {zones.map(zone => (
-                <div key={zone.id}>
-                    {zone.radius && (
-                        <Circle
-                            center={[zone.lat, zone.lng]}
-                            radius={zone.radius}
-                            pathOptions={{
-                                color: '#22c55e',
-                                fillColor: '#22c55e',
-                                fillOpacity: 0.1,
-                                weight: 2,
-                            }}
-                        />
-                    )}
-                    <Marker
-                        position={[zone.lat, zone.lng]}
-                        icon={createSafetyIcon(zone.type)}
-                    >
-                        <Popup>
-                            <div className="text-center">
-                                <p className="font-bold text-green-600">{zone.name}</p>
-                                <p className="text-xs text-slate-500 uppercase">{zone.type.replace('_', ' ')}</p>
-                            </div>
-                        </Popup>
-                    </Marker>
-                </div>
-            ))}
+            {zones.map(zone => {
+                const isDanger = zone.type === 'danger'
+                const color = isDanger ? '#ef4444' : '#22c55e'
+
+                return (
+                    <div key={zone.id}>
+                        {zone.radius && (
+                            <Circle
+                                center={[zone.lat, zone.lng]}
+                                radius={zone.radius}
+                                pathOptions={{
+                                    color: color,
+                                    fillColor: color,
+                                    fillOpacity: 0.15,
+                                    weight: 2,
+                                    dashArray: isDanger ? '10, 10' : undefined
+                                }}
+                            />
+                        )}
+                        <Marker
+                            position={[zone.lat, zone.lng]}
+                            icon={createSafetyIcon(zone.type)}
+                        >
+                            <Popup>
+                                <div className="text-center p-2">
+                                    <p className={`font-bold ${isDanger ? 'text-red-500' : 'text-green-600'}`}>{zone.name}</p>
+                                    <p className="text-xs text-slate-500 uppercase tracking-wider">{zone.type.replace('_', ' ')}</p>
+                                </div>
+                            </Popup>
+                        </Marker>
+                    </div>
+                )
+            })}
         </>
     )
 }

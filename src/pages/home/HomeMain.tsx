@@ -142,11 +142,11 @@ export default function HomeMain() {
                                     onClick={() => item.path && navigate(item.path)}
                                     className={`
                                     ${glassClasses}
-                                    group relative flex flex-col items-center justify-center gap-3 p-5 rounded-[2rem] h-[180px] text-center
+                                    group relative flex flex-col items-center justify-center gap-3 p-5 rounded-3xl h-[180px] text-center
                                     hover:translate-y-[-4px] transition-all duration-300
                                     ${item.highlighted
-                                            ? 'border-accent/50 bg-accent/[0.05] dark:bg-accent/[0.1] shadow-[0_0_20px_rgba(34,197,94,0.1)] dark:shadow-[0_0_20px_rgba(34,197,94,0.05)]'
-                                            : 'border-white/10 dark:border-white/5 bg-white/5'
+                                            ? 'border-accent/40 bg-accent/[0.05] dark:bg-accent/[0.1] shadow-xl shadow-accent/10'
+                                            : 'border-white/10 dark:border-white/5 bg-white/5 shadow-lg shadow-black/5'
                                         }
                                 `}
                                 >
@@ -171,7 +171,7 @@ export default function HomeMain() {
                                     </div>
 
                                     {item.highlighted && (
-                                        <div className="absolute inset-0 rounded-[2rem] border-2 border-accent/20 pointer-events-none group-hover:border-accent/40 transition-colors"></div>
+                                        <div className="absolute inset-0 rounded-3xl border-2 border-accent/20 pointer-events-none group-hover:border-accent/40 transition-colors"></div>
                                     )}
                                 </button>
                             ))}

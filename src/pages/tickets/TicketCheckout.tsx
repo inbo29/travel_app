@@ -12,16 +12,10 @@ export default function TicketCheckout() {
     }
 
     return (
-        <div className="pt-24 pb-40 px-6 max-w-2xl mx-auto space-y-12">
-            {/* Header */}
+        <div className="pt-8 pb-40 px-6 max-w-2xl mx-auto space-y-12">
+            {/* Local Header Removed (Managed by MainLayout) */}
             <div className="flex items-center gap-6">
-                <button onClick={() => navigate(-1)} className="w-12 h-12 rounded-2xl bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100 transition-colors">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
                 <div>
-                    <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">{t('tickets.checkout.title')}</h1>
                     <div className="flex items-center gap-2 mt-1">
                         <div className="h-1 w-8 bg-accent rounded-full" />
                         <div className="h-1 w-8 bg-accent rounded-full" />

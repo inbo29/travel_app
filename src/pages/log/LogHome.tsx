@@ -19,14 +19,8 @@ export default function LogHome() {
     }, [journeys, journeys.length])
 
     return (
-        <div className="pt-6 pb-32 px-6 max-w-5xl mx-auto space-y-8">
-
-            <div className="flex items-center justify-between">
-                <div>
-                    <h1 className="text-4xl font-black text-slate-900 dark:text-white">{t('log.title')}</h1>
-                    <p className="text-slate-500 dark:text-white/60 font-medium">{t('quick.travelLog.subtitle')}</p>
-                </div>
-            </div>
+        <div className="pt-8 pb-32 px-6 max-w-5xl mx-auto space-y-8">
+            {/* Redundant Title Removed (now in Header) */}
 
             {journeys.length === 0 ? (
                 <div className={`${glassClasses} p-12 rounded-[3rem] text-center space-y-4 border-dashed border-2 border-slate-300 dark:border-white/10`}>

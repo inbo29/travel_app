@@ -49,9 +49,7 @@ export default function JourneyDetail() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
 
                 <div className="absolute top-6 left-6 z-10 w-full pr-12 flex justify-between items-center">
-                    <button onClick={() => navigate('/travel-log')} className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-colors">
-                        ←
-                    </button>
+                    {/* Local Back Button Removed (Managed by Header) */}
                 </div>
 
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-white">
@@ -136,10 +134,19 @@ export default function JourneyDetail() {
 
                 {activeTab === 'map' && (
                     <div className="animate-in fade-in zoom-in-95 duration-500">
-                        <MapReplay items={journey.days.flatMap(d => d.items)} />
-                        <p className="text-center text-xs text-slate-400 mt-4 uppercase tracking-widest">
-                            Showing route for all {journey.days.length} days
-                        </p>
+                        {journey.days.flatMap(d => d.items).some(i => i.type === 'taxi' && i.metadata?.routePolyline) ? (
+                            <>
+                                <MapReplay items={journey.days.flatMap(d => d.items)} />
+                                <p className="text-center text-xs text-slate-400 mt-4 uppercase tracking-widest">
+                                    Showing route for all {journey.days.length} days
+                                </p>
+                            </>
+                        ) : (
+                            <div className={`${glassClasses} h-[300px] rounded-[3rem] flex flex-col items-center justify-center text-slate-400 space-y-4 border-dashed border-2 border-slate-300 dark:border-white/10`}>
+                                <div className="text-4xl opacity-50">📍</div>
+                                <div>{t('log.map.noRoute')}</div>
+                            </div>
+                        )}
                     </div>
                 )}
 

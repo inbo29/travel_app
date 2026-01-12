@@ -8,25 +8,31 @@ export default function JourneySummary({ journey }: { journey: Journey }) {
     // Calculate stats
     const taxiCount = journey.days.reduce((acc, day) => acc + day.items.filter(i => i.type === 'taxi').length, 0)
     const ticketCount = journey.days.reduce((acc, day) => acc + day.items.filter(i => i.type === 'ticket').length, 0)
+    const placeCount = journey.days.reduce((acc, day) => acc + day.items.filter(i => i.type === 'place').length, 0)
 
     const topLocations = journey.days
         .flatMap(d => d.items)
         .filter(i => i.location)
-        .slice(0, 3) // Mock "Top" logic
+        .slice(0, 5) // Top 5 highlights
 
     return (
         <div className="space-y-8 pb-20">
             {/* Hero Stats */}
-            <div className="grid grid-cols-2 gap-4">
-                <div className={`${glassClasses} p-6 rounded-[2.5rem] bg-white/50 dark:bg-white/5 border border-white/20 text-center space-y-2`}>
-                    <div className="text-4xl">🚕</div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white uppercase">{taxiCount} {t('log.summary.rides')}</div>
-                    <div className="text-xs text-slate-500 font-bold tracking-widest uppercase">Safe Travels</div>
+            <div className="grid grid-cols-3 gap-3">
+                <div className={`${glassClasses} p-4 rounded-3xl bg-white/50 dark:bg-white/5 border border-white/20 text-center space-y-1`}>
+                    <div className="text-2xl">🚕</div>
+                    <div className="text-xl font-black text-slate-900 dark:text-white">{taxiCount}</div>
+                    <div className="text-[8px] text-slate-500 font-bold tracking-widest uppercase">{t('log.summary.rides')}</div>
                 </div>
-                <div className={`${glassClasses} p-6 rounded-[2.5rem] bg-white/50 dark:bg-white/5 border border-white/20 text-center space-y-2`}>
-                    <div className="text-4xl">🎫</div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white uppercase">{ticketCount} {t('log.summary.tickets')}</div>
-                    <div className="text-xs text-slate-500 font-bold tracking-widest uppercase">Experiences</div>
+                <div className={`${glassClasses} p-4 rounded-3xl bg-white/50 dark:bg-white/5 border border-white/20 text-center space-y-1`}>
+                    <div className="text-2xl">🎫</div>
+                    <div className="text-xl font-black text-slate-900 dark:text-white">{ticketCount}</div>
+                    <div className="text-[8px] text-slate-500 font-bold tracking-widest uppercase">{t('log.summary.tickets')}</div>
+                </div>
+                <div className={`${glassClasses} p-4 rounded-3xl bg-white/50 dark:bg-white/5 border border-white/20 text-center space-y-1`}>
+                    <div className="text-2xl">📍</div>
+                    <div className="text-xl font-black text-slate-900 dark:text-white">{placeCount}</div>
+                    <div className="text-[8px] text-slate-500 font-bold tracking-widest uppercase">{t('log.summary.places')}</div>
                 </div>
             </div>
 

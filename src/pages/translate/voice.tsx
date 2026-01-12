@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { glassClasses } from '@/styles/glass'
+import { useI18n } from '@/hooks/useI18n'
 import { useTranslateStore } from '@/store/translateStore'
 import { TranslateService } from '@/services/translate.service'
 import { LanguageSelector } from '@/domains/translate/components/LanguageSelector'
 import { LANGUAGES } from '@/domains/translate/types'
 
 export default function VoiceTranslate() {
+    const { t } = useI18n()
     const navigate = useNavigate()
     const store = useTranslateStore()
     const [isListening, setIsListening] = useState(false)
@@ -38,7 +40,8 @@ export default function VoiceTranslate() {
             context: store.context,
             mode: 'VOICE',
         })
-        alert('Saved!')
+        // Show feedback
+        alert(t('translate.saveBtn') + '!')
     }
 
     return (
@@ -54,8 +57,8 @@ export default function VoiceTranslate() {
                     </svg>
                 </button>
                 <div>
-                    <h1 className="text-2xl font-black text-slate-900 dark:text-white">Voice Translate</h1>
-                    <p className="text-xs text-amber-500 font-bold">⚠️ Simulated Mode</p>
+                    <h1 className="text-2xl font-black text-slate-900 dark:text-white">{t('translate.voice.title')}</h1>
+                    <p className="text-[10px] text-amber-500 font-bold uppercase tracking-wider">⚠️ {t('translate.voice.simulated')}</p>
                 </div>
             </div>
 
@@ -64,42 +67,42 @@ export default function VoiceTranslate() {
                 <LanguageSelector
                     value={store.fromLang}
                     onChange={(code) => store.setLanguages(code, store.toLang)}
-                    label="Speak"
+                    label={t('translate.voice.speak')}
                 />
                 <button
                     onClick={() => store.swapLanguages()}
-                    className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent hover:bg-accent/20 transition-all mb-1"
+                    className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent hover:bg-accent/20 transition-all mb-1 shadow-sm shadow-accent/5"
                 >
                     ⇄
                 </button>
                 <LanguageSelector
                     value={store.toLang}
                     onChange={(code) => store.setLanguages(store.fromLang, code)}
-                    label="Translate To"
+                    label={t('translate.voice.translateTo')}
                 />
             </div>
 
             {/* Result Display */}
             {result && (
                 <div className="space-y-4">
-                    <div className={`${glassClasses} p-6 rounded-[2rem] border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/5`}>
+                    <div className={`${glassClasses} p-6 rounded-3xl border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/5 shadow-xl shadow-black/5`}>
                         <div className="flex items-center gap-2 mb-2">
                             <span>{fromFlag}</span>
-                            <span className="text-[10px] font-bold text-slate-400 uppercase">Recognized</span>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{t('translate.voice.recognized')}</span>
                         </div>
-                        <p className="text-lg font-medium text-slate-900 dark:text-white">{result.source}</p>
+                        <p className="text-lg font-medium text-slate-900 dark:text-white leading-relaxed">{result.source}</p>
                     </div>
-                    <div className={`${glassClasses} p-6 rounded-[2rem] border-accent/30 bg-accent/5`}>
+                    <div className={`${glassClasses} p-6 rounded-3xl border-accent/20 bg-accent/5 shadow-xl shadow-accent/5`}>
                         <div className="flex items-center gap-2 mb-2">
                             <span>{toFlag}</span>
-                            <span className="text-[10px] font-bold text-accent uppercase">Translation</span>
+                            <span className="text-[10px] font-bold text-accent uppercase tracking-widest">{t('translate.voice.translation')}</span>
                         </div>
-                        <p className="text-lg font-medium text-slate-900 dark:text-white">{result.translated}</p>
+                        <p className="text-lg font-medium text-slate-900 dark:text-white leading-relaxed">{result.translated}</p>
                         <button
                             onClick={handleSave}
-                            className="mt-4 w-full py-3 rounded-xl bg-accent text-white font-bold"
+                            className="mt-4 w-full py-4 rounded-xl bg-accent text-white font-bold shadow-lg shadow-accent/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
                         >
-                            ⭐ Save
+                            ⭐ {t('translate.saveBtn')}
                         </button>
                     </div>
                 </div>
@@ -111,16 +114,16 @@ export default function VoiceTranslate() {
                     onClick={handleMicPress}
                     disabled={isListening}
                     className={`w-40 h-40 rounded-full flex items-center justify-center text-6xl transition-all shadow-2xl ${isListening
-                            ? 'bg-red-500 animate-pulse scale-110'
-                            : 'bg-accent hover:scale-105'
+                        ? 'bg-red-500 animate-pulse scale-110'
+                        : 'bg-accent hover:scale-105'
                         }`}
                 >
                     🎙️
                 </button>
             </div>
 
-            <p className="text-center text-slate-400 font-medium">
-                {isListening ? 'Listening...' : 'Tap the microphone to start'}
+            <p className="text-center text-slate-400 font-bold tracking-tight py-4">
+                {isListening ? t('translate.voice.listening') : t('translate.voice.tapToStart')}
             </p>
         </div>
     )

@@ -97,20 +97,9 @@ export default function TicketsHome() {
     const trendingTickets = tickets.filter(t => t.trending)
 
     return (
-        <div className="pt-24 pb-32 px-6 max-w-7xl mx-auto space-y-10">
-            {/* Header & Search */}
+        <div className="pt-8 pb-32 px-6 max-w-7xl mx-auto space-y-10">
+            {/* Redundant Header Removed (Managed by Global Header) */}
             <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                    <button
-                        onClick={() => navigate('/home')}
-                        className="w-10 h-10 rounded-full bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all shrink-0"
-                    >
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">{t('tickets.title')}</h1>
-                </div>
                 <div className={`${glassClasses} flex items-center gap-3 px-6 py-4 rounded-[2rem] border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/5`}>
                     <span className="text-2xl">🔍</span>
                     <input

@@ -67,17 +67,7 @@ export default function TicketDetail() {
 
     return (
         <div className="relative min-h-screen pb-32">
-            {/* Back Button */}
-            <div className="fixed top-6 left-6 z-50">
-                <button
-                    onClick={() => navigate(-1)}
-                    className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all shadow-lg"
-                >
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-            </div>
+            {/* Local Back Button Removed (Managed by Header) */}
 
             {/* Hero Image */}
             <div className="fixed top-0 left-0 right-0 h-[60vh] z-0">

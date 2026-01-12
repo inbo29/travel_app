@@ -1,6 +1,47 @@
 {
     "header": {
-        "searchPlaceholder": "Search Trip / Guide / Place"
+        "searchPlaceholder": "Search Trip / Guide / Place",
+        "searching": "Finding best matches...",
+        "sorting": "Sorting by relevance...",
+        "processing": "Processing...",
+        "escToClose": "ESC to close",
+        "enterToSearch": "ENTER to search"
+    },
+    "translate": {
+        "title": "Translate",
+        "subtitle": "Text, Voice, Camera & More",
+        "recentTitle": "Recent Translations",
+        "viewAll": "View All",
+        "empty": "No saved translations yet.",
+        "modes": {
+            "text": "Text",
+            "voice": "Voice",
+            "conversation": "Conversation",
+            "camera": "Camera"
+        },
+        "from": "From",
+        "to": "To",
+        "placeholder": "Type something to translate...",
+        "translateBtn": "Translate",
+        "copyBtn": "Copy",
+        "saveBtn": "Save",
+        "characters": "characters",
+        "contexts": {
+            "travel": "Travel",
+            "business": "Business",
+            "medical": "Medical",
+            "general": "General"
+        },
+        "voice": {
+            "title": "Voice Translate",
+            "simulated": "Simulated Mode",
+            "recognized": "Recognized",
+            "translation": "Translation",
+            "listening": "Listening...",
+            "tapToStart": "Tap the microphone to start",
+            "speak": "Speak",
+            "translateTo": "Translate To"
+        }
     },
     "nav": {
         "home": "Home",
@@ -123,10 +164,17 @@
             }
         },
         "success": {
-            "title": "Ticket Confirmed!",
-            "qr": "Show this QR to the provider",
-            "wallet": "Add to Wallet",
-            "viewMy": "View My Tickets"
+            "title": "Booking Complete!",
+            "sentEmail": "Your tickets have been sent to your email.",
+            "wallet": "Add to Apple Wallet",
+            "viewMy": "View My Tickets",
+            "qrInfo": "Show this QR to the provider",
+            "type": "Type",
+            "qty": "Qty",
+            "venue": "Venue",
+            "refNo": "Ref No.",
+            "help": "Need help?",
+            "contactSupport": "Contact Support"
         },
         "bookNow": "Book Now",
         "bookTicket": "Book Ticket"
@@ -250,12 +298,23 @@
             "spend": "Total Spend",
             "rides": "Rides",
             "tickets": "Tickets",
+            "places": "Places visited",
             "highlights": "Highlights",
             "duration": "Duration"
         },
         "status": {
             "active": "Active Journey",
             "completed": "Completed"
+        },
+        "type": {
+            "taxi": "Taxi Ride",
+            "ticket": "Ticket Purchase",
+            "payment": "Payment Completed",
+            "place": "Place Visit",
+            "note": "Note"
+        },
+        "map": {
+            "noRoute": "No movement logs for this day."
         }
     }
 }

@@ -32,7 +32,7 @@ const InterpreterService = () => {
     ]
 
     return (
-        <div className="min-h-screen bg-[#0f172a] pt-32 pb-32 px-6">
+        <div className="min-h-screen bg-bg-light dark:bg-bg-dark pt-8 pb-32 px-6">
             <div className="max-w-xl mx-auto">
                 <header className="text-center mb-12">
                     <h1 className="text-3xl font-black text-white mb-4">How can we help you communicate?</h1>

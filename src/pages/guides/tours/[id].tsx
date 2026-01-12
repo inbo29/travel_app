@@ -25,12 +25,7 @@ const TourDetail = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/40 to-transparent" />
 
-                <button
-                    onClick={() => navigate(-1)}
-                    className="absolute top-28 left-6 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-black/60 transition-all"
-                >
-                    ←
-                </button>
+                {/* Local Back Button Removed (Managed by Header) */}
 
                 <div className="absolute bottom-8 left-6 right-6 max-w-7xl mx-auto">
                     <div className="flex items-center gap-2 mb-3">

@@ -68,7 +68,7 @@ export default function TextTranslate() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <h1 className="text-2xl font-black text-slate-900 dark:text-white">Text Translate</h1>
+                <h1 className="text-2xl font-black text-slate-900 dark:text-white">{t('translate.modes.text')}</h1>
             </div>
 
             {/* Context Selection */}
@@ -78,12 +78,12 @@ export default function TextTranslate() {
                         key={c.value}
                         onClick={() => store.setContext(c.value)}
                         className={`px-4 py-2 rounded-xl font-bold text-sm whitespace-nowrap transition-all flex items-center gap-2 ${store.context === c.value
-                                ? 'bg-accent text-white'
-                                : `${glassClasses} border-slate-200 dark:border-white/10 text-slate-600 dark:text-white/70`
+                            ? 'bg-accent text-white shadow-lg shadow-accent/20'
+                            : `${glassClasses} border-slate-200 dark:border-white/10 text-slate-600 dark:text-white/70 shadow-sm`
                             }`}
                     >
                         <span>{c.icon}</span>
-                        {c.label}
+                        {t(`translate.contexts.${c.value}`)}
                     </button>
                 ))}
             </div>
@@ -93,7 +93,7 @@ export default function TextTranslate() {
                 <LanguageSelector
                     value={store.fromLang}
                     onChange={(code) => store.setLanguages(code, store.toLang)}
-                    label="From"
+                    label={t('translate.from')}
                 />
                 <button
                     onClick={() => store.swapLanguages()}
@@ -104,48 +104,48 @@ export default function TextTranslate() {
                 <LanguageSelector
                     value={store.toLang}
                     onChange={(code) => store.setLanguages(store.fromLang, code)}
-                    label="To"
+                    label={t('translate.to')}
                 />
             </div>
 
             {/* Input */}
-            <div className={`${glassClasses} p-6 rounded-[2rem] border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/5`}>
+            <div className={`${glassClasses} p-6 rounded-3xl border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/5 shadow-xl shadow-black/5`}>
                 <textarea
                     value={store.inputText}
                     onChange={(e) => store.setInput(e.target.value)}
-                    placeholder="Type something to translate..."
+                    placeholder={t('translate.placeholder')}
                     rows={4}
                     className="w-full bg-transparent resize-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium text-lg"
                 />
                 <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-white/10">
-                    <span className="text-xs text-slate-400">{store.inputText.length} characters</span>
+                    <span className="text-xs text-slate-400">{store.inputText.length} {t('translate.characters')}</span>
                     <button
                         onClick={handleTranslate}
                         disabled={loading || !store.inputText.trim()}
-                        className="px-8 py-3 bg-accent text-white font-bold rounded-xl disabled:opacity-50 flex items-center gap-2"
+                        className="px-8 py-3 bg-accent text-white font-bold rounded-xl disabled:opacity-50 flex items-center gap-2 shadow-lg shadow-accent/20"
                     >
                         {loading ? (
                             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         ) : (
                             '🔤'
                         )}
-                        Translate
+                        {t('translate.translateBtn')}
                     </button>
                 </div>
             </div>
 
             {/* Output */}
             {store.outputText && (
-                <div className={`${glassClasses} p-6 rounded-[2rem] border-accent/30 bg-accent/5`}>
+                <div className={`${glassClasses} p-6 rounded-3xl border-accent/20 bg-accent/5 shadow-xl shadow-accent/5`}>
                     <p className="text-lg font-medium text-slate-900 dark:text-white leading-relaxed">
                         {store.outputText}
                     </p>
-                    <div className="flex gap-3 pt-4 mt-4 border-t border-accent/20">
-                        <button onClick={handleCopy} className="flex-1 py-3 rounded-xl bg-white/50 dark:bg-white/10 font-bold text-slate-700 dark:text-white">
-                            📋 Copy
+                    <div className="flex gap-3 pt-4 mt-4 border-t border-accent/10">
+                        <button onClick={handleCopy} className="flex-1 py-3 rounded-xl bg-white/50 dark:bg-white/10 font-bold text-slate-700 dark:text-white hover:bg-white transition-colors">
+                            📋 {t('translate.copyBtn')}
                         </button>
-                        <button onClick={handleSave} className="flex-1 py-3 rounded-xl bg-accent text-white font-bold">
-                            ⭐ Save
+                        <button onClick={handleSave} className="flex-1 py-3 rounded-xl bg-accent text-white font-bold hover:shadow-lg hover:shadow-accent/20 transition-all">
+                            ⭐ {t('translate.saveBtn')}
                         </button>
                     </div>
                 </div>

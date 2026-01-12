@@ -101,25 +101,17 @@ export function TaxiHomeContent() {
     }
 
     return (
-        <div className="pt-4 pb-20 px-4 lg:px-6 max-w-7xl mx-auto h-full flex flex-col pointer-events-none overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,0.8fr] gap-6 lg:gap-10 items-start h-full">
+        <div className="pt-4 pb-20 px-4 lg:px-6 max-w-[1600px] mx-auto h-full flex flex-col pointer-events-none overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr,450px] gap-6 lg:gap-10 items-start h-full">
 
-                {/* Left Side: Search Bar (Floating over map) */}
+                {/* Left Side: Floating elements over map */}
                 <div className="space-y-6 flex flex-col pointer-events-none">
-                    <div className="flex items-center justify-between mb-4 flex-none pointer-events-auto">
-                        <div className="flex items-center gap-6">
-                            <button onClick={() => navigate('/home')} className="w-12 h-12 rounded-2xl bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all">
-                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
-                            <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t('taxi.title')}</h1>
-                        </div>
-
-                        {/* History Button */}
+                    {/* Page Title & History Button */}
+                    <div className="flex items-center gap-4 flex-none pointer-events-auto">
+                        <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t('taxi.title')}</h1>
                         <button
                             onClick={() => navigate('/taxi/history')}
-                            className={`${glassClasses} bg-white/5 dark:bg-white/10 px-4 py-2 rounded-xl text-sm font-bold text-slate-900 dark:text-white hover:bg-white/20`}
+                            className={`${glassClasses} bg-white/5 dark:bg-white/10 px-4 py-2 rounded-xl text-sm font-bold text-slate-900 dark:text-white hover:bg-white/20 transition-all`}
                         >
                             History
                         </button>
@@ -198,12 +190,12 @@ export function TaxiHomeContent() {
                                     key={type}
                                     onClick={() => setVehicleType(type)}
                                     className={`
-                                        p-6 rounded-[2.5rem] border-2 transition-all flex flex-col items-center gap-3
-                                        ${vehicleType === type
+                                            p-6 rounded-[2.5rem] border-2 transition-all flex flex-col items-center gap-3
+                                            ${vehicleType === type
                                             ? 'border-accent bg-accent/[0.05] shadow-xl scale-[1.05] z-10'
                                             : 'border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-white/5 opacity-40 grayscale hover:grayscale-0 hover:opacity-100'
                                         }
-                                    `}
+                                        `}
                                 >
                                     <span className="text-3xl">{type === 'standard' ? '🚕' : type === 'comfort' ? '🚐' : '🚔'}</span>
                                     <div className="text-center">
@@ -221,12 +213,12 @@ export function TaxiHomeContent() {
                         onClick={handleCallTaxi}
                         disabled={!searchDestination}
                         className={`
-                            w-full py-7 rounded-[2.5rem] font-black text-2xl flex items-center justify-center gap-4 transition-all
-                            ${searchDestination
+                                w-full py-7 rounded-[2.5rem] font-black text-2xl flex items-center justify-center gap-4 transition-all
+                                ${searchDestination
                                 ? 'bg-accent text-white shadow-2xl shadow-accent/40 hover:scale-[1.02] active:scale-[0.98]'
                                 : 'bg-slate-200 dark:bg-white/10 text-slate-400 cursor-not-allowed'
                             }
-                        `}
+                            `}
                     >
                         {t('taxi.callButton')}
                         <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">

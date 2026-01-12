@@ -21,17 +21,18 @@ export interface MapState {
 export interface POI {
     id: string
     name: string
-    category: 'restaurant' | 'cafe' | 'museum' | 'attraction' | 'hotel' | 'shop'
+    category: 'restaurant' | 'cafe' | 'museum' | 'attraction' | 'hotel' | 'shop' | 'shopping'
     lat: number
     lng: number
     rating?: number
     icon: string
+    address?: string
 }
 
 export interface SafetyZone {
     id: string
     name: string
-    type: 'embassy' | 'hospital' | 'police' | 'safe_area'
+    type: 'embassy' | 'hospital' | 'police' | 'safe_area' | 'danger'
     lat: number
     lng: number
     radius?: number // meters

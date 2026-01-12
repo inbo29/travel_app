@@ -8,7 +8,7 @@ export default function TicketSuccess() {
     const navigate = useNavigate()
 
     return (
-        <div className="pt-24 pb-40 px-6 max-w-2xl mx-auto text-center space-y-12">
+        <div className="pt-8 pb-40 px-6 max-w-2xl mx-auto text-center space-y-12">
             {/* Header Success */}
             <div className="space-y-6">
                 <div className="w-24 h-24 rounded-full bg-accent/20 border-4 border-accent flex items-center justify-center text-5xl mx-auto animate-bounce">
@@ -16,12 +16,12 @@ export default function TicketSuccess() {
                 </div>
                 <div className="space-y-2">
                     <h1 className="text-4xl font-black text-slate-900 dark:text-white">{t('tickets.success.title')}</h1>
-                    <p className="text-slate-500 dark:text-white/60 font-medium">Your tickets have been sent to your email.</p>
+                    <p className="text-slate-500 dark:text-white/60 font-medium">{t('tickets.success.sentEmail')}</p>
                 </div>
             </div>
 
             {/* QR Card */}
-            <div className={`${glassClasses} rounded-[3rem] p-10 space-y-8 border-slate-200 dark:border-white/20 bg-white dark:bg-bg-bg-dark/50 shadow-2xl relative overflow-hidden group`}>
+            <div className={`${glassClasses} rounded-3xl p-10 space-y-8 border-slate-200 dark:border-white/20 bg-white dark:bg-bg-bg-dark/50 shadow-2xl relative overflow-hidden group`}>
                 <div className="absolute top-0 left-0 w-full h-2 bg-accent/50" />
 
                 <div className="space-y-2">
@@ -43,19 +43,19 @@ export default function TicketSuccess() {
 
                 <div className="grid grid-cols-2 gap-8 border-t border-slate-100 dark:border-white/10 pt-8 text-left">
                     <div className="space-y-1">
-                        <p className="text-[10px] font-bold text-slate-400 dark:text-white/30 uppercase tracking-widest">Type</p>
+                        <p className="text-[10px] font-bold text-slate-400 dark:text-white/30 uppercase tracking-widest">{t('tickets.success.type')}</p>
                         <p className="font-bold text-slate-900 dark:text-white">VIP Access</p>
                     </div>
                     <div className="space-y-1">
-                        <p className="text-[10px] font-bold text-slate-400 dark:text-white/30 uppercase tracking-widest">Qty</p>
+                        <p className="text-[10px] font-bold text-slate-400 dark:text-white/30 uppercase tracking-widest">{t('tickets.success.qty')}</p>
                         <p className="font-bold text-slate-900 dark:text-white">1 Person</p>
                     </div>
                     <div className="space-y-1">
-                        <p className="text-[10px] font-bold text-slate-400 dark:text-white/30 uppercase tracking-widest">Venue</p>
+                        <p className="text-[10px] font-bold text-slate-400 dark:text-white/30 uppercase tracking-widest">{t('tickets.success.venue')}</p>
                         <p className="font-bold text-slate-900 dark:text-white">Central Park, NY</p>
                     </div>
                     <div className="space-y-1">
-                        <p className="text-[10px] font-bold text-slate-400 dark:text-white/30 uppercase tracking-widest">Ref No.</p>
+                        <p className="text-[10px] font-bold text-slate-400 dark:text-white/30 uppercase tracking-widest">{t('tickets.success.refNo')}</p>
                         <p className="font-bold text-accent">#TKT-{id?.slice(-4).toUpperCase() || '7789'}</p>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ export default function TicketSuccess() {
             </div>
 
             <p className="text-slate-400 dark:text-white/30 text-xs font-medium">
-                Need help? <button className="text-accent underline">Contact Support</button>
+                {t('tickets.success.help')} <button className="text-accent underline font-bold tracking-tight">{t('tickets.success.contactSupport')}</button>
             </p>
         </div>
     )

@@ -1,103 +1,131 @@
 import { Journey } from '@/types/log'
 
+const now = Date.now()
+const day = 24 * 60 * 60 * 1000
+
 export const MOCK_JOURNEYS: Journey[] = [
     {
-        id: 'j_bali_2023',
-        title: 'Bali Adventure 🌴',
+        id: 'ub-2026',
+        title: 'Ulaanbaatar Stay',
         status: 'completed',
-        startDate: new Date('2023-10-12').getTime(),
-        endDate: new Date('2023-10-20').getTime(),
-        coverImage: 'nature/nt2.png', // Reuse existing assets
-        origin: { lat: 37.5665, lng: 126.9780, name: 'Seoul, Korea' },
-        destination: { lat: -8.4095, lng: 115.1889, name: 'Bali, Indonesia' },
-        totalDistance: 1240.5,
-        totalSpend: 850,
+        startDate: now - 5 * day,
+        endDate: now - 2 * day,
+        coverImage: 'nature/nt1.png',
+        origin: { lat: 47.9186, lng: 106.9170, name: 'Chinggis Khaan Airport' },
+        destination: { lat: 47.9186, lng: 106.9180, name: 'Blue Sky Hotel' },
+        totalDistance: 45.2,
+        totalSpend: 125000,
         days: [
             {
-                date: '2023-10-12',
+                date: new Date(now - 5 * day).toISOString().split('T')[0],
                 items: [
                     {
-                        id: 't_1',
+                        id: 'item-1',
                         type: 'taxi',
                         source: 'auto',
-                        timestamp: new Date('2023-10-12T10:00:00').getTime(),
-                        title: 'Taxi to Airport',
-                        description: 'Hyundai Ioniq 5 • Driver Kim',
-                        amount: 45,
-                        currency: '$',
-                        location: { lat: 37.5665, lng: 126.9780, name: 'Home' },
-                        metadata: {
-                            distanceKm: 45,
-                            durationMin: 50,
-                            routePolyline: [{ lat: 37.5665, lng: 126.9780 }, { lat: 37.4485, lng: 126.4525 }]
-                        }
+                        timestamp: now - 5 * day + 1000 * 60 * 60,
+                        title: 'Airport Pickup',
+                        description: 'Smooth ride from airport to city center',
+                        amount: 35000,
+                        currency: '₮',
+                        location: { lat: 47.9186, lng: 106.9170, name: 'Airport' },
+                        metadata: { taxiId: 'tx-101', driverName: 'Batu', distanceKm: 32.5 }
                     },
                     {
-                        id: 'pay_1',
-                        type: 'payment',
-                        source: 'auto',
-                        timestamp: new Date('2023-10-12T13:30:00').getTime(),
-                        title: 'Duty Free Shop',
-                        amount: 120,
-                        currency: '$'
+                        id: 'item-2',
+                        type: 'place',
+                        source: 'user',
+                        timestamp: now - 5 * day + 1000 * 60 * 60 * 3,
+                        title: 'Blue Sky Hotel',
+                        description: 'Checking in. Great view of the square.',
+                        location: { lat: 47.9186, lng: 106.9180, name: 'Blue Sky' }
                     }
                 ]
             },
             {
-                date: '2023-10-13',
+                date: new Date(now - 4 * day).toISOString().split('T')[0],
                 items: [
                     {
-                        id: 'place_1',
-                        type: 'place',
+                        id: 'item-3',
+                        type: 'ticket',
                         source: 'user',
-                        timestamp: new Date('2023-10-13T09:00:00').getTime(),
-                        title: 'Uluwatu Temple',
-                        description: 'Beautiful views from the cliff edge.',
-                        location: { lat: -8.8291, lng: 115.0844, name: 'Uluwatu Temple' },
-                        photos: ['nature/nt1.png']
+                        timestamp: now - 4 * day + 1000 * 60 * 60 * 10,
+                        title: 'National Museum of Mongolia',
+                        description: 'Historical artifacts and cultural tour',
+                        amount: 15000,
+                        currency: '₮',
+                        metadata: { ticketId: 'tkt-882', category: 'museum' }
                     },
                     {
-                        id: 'taxi_2',
-                        type: 'taxi',
+                        id: 'item-4',
+                        type: 'payment',
                         source: 'auto',
-                        timestamp: new Date('2023-10-13T14:15:00').getTime(),
-                        title: 'Ride to Seminyak',
-                        amount: 15,
-                        currency: '$',
-                        metadata: {
-                            distanceKm: 12,
-                            routePolyline: [{ lat: -8.8291, lng: 115.0844 }, { lat: -8.6913, lng: 115.1682 }]
-                        }
+                        timestamp: now - 4 * day + 1000 * 60 * 60 * 13,
+                        title: 'Modern Nomads Lunch',
+                        description: 'Traditional Mongolian cuisine',
+                        amount: 45000,
+                        currency: '₮'
                     }
                 ]
             }
         ]
     },
     {
-        id: 'j_ub_2024',
-        title: 'Ulaanbaatar Stay 🇲🇳',
-        status: 'active',
-        startDate: Date.now() - 86400000 * 2, // Started 2 days ago
-        coverImage: 'city/ct1.png',
-        totalDistance: 45.2,
-        totalSpend: 150000,
+        id: 'bali-2026',
+        title: 'Bali Adventure',
+        status: 'completed',
+        startDate: now - 15 * day,
+        endDate: now - 10 * day,
+        coverImage: 'nature/nt2.png',
+        totalDistance: 120.5,
+        totalSpend: 450000,
         days: [
             {
-                date: new Date().toISOString().split('T')[0],
+                date: new Date(now - 15 * day).toISOString().split('T')[0],
                 items: [
                     {
-                        id: 't_ub_1',
+                        id: 'b-1',
                         type: 'taxi',
                         source: 'auto',
-                        timestamp: Date.now() - 3600000,
-                        title: 'Ride to Sukhbaatar Square',
-                        description: 'Prius 30 • Driver Bat',
-                        amount: 15000,
+                        timestamp: now - 15 * day + 1000 * 60 * 60,
+                        title: 'Denpasar Transfer',
+                        amount: 150000,
+                        currency: 'Rp',
+                        metadata: { distanceKm: 15.2 }
+                    },
+                    {
+                        id: 'b-2',
+                        type: 'place',
+                        source: 'user',
+                        timestamp: now - 15 * day + 1000 * 60 * 60 * 5,
+                        title: 'Uluwatu Temple',
+                        description: 'Sunset view was amazing.'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'active-trip-1',
+        title: 'Nomadic Expedition',
+        status: 'active',
+        startDate: now - 1 * day,
+        coverImage: 'nature/nt3.png',
+        totalDistance: 12.5,
+        totalSpend: 8500,
+        days: [
+            {
+                date: new Date(now - 1 * day).toISOString().split('T')[0],
+                items: [
+                    {
+                        id: 'item-active-1',
+                        type: 'taxi',
+                        source: 'auto',
+                        timestamp: now - 1 * day + 1000 * 60 * 60 * 2,
+                        title: 'City Center Hub',
+                        amount: 8500,
                         currency: '₮',
-                        metadata: {
-                            distanceKm: 5.2,
-                            routePolyline: [{ lat: 47.910, lng: 106.900 }, { lat: 47.918, lng: 106.917 }]
-                        }
+                        metadata: { distanceKm: 5.2 }
                     }
                 ]
             }

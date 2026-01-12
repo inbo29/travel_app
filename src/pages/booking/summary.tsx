@@ -19,11 +19,11 @@ const BookingSummary = () => {
     const image = tour ? getFallbackImage(tour.category) : (guide ? guide.avatar : '')
 
     return (
-        <div className="min-h-screen bg-[#0f172a] pt-32 pb-32 px-6">
+        <div className="min-h-screen bg-bg-light dark:bg-bg-dark pt-8 pb-32 px-6">
             <div className="max-w-xl mx-auto">
                 <header className="mb-10">
-                    <button onClick={() => navigate(-1)} className="text-white/40 mb-4 hover:text-white transition-colors">← Back</button>
-                    <h1 className="text-3xl font-black text-white">Booking Summary</h1>
+                    {/* Redundant back button and title removed/managed by Header */}
+                    <h1 className="text-3xl font-black text-slate-900 dark:text-white">Review Booking</h1>
                 </header>
 
                 <div className="bg-white/5 border border-white/10 rounded-[32px] overflow-hidden shadow-2xl mb-8">

@@ -1,7 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import DefaultLayout from '@/layouts/DefaultLayout'
-import TaxiLayout from '@/layouts/TaxiLayout'
-import ExploreMapLayout from '@/layouts/ExploreMapLayout'
+import MainLayout from '@/layouts/MainLayout'
 import Home from '@/pages/home'
 import { useI18n } from '@/hooks/useI18n'
 import { useTaxiSimulator } from '@/hooks/useTaxiSimulator'
@@ -55,8 +53,7 @@ export default function App() {
 
     return (
         <Routes>
-            {/* ===== DEFAULT LAYOUT (No Map) ===== */}
-            <Route element={<DefaultLayout />}>
+            <Route element={<MainLayout />}>
                 <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path="/home/*" element={<Home />} />
 
@@ -92,27 +89,23 @@ export default function App() {
                 <Route path="/translate/saved" element={<SavedTranslations />} />
                 <Route path="/translator" element={<TranslateHome />} />
 
-                {/* Other */}
-                <Route path="/exchange" element={<div className="pt-24 px-6 text-white text-2xl font-bold">{t('nav.payme')}</div>} />
-                <Route path="/profile" element={<div className="pt-24 px-6 text-white text-2xl font-bold">{t('nav.my')}</div>} />
+                {/* Market & Log */}
+                <Route path="/exchange" element={<div className="pt-8 px-6 text-2xl font-bold">{t('nav.payme')}</div>} />
+                <Route path="/profile" element={<div className="pt-8 px-6 text-2xl font-bold">{t('nav.my')}</div>} />
                 <Route path="/market-rates" element={<MarketRates />} />
                 <Route path="/local-mart" element={<LocalMart />} />
                 <Route path="/travel-log" element={<LogHome />} />
                 <Route path="/travel-log/:id" element={<JourneyDetail />} />
-            </Route>
 
-            {/* ===== TAXI LAYOUT (Full-screen Taxi Map) ===== */}
-            <Route element={<TaxiLayout />}>
+                {/* Taxi Module */}
                 <Route path="/taxi" element={<TaxiHome />} />
                 <Route path="/taxi/matching" element={<TaxiMatching />} />
                 <Route path="/taxi/ride" element={<TaxiRide />} />
                 <Route path="/taxi/completion" element={<TaxiCompletion />} />
                 <Route path="/taxi/payment" element={<TaxiPayment />} />
                 <Route path="/taxi/history" element={<TaxiHistory />} />
-            </Route>
 
-            {/* ===== EXPLORE MAP LAYOUT (POI Map) ===== */}
-            <Route element={<ExploreMapLayout />}>
+                {/* Map Module */}
                 <Route path="/map" element={<MapPage />} />
             </Route>
         </Routes>

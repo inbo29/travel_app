@@ -6,7 +6,7 @@ const BookingSuccess = () => {
     const { t } = useI18n()
 
     return (
-        <div className="min-h-screen bg-[#0f172a] flex items-center justify-center px-6">
+        <div className="min-h-screen bg-bg-light dark:bg-bg-dark flex items-center justify-center pt-8 pb-32 px-6">
             <div className="max-w-md w-full text-center">
                 <div className="relative w-32 h-32 mx-auto mb-10">
                     <div className="absolute inset-0 bg-primary/20 blur-[40px] rounded-full animate-pulse" />

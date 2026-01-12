@@ -42,18 +42,10 @@ export default function TicketBooking() {
     if (loading || !rule || !detail) return <div className="min-h-screen flex items-center justify-center text-white">Loading booking info...</div>
 
     return (
-        <div className="pt-24 pb-32 px-6 max-w-4xl mx-auto space-y-8 min-h-screen">
+        <div className="pt-8 pb-32 px-6 max-w-4xl mx-auto space-y-8 min-h-screen">
+            {/* Header Area Managed by Global Header */}
             <div className="flex items-center gap-4">
-                <button
-                    onClick={() => store.step === 1 ? navigate(-1) : store.setStep(store.step - 1)}
-                    className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all"
-                >
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
                 <div className="flex-1">
-                    <h1 className="text-2xl font-black text-slate-900 dark:text-white">Booking: {detail.id}</h1>
                     <p className="text-sm text-slate-500 dark:text-white/60 font-bold">Step {store.step} of {rule.seatSelection ? 3 : 2}</p>
                 </div>
             </div>
