@@ -3,7 +3,7 @@ import { useTaxiStore } from '@/store/taxiStore'
 import { log } from '@/utils/mockUtils'
 import { mockDriver } from '@/mocks/taxi/taxi.mock'
 import { fetchRoute } from '@/services/map.service'
-import { calculateDistance } from '@/utils/mapUtils'
+import { calculateDistance, calculateBearing } from '@/utils/mapUtils'
 
 export const useTaxiSimulator = () => {
     // Use granular selectors to avoid unnecessary re-renders
@@ -46,7 +46,8 @@ export const useTaxiSimulator = () => {
                 const origin = rideRef.current?.origin
                 if (!origin) return
 
-                const mockDriverLoc = { lat: origin.lat + 0.005, lng: origin.lng + 0.005 }
+                // Mock driver starts a bit away
+                const mockDriverLoc = { lat: origin.lat + 0.008, lng: origin.lng + 0.008 }
                 updateRideProgress({
                     status: 'MATCHED',
                     driver: mockDriver,
@@ -90,27 +91,32 @@ export const useTaxiSimulator = () => {
             const rideState = rideRef.current
             if (!rideState || !rideState.routePath) return
 
-            const speed = 5
-            const nextIndex = (rideState.routeIndex || 0) + speed
+            const speed = 2 // Slower but more frequent updates in logic
+            const currentIndex = rideState.routeIndex || 0
+            const nextIndex = currentIndex + speed
 
             if (nextIndex >= rideState.routePath.length) {
                 // Arrived
                 clearSimulator()
                 updateRideProgress({
-                    status: 'IN_RIDE', // Must be confirmed by user? Or auto? Logic says auto-switch for simpler flow here implies 'Arrived' -> 'In Ride' or 'Arrived' -> 'Waiting' etc.
-                    // User request implies seamless flow. Let's assume auto-switch to IN_RIDE for simulator simplicity
-                    // BUT normally driver waits. Let's stick to previous logic: clear route, set IN_RIDE.
+                    status: 'IN_RIDE',
                     routePath: undefined,
                     routeIndex: 0,
-                    currentLocation: rideState.routePath[rideState.routePath.length - 1]
+                    currentLocation: rideState.routePath[rideState.routePath.length - 1],
+                    bearing: 0
                 })
             } else {
+                const currentPos = rideState.routePath[currentIndex]
+                const nextPos = rideState.routePath[nextIndex]
+                const bearing = calculateBearing(currentPos, nextPos)
+
                 updateRideProgress({
-                    driverLocation: rideState.routePath[nextIndex],
-                    routeIndex: nextIndex
+                    driverLocation: nextPos,
+                    routeIndex: nextIndex,
+                    bearing: bearing
                 })
             }
-        }, 1000)
+        }, 800)
     }
 
     // Simulation: In Ride
@@ -129,13 +135,17 @@ export const useTaxiSimulator = () => {
             const rideState = rideRef.current
             if (!rideState || !rideState.routePath) return
 
-            const speed = 5 // Speed multiplier
-            const nextIndex = (rideState.routeIndex || 0) + speed
+            const speed = 2
+            const currentIndex = rideState.routeIndex || 0
+            const nextIndex = currentIndex + speed
             const isFinished = nextIndex >= rideState.routePath.length
 
             // Clamp index
             const safeIndex = Math.min(nextIndex, rideState.routePath.length - 1)
+            const currentPos = rideState.routePath[currentIndex]
             const newPos = rideState.routePath[safeIndex]
+
+            const bearing = calculateBearing(currentPos, newPos)
 
             // Calculate distance/fare
             const segmentDist = calculateDistance(rideState.currentLocation || rideState.origin, newPos) || 0
@@ -151,14 +161,15 @@ export const useTaxiSimulator = () => {
                 routeIndex: safeIndex,
                 distanceKm: newTotalDist,
                 currentFare: newFare,
-                durationMin: rideState.durationMin + (1 / 60) * speed
+                durationMin: rideState.durationMin + (1 / 60) * speed,
+                bearing: bearing
             })
 
             if (isFinished) {
                 clearSimulator()
                 setStatus('COMPLETED')
             }
-        }, 1000)
+        }, 800)
     }
 
     // Cleanup on unmount

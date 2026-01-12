@@ -12,6 +12,7 @@ export type TaxiStatus =
 export interface LatLng {
     lat: number
     lng: number
+    name?: string
 }
 
 export interface Driver {
@@ -42,4 +43,5 @@ export interface TaxiRide {
     endTime?: number
     routePath?: LatLng[]
     routeIndex?: number
+    bearing?: number
 }

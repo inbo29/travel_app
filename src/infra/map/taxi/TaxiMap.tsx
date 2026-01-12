@@ -26,6 +26,7 @@ interface TaxiMapProps {
     origin?: { lat: number; lng: number }
     destination?: { lat: number; lng: number }
     driverLocation?: { lat: number; lng: number }
+    bearing?: number
     route?: [number, number][]
     status: string // Accepts any TaxiStatus
 }
@@ -36,29 +37,41 @@ function MapController({
     destination,
     driverLocation,
     status
-}: Omit<TaxiMapProps, 'route'>) {
+}: Omit<TaxiMapProps, 'route' | 'bearing'>) {
     const map = useMap()
 
     useEffect(() => {
-        // Auto-fit based on status
+        if (!map) return
+
         if (status === 'IDLE' || status === 'SEARCHING') {
-            map.flyTo([userLocation.lat, userLocation.lng], 15, { duration: 1 })
-        } else if (status === 'DRIVER_ARRIVING' && driverLocation && origin) {
-            // Fit driver and origin
-            const bounds = L.latLngBounds([
-                [driverLocation.lat, driverLocation.lng],
-                [origin.lat, origin.lng]
-            ])
-            map.flyToBounds(bounds, { padding: [50, 50], duration: 1 })
-        } else if (status === 'IN_RIDE' && driverLocation && destination) {
-            // Fit driver and destination
-            const bounds = L.latLngBounds([
-                [driverLocation.lat, driverLocation.lng],
-                [destination.lat, destination.lng]
-            ])
-            map.flyToBounds(bounds, { padding: [50, 50], duration: 1 })
+            if (origin && destination) {
+                const bounds = L.latLngBounds([[origin.lat, origin.lng], [destination.lat, destination.lng]])
+                map.flyToBounds(bounds, { padding: [100, 100], duration: 1.5 })
+            } else if (origin) {
+                map.flyTo([origin.lat, origin.lng], 16, { duration: 1.5 })
+            } else if (destination) {
+                map.flyTo([destination.lat, destination.lng], 16, { duration: 1.5 })
+            } else {
+                map.flyTo([userLocation.lat, userLocation.lng], 15, { duration: 1 })
+            }
+        } else if (status === 'MATCHED' || status === 'MATCH_ACCEPTED' || status === 'DRIVER_ARRIVING') {
+            if (driverLocation && origin) {
+                const bounds = L.latLngBounds([
+                    [driverLocation.lat, driverLocation.lng],
+                    [origin.lat, origin.lng]
+                ])
+                map.flyToBounds(bounds, { padding: [120, 120], duration: 1.5 })
+            }
+        } else if (status === 'IN_RIDE') {
+            if (driverLocation && destination) {
+                const bounds = L.latLngBounds([
+                    [driverLocation.lat, driverLocation.lng],
+                    [destination.lat, destination.lng]
+                ])
+                map.flyToBounds(bounds, { padding: [120, 120], duration: 1.5 })
+            }
         }
-    }, [status, driverLocation?.lat, driverLocation?.lng])
+    }, [status, driverLocation?.lat, driverLocation?.lng, origin?.lat, origin?.lng, destination?.lat, destination?.lng])
 
     return null
 }
@@ -75,6 +88,7 @@ export function TaxiMap({
     origin,
     destination,
     driverLocation,
+    bearing = 0,
     route = [],
     status
 }: TaxiMapProps) {
@@ -119,7 +133,7 @@ export function TaxiMap({
 
             {/* Driver marker */}
             {driverLocation && (status === 'DRIVER_ARRIVING' || status === 'IN_RIDE') && (
-                <DriverMarker lat={driverLocation.lat} lng={driverLocation.lng} />
+                <DriverMarker lat={driverLocation.lat} lng={driverLocation.lng} rotation={bearing} />
             )}
         </MapContainer>
     )

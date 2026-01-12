@@ -25,7 +25,7 @@ export const TICKET_LIST: TicketListItem[] = [
         dateRange: ['2024-10-12'],
         searchable: ['music', 'festival', 'forest', 'concert', 'band'],
         rating: 4.8,
-        image: '/img/nature/nt1.png',
+        image: 'nature/nt1.png',
         trending: true,
         tags: ['Music', 'Outdoor']
     },
@@ -39,7 +39,7 @@ export const TICKET_LIST: TicketListItem[] = [
         dateRange: ['2024-06-21'],
         searchable: ['summer', 'solstice', 'party', 'park', 'new york'],
         rating: 4.5,
-        image: '/img/nature/nt2.png',
+        image: 'nature/nt2.png',
         trending: true,
         tags: ['Festival', 'Summer']
     },
@@ -55,7 +55,7 @@ export const TICKET_LIST: TicketListItem[] = [
         dateRange: ['DAILY'],
         searchable: ['bus', 'darkhan', 'transport', 'ulaanbaatar'],
         rating: 4.2,
-        image: '/img/city/ct1.png',
+        image: 'city/ct1.png',
         trending: false,
         tags: ['Intercity', 'Cheap']
     },
@@ -69,7 +69,7 @@ export const TICKET_LIST: TicketListItem[] = [
         dateRange: ['DAILY'],
         searchable: ['bus', 'terelj', 'park', 'nature'],
         rating: 4.6,
-        image: '/img/nature/nt3.png',
+        image: 'nature/nt3.png',
         trending: true,
         tags: ['Tourist', 'Nature']
     },
@@ -85,7 +85,7 @@ export const TICKET_LIST: TicketListItem[] = [
         dateRange: ['WEEKLY'],
         searchable: ['train', 'russia', 'baikal', 'irkutsk', 'siberia'],
         rating: 4.9,
-        image: '/img/nature/nt4.png',
+        image: 'nature/nt4.png',
         trending: true,
         tags: ['International', 'Scenic']
     },
@@ -99,7 +99,7 @@ export const TICKET_LIST: TicketListItem[] = [
         dateRange: ['DAILY'],
         searchable: ['train', 'china', 'border', 'zamyn-uud'],
         rating: 4.0,
-        image: '/img/city/ct2.png',
+        image: 'city/ct2.png',
         trending: false,
         tags: ['Border', 'Night Train']
     },
@@ -115,7 +115,7 @@ export const TICKET_LIST: TicketListItem[] = [
         dateRange: ['DAILY'],
         searchable: ['flight', 'khovd', 'western', 'plane', 'miat', 'hunnu'],
         rating: 4.3,
-        image: '/img/nature/nt5.png',
+        image: 'nature/nt5.png',
         trending: false,
         tags: ['Domestic', 'Fast']
     },
@@ -131,7 +131,7 @@ export const TICKET_LIST: TicketListItem[] = [
         dateRange: ['OPEN_YEAR_ROUND'],
         searchable: ['museum', 'history', 'chinggis', 'khan', 'culture'],
         rating: 4.9,
-        image: '/img/city/ct3.png',
+        image: 'city/ct3.png',
         trending: true,
         tags: ['History', 'Must See']
     },
@@ -145,7 +145,7 @@ export const TICKET_LIST: TicketListItem[] = [
         dateRange: ['OPEN_YEAR_ROUND'],
         searchable: ['museum', 'national', 'history', 'culture'],
         rating: 4.4,
-        image: '/img/city/ct4.png',
+        image: 'city/ct4.png',
         trending: false,
         tags: ['Culture', 'Classic']
     }

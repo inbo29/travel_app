@@ -43,6 +43,9 @@ import ConversationTranslate from '@/pages/translate/conversation'
 import OCRTranslate from '@/pages/translate/ocr'
 import OCRResult from '@/pages/translate/result'
 import SavedTranslations from '@/pages/translate/saved'
+import LogHome from '@/pages/log/LogHome'
+import JourneyDetail from '@/pages/log/JourneyDetail'
+import LocalMart from '@/pages/market/LocalMart'
 
 export default function App() {
     const { t } = useI18n()
@@ -93,6 +96,9 @@ export default function App() {
                 <Route path="/exchange" element={<div className="pt-24 px-6 text-white text-2xl font-bold">{t('nav.payme')}</div>} />
                 <Route path="/profile" element={<div className="pt-24 px-6 text-white text-2xl font-bold">{t('nav.my')}</div>} />
                 <Route path="/market-rates" element={<MarketRates />} />
+                <Route path="/local-mart" element={<LocalMart />} />
+                <Route path="/travel-log" element={<LogHome />} />
+                <Route path="/travel-log/:id" element={<JourneyDetail />} />
             </Route>
 
             {/* ===== TAXI LAYOUT (Full-screen Taxi Map) ===== */}

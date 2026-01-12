@@ -23,7 +23,7 @@ export const TICKET_DETAILS: Record<string, TicketDetailItem> = {
             { time: '20:00', title: 'Headliner: Echoes of Nature' },
             { time: '23:00', title: 'Campfire Jam Session' }
         ],
-        images: ['/img/nature/nt1.png', '/img/nature/nt2.png'],
+        images: ['nature/nt1.png', 'nature/nt2.png'],
         seatMap: true,
         highlights: ['Open-air stage', 'Surrounded by giant redwoods', 'Eco-friendly event'],
         terms: 'Non-refundable within 48 hours. Rain or shine event.'
@@ -38,7 +38,7 @@ export const TICKET_DETAILS: Record<string, TicketDetailItem> = {
             { time: '11:00', title: 'Rest Stop (Bornuur)' },
             { time: '13:00', title: 'Arrival at Darkhan Bus Station' }
         ],
-        images: ['/img/city/ct1.png'],
+        images: ['city/ct1.png'],
         seatMap: true,
         highlights: ['Fastest route', 'New fleet', 'Professional drivers'],
         terms: 'Show ticket 30 mins before departure.'
@@ -53,7 +53,7 @@ export const TICKET_DETAILS: Record<string, TicketDetailItem> = {
             { time: '17:00', title: 'Last Admission' },
             { time: '18:00', title: 'Closing' }
         ],
-        images: ['/img/city/ct3.png', '/img/city/ct4.png'],
+        images: ['city/ct3.png', 'city/ct4.png'],
         seatMap: false,
         highlights: ['Golden Sutra', 'Imperial Seals', 'VR Experience'],
         terms: 'Valid for the selected date(s). Student ID required for discount.'

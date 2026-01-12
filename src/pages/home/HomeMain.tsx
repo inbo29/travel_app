@@ -21,7 +21,8 @@ const QUICK_ACCESS_ITEMS: { key: string, icon: string, highlighted?: boolean, pa
     { key: 'translate', icon: '🌐', path: '/translator' },
     { key: 'market', icon: '📊', path: '/market-rates' },
     { key: 'map', icon: '🗺️', path: '/map' },
-    { key: 'travelLog', icon: '📔' },
+    { key: 'localMart', icon: '🛍️', path: '/local-mart' },
+    { key: 'travelLog', icon: '📔', path: '/travel-log' }, // New Route
 ]
 
 export default function HomeMain() {

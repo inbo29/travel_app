@@ -47,6 +47,10 @@
             "title": "Map",
             "subtitle": "Safety Zones"
         },
+        "localMart": {
+            "title": "Local Mart",
+            "subtitle": "Specialties"
+        },
         "travelLog": {
             "title": "Travel Log",
             "subtitle": "My History"
@@ -227,6 +231,31 @@
             "food": "Food & Drink",
             "accommodation": "Stay",
             "dailyGoods": "Daily Goods"
+        }
+    },
+    "log": {
+        "title": "Travel Log",
+        "empty": {
+            "title": "No entries yet",
+            "desc": "Your taxi rides, ticket bookings, and payments will automatically appear here."
+        },
+        "tabs": {
+            "timeline": "Timeline",
+            "map": "Map",
+            "photos": "Photos",
+            "summary": "Summary"
+        },
+        "summary": {
+            "distance": "Distance",
+            "spend": "Total Spend",
+            "rides": "Rides",
+            "tickets": "Tickets",
+            "highlights": "Highlights",
+            "duration": "Duration"
+        },
+        "status": {
+            "active": "Active Journey",
+            "completed": "Completed"
         }
     }
 }

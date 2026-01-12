@@ -30,6 +30,7 @@ function TaxiLayoutContent() {
                     origin={ride?.origin || searchOrigin || undefined}
                     destination={ride?.destination || searchDestination || undefined}
                     driverLocation={ride?.currentLocation || ride?.driverLocation || undefined}
+                    bearing={ride?.bearing}
                     route={ride?.routePath?.map(p => [p.lat, p.lng] as [number, number]) || []}
                     status={ride?.status || 'IDLE'}
                 />

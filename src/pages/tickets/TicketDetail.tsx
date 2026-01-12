@@ -82,7 +82,7 @@ export default function TicketDetail() {
             {/* Hero Image */}
             <div className="fixed top-0 left-0 right-0 h-[60vh] z-0">
                 <img
-                    src={`${ticket.images[0]}`}
+                    src={`${import.meta.env.BASE_URL}${ticket.images[0]}`}
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-bg-dark" />

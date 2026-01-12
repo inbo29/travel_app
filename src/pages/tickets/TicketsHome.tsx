@@ -172,7 +172,7 @@ export default function TicketsHome() {
                                     >
                                         <div className="aspect-[16/10] overflow-hidden">
                                             <img
-                                                src={`${ticket.image}`}
+                                                src={`${import.meta.env.BASE_URL}${ticket.image}`}
                                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                                             />
                                         </div>
@@ -233,7 +233,7 @@ export default function TicketsHome() {
                                     >
                                         <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-xl shrink-0">
                                             <img
-                                                src={`${ticket.image}`}
+                                                src={`${import.meta.env.BASE_URL}${ticket.image}`}
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>
