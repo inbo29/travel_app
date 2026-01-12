@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 
-export type Language = 'en' | 'mn' | 'ko' | 'ja' | 'zh'
+export type Language = 'en' | 'mn' | 'ko' | 'ja' | 'zh' | 'my'
 
 interface LanguageContextValue {
     lang: Language
@@ -18,7 +18,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
             setLangState(stored)
         } else {
             const browserLang = navigator.language.slice(0, 2)
-            if (['en', 'mn', 'ko', 'ja', 'zh'].includes(browserLang)) {
+            if (['en', 'mn', 'ko', 'ja', 'zh', 'my'].includes(browserLang)) {
                 setLangState(browserLang as Language)
             } else {
                 setLangState('en')

@@ -9,6 +9,7 @@ const LANGUAGES: { code: Language; label: string; flag: string }[] = [
     { code: 'ko', label: 'Korean', flag: '🇰🇷' },
     { code: 'ja', label: 'Japanese', flag: '🇯🇵' },
     { code: 'zh', label: 'Chinese', flag: '🇨🇳' },
+    { code: 'my', label: 'Myanmar', flag: '🇲🇲' }
 ]
 
 export function LanguageSwitcher() {

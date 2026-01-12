@@ -1,22 +1,63 @@
 {
     "header": {
-        "searchPlaceholder": "여행 / 가이드 / 명소 검색"
+        "searchPlaceholder": "여행 / 가이드 / 장소 검색",
+        "searching": "최적의 결과를 찾는 중...",
+        "sorting": "관련도 기준으로 정렬 중...",
+        "processing": "처리 중...",
+        "escToClose": "ESC로 닫기",
+        "enterToSearch": "ENTER로 검색"
+    },
+    "translate": {
+        "title": "번역",
+        "subtitle": "텍스트, 음성, 카메라 등",
+        "recentTitle": "최근 번역",
+        "viewAll": "전체 보기",
+        "empty": "저장된 번역이 없습니다.",
+        "modes": {
+            "text": "텍스트",
+            "voice": "음성",
+            "conversation": "대화",
+            "camera": "카메라"
+        },
+        "from": "원문",
+        "to": "번역",
+        "placeholder": "번역할 내용을 입력하세요...",
+        "translateBtn": "번역하기",
+        "copyBtn": "복사",
+        "saveBtn": "저장",
+        "characters": "자",
+        "contexts": {
+            "travel": "여행",
+            "business": "비즈니스",
+            "medical": "의료",
+            "general": "일반"
+        },
+        "voice": {
+            "title": "음성 번역",
+            "simulated": "시뮬레이션 모드",
+            "recognized": "인식된 내용",
+            "translation": "번역 결과",
+            "listening": "듣는 중...",
+            "tapToStart": "마이크를 눌러 시작하세요",
+            "speak": "말하기",
+            "translateTo": "번역 언어"
+        }
     },
     "nav": {
         "home": "홈",
         "translate": "번역",
         "map": "지도",
-        "payme": "PayMe",
-        "my": "마이",
+        "payme": "결제",
+        "my": "내 정보",
         "taxi": "택시"
     },
     "home": {
         "tag": "몽골 발견하기",
-        "title": "모든 것이 자연 위를",
-        "titleAccent": "유영합니다.",
-        "subtitle": "광활한 초원과 수정처럼 맑은 호수를 프리미엄하고 투명한 평온함 속에서 경험해 보세요.",
-        "start": "여행 시작하기",
-        "explore": "여행지 탐색"
+        "title": "모든 것이 떠다닙니다",
+        "titleAccent": "자연 위에서",
+        "subtitle": "광활한 초원과 맑은 호수를 프리미엄한 평온함으로 경험하세요.",
+        "start": "여행 시작",
+        "explore": "목적지 탐색"
     },
     "quick": {
         "taxi": {
@@ -25,10 +66,10 @@
         },
         "guide": {
             "title": "가이드",
-            "subtitle": "투어 및 매칭"
+            "subtitle": "투어 & 매칭"
         },
         "payme": {
-            "title": "PayMe",
+            "title": "결제",
             "subtitle": "결제 및 환전"
         },
         "tickets": {
@@ -37,49 +78,53 @@
         },
         "translate": {
             "title": "번역",
-            "subtitle": "음성 및 OCR"
+            "subtitle": "음성 & OCR"
         },
         "market": {
             "title": "시세",
-            "subtitle": "현지 환율"
+            "subtitle": "현지 평균가"
         },
         "map": {
             "title": "지도",
             "subtitle": "안전 구역"
         },
+        "localMart": {
+            "title": "로컬 마트",
+            "subtitle": "특산품"
+        },
         "travelLog": {
             "title": "여행 기록",
-            "subtitle": "나의 히스토리"
+            "subtitle": "내 기록"
         }
     },
     "sections": {
-        "quickAccess": "퀵 메뉴",
+        "quickAccess": "빠른 접근",
         "editorsPick": "에디터 추천",
-        "recommended": "추천 여행지",
+        "recommended": "추천",
         "nearby": "내 주변",
         "viewAll": "전체 보기",
-        "seeMore": "더 보기"
+        "seeMore": "더보기"
     },
     "mock": {
         "trekTitle": "히든 밸리 트레킹 체험",
-        "trekFeatures": "3일 • 전문 가이드 동행",
-        "bookNow": "지금 예약하기",
-        "altaiTitle": "알타이 산맥 원정대",
-        "altaiFeatures": "오지 탐험 • 12일",
-        "nomadTitle": "유목민 홈스테이",
+        "trekFeatures": "3일 • 전문 가이드",
+        "bookNow": "지금 예약",
+        "altaiTitle": "알타이 산맥 탐험",
+        "altaiFeatures": "오지 체험 • 12일",
+        "nomadTitle": "노마드 홈스테이",
         "nomadFeatures": "2.5km 거리 • 초원 전망",
-        "night": "박",
-        "person": "인",
-        "cultural": "문화 체험",
-        "localStay": "현지 숙박",
+        "night": "야간",
+        "person": "인원",
+        "cultural": "문화",
+        "localStay": "로컬 숙소",
         "highlyRecommended": "강력 추천"
     },
     "tickets": {
         "title": "티켓",
-        "search": "공연 또는 노선 검색",
-        "trending": "현재 인기",
-        "upcoming": "내 주변 예정",
-        "recommended": "추천 티켓",
+        "search": "이벤트 또는 노선 검색",
+        "trending": "지금 인기",
+        "upcoming": "근처 예정",
+        "recommended": "추천",
         "categories": {
             "all": "전체",
             "performance": "공연",
@@ -89,82 +134,89 @@
             "museum": "박물관"
         },
         "details": {
-            "about": "상세 정보",
+            "about": "소개",
             "selectDate": "날짜 및 시간 선택",
             "chooseTicket": "티켓 선택",
-            "location": "위치",
+            "location": "장소",
             "provider": "제공자"
         },
         "options": {
             "title": "옵션 선택",
             "date": "날짜",
-            "time": "시간 슬롯",
+            "time": "시간대",
             "seat": "좌석 유형",
             "quantity": "수량",
-            "next": "결제로 이동"
+            "next": "결제 진행"
         },
         "checkout": {
             "title": "결제",
-            "step": "{{total}}단계 중 {{current}}단계",
+            "step": "{{current}} / {{total}} 단계",
             "travelerInfo": "여행자 정보",
             "payment": "결제 수단",
             "recommended": "추천",
-            "total": "총 결제 금액",
+            "total": "총 금액",
             "complete": "결제 완료",
             "methods": {
                 "payme": "PayMe",
                 "card": "신용/체크카드",
-                "apple": "Apple Pay",
-                "samsung": "Samsung Pay"
+                "apple": "애플 페이",
+                "samsung": "삼성 페이"
             }
         },
         "success": {
-            "title": "티켓 확정!",
-            "qr": "제공자에게 이 QR 코드를 보여주세요",
-            "wallet": "월렛에 추가",
-            "viewMy": "내 티켓 보기"
+            "title": "예약 완료!",
+            "sentEmail": "티켓이 이메일로 전송되었습니다.",
+            "wallet": "애플 지갑에 추가",
+            "viewMy": "내 티켓 보기",
+            "qrInfo": "현장에서 QR 코드를 제시하세요",
+            "type": "종류",
+            "qty": "수량",
+            "venue": "장소",
+            "refNo": "예약 번호",
+            "help": "도움이 필요하신가요?",
+            "contactSupport": "고객센터 문의"
         },
         "bookNow": "지금 예약",
-        "bookTicket": "티켓 예약하기"
+        "bookTicket": "티켓 예약"
     },
     "taxi": {
         "title": "택시 호출",
-        "searching": "드라이버를 찾는 중...",
-        "found": "드라이버 매칭 완료",
-        "arriving": "드라이버 도착 중",
+        "searching": "기사님을 찾는 중...",
+        "found": "기사님 배정 완료",
+        "arriving": "기사님 도착 중",
         "inProgress": "이동 중",
-        "completed": "운행 완료",
-        "cancelled": "호출 취소됨",
-        "origin": "출발지",
-        "originPlaceholder": "위치 인식 중...",
+        "completed": "이용 완료",
+        "cancelled": "이용 취소",
+        "origin": "현재 위치",
+        "originPlaceholder": "위치를 확인하는 중...",
         "destination": "어디로 갈까요?",
-        "destinationPlaceholder": "목적지 입력 (예: 국립 오페라 하우스)",
+        "destinationPlaceholder": "목적지 입력 (예: 오페라 하우스)",
         "estimatedFare": "예상 요금",
-        "callButton": "택시 호출하기",
-        "noResults": "검색 결과 없음",
+        "callButton": "택시 호출",
+        "noResults": "검색 결과가 없습니다",
         "matching": {
-            "title": "드라이버 매칭 중",
+            "title": "차량 배정 중",
             "eta": "{{time}}분 후 도착"
         },
         "ride": {
             "stop": "정차 요청",
             "safety": "안전 센터",
-            "realtime": "실시간 트래커",
+            "realtime": "실시간 위치",
             "distance": "남은 거리",
             "time": "예상 시간"
         },
         "payment": {
             "title": "결제",
             "automatic": "자동 결제",
-            "total": "최종 요금",
+            "total": "총 요금",
             "breakdown": "요금 상세",
             "base": "기본 요금",
-            "distance": "거리 요금",
-            "time": "시간 요금"
+            "distance": "거리",
+            "time": "시간"
         },
         "history": {
-            "title": "택시 이용 기록",
-            "empty": "최근 이용 기록이 없습니다",
+            "title": "택시 이용 내역",
+            "empty": "이용 내역이 없습니다",
             "rebook": "다시 호출"
         },
         "types": {
@@ -172,20 +224,20 @@
             "comfort": "컴포트",
             "premium": "프리미엄"
         },
-        "matchFound": "드라이버 매칭 완료!",
+        "matchFound": "배정 완료!",
         "reject": "거절",
-        "accept": "수락",
-        "driverArriving": "드라이버가 오는 중입니다",
+        "accept": "탑승 수락",
+        "driverArriving": "기사님이 오고 있습니다",
         "review": {
-            "title": "운행 평가",
-            "comment": "코멘트 남기기 (선택사항)",
-            "submit": "후기 제출",
-            "skip": "다음에 하기"
+            "title": "이용 평가",
+            "comment": "후기 작성 (선택)",
+            "submit": "리뷰 제출",
+            "skip": "나중에 하기"
         }
     },
     "tour": {
         "title": "새로운 모험 발견",
-        "book": "지금 예약하기",
+        "book": "지금 예약",
         "category": {
             "all": "전체",
             "history": "역사",
@@ -196,37 +248,73 @@
         "details": {
             "overview": "개요",
             "itinerary": "일정",
-            "included": "포함 내역"
+            "included": "포함 사항"
         }
     },
     "guide": {
-        "title": "완벽한 가이드 찾기",
-        "hire": "가이드 고용하기",
-        "verified": "인증된 전문가",
-        "about": "자기소개",
-        "languages": "지원 언어",
+        "title": "나에게 맞는 가이드 찾기",
+        "hire": "가이드 예약",
+        "verified": "검증된 전문가",
+        "about": "소개",
+        "languages": "사용 언어",
         "services": "제공 서비스",
         "rate": "시간당 요금"
     },
     "booking": {
         "summary": "예약 요약",
-        "pay": "결제 및 확인",
-        "success": "예약이 완료되었습니다!",
+        "pay": "결제 및 확정",
+        "success": "모든 준비가 완료되었습니다!",
         "id": "예약 ID"
     },
     "marketPage": {
         "title": "현지 시세",
-        "subtitle": "공식 통계 기준 평균",
-        "updated": "최종 업데이트: {{date}}",
-        "aboveAverage": "평균보다 높음",
-        "disclaimer": "지역에 따라 가격이 상이할 수 있습니다",
+        "subtitle": "평균 지역 가격",
+        "updated": "마지막 업데이트: {{date}}",
+        "aboveAverage": "지역 평균보다 높음",
+        "disclaimer": "지역에 따라 가격이 달라질 수 있습니다",
         "source": "출처",
-        "convert": "USD → MNT 환전하기",
+        "convert": "USD → MNT 변환",
         "categories": {
             "transport": "교통",
-            "food": "식음료",
+            "food": "음식 및 음료",
             "accommodation": "숙박",
-            "dailyGoods": "생필품"
+            "dailyGoods": "생활용품"
+        }
+    },
+    "log": {
+        "title": "여행 기록",
+        "empty": {
+            "title": "기록이 없습니다",
+            "desc": "택시 이용, 티켓 구매, 결제 내역이 자동으로 기록됩니다."
+        },
+        "tabs": {
+            "timeline": "타임라인",
+            "map": "지도",
+            "photos": "사진",
+            "summary": "요약"
+        },
+        "summary": {
+            "distance": "이동 거리",
+            "spend": "총 사용 금액",
+            "rides": "이용 횟수",
+            "tickets": "티켓",
+            "places": "방문 장소",
+            "highlights": "하이라이트",
+            "duration": "기간"
+        },
+        "status": {
+            "active": "진행 중",
+            "completed": "완료"
+        },
+        "type": {
+            "taxi": "택시 이용",
+            "ticket": "티켓 구매",
+            "payment": "결제 완료",
+            "place": "장소 방문",
+            "note": "메모"
+        },
+        "map": {
+            "noRoute": "이 날짜에는 이동 기록이 없습니다."
         }
     }
 }

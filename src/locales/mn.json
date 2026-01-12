@@ -1,203 +1,320 @@
 {
     "header": {
-        "searchPlaceholder": "Аялал / Хөтөч / Газар хайх"
+        "searchPlaceholder": "여행 / 가이드 / 장소 검색",
+        "searching": "최적의 결과를 찾는 중...",
+        "sorting": "관련도 기준으로 정렬 중...",
+        "processing": "처리 중...",
+        "escToClose": "ESC로 닫기",
+        "enterToSearch": "ENTER로 검색"
+    },
+    "translate": {
+        "title": "번역",
+        "subtitle": "텍스트, 음성, 카메라 등",
+        "recentTitle": "최근 번역",
+        "viewAll": "전체 보기",
+        "empty": "저장된 번역이 없습니다.",
+        "modes": {
+            "text": "텍스트",
+            "voice": "음성",
+            "conversation": "대화",
+            "camera": "카메라"
+        },
+        "from": "원문",
+        "to": "번역",
+        "placeholder": "번역할 내용을 입력하세요...",
+        "translateBtn": "번역하기",
+        "copyBtn": "복사",
+        "saveBtn": "저장",
+        "characters": "자",
+        "contexts": {
+            "travel": "여행",
+            "business": "비즈니스",
+            "medical": "의료",
+            "general": "일반"
+        },
+        "voice": {
+            "title": "음성 번역",
+            "simulated": "시뮬레이션 모드",
+            "recognized": "인식된 내용",
+            "translation": "번역 결과",
+            "listening": "듣는 중...",
+            "tapToStart": "마이크를 눌러 시작하세요",
+            "speak": "말하기",
+            "translateTo": "번역 언어"
+        }
     },
     "nav": {
-        "home": "Нүүр",
-        "translate": "Орчуулга",
-        "map": "Газрын зураг",
-        "payme": "PayMe",
-        "my": "Миний",
-        "taxi": "Такси"
+        "home": "홈",
+        "translate": "번역",
+        "map": "지도",
+        "payme": "결제",
+        "my": "내 정보",
+        "taxi": "택시"
     },
     "home": {
-        "tag": "МОНГОЛТОЙ ТАНИЛЦ",
-        "title": "Бүх зүйл байгаль",
-        "titleAccent": "дээр оршдог.",
-        "subtitle": "Уудам тал нутаг, болор мэт тунгалаг нууруудыг дээд зэрэглэлийн, тунгалаг амар амгалангаар мэдэр.",
-        "start": "Аялал эхлэх",
-        "explore": "Аялах газрууд"
+        "tag": "몽골 발견하기",
+        "title": "모든 것이 떠다닙니다",
+        "titleAccent": "자연 위에서",
+        "subtitle": "광활한 초원과 맑은 호수를 프리미엄한 평온함으로 경험하세요.",
+        "start": "여행 시작",
+        "explore": "목적지 탐색"
     },
     "quick": {
         "taxi": {
-            "title": "Такси",
-            "subtitle": "Шуурхай дуудлага"
+            "title": "택시",
+            "subtitle": "즉시 호출"
         },
         "guide": {
-            "title": "Хөтөч",
-            "subtitle": "Аялал ба Хослол"
+            "title": "가이드",
+            "subtitle": "투어 & 매칭"
         },
         "payme": {
-            "title": "PayMe",
-            "subtitle": "Төлбөр ба Солилцоо"
+            "title": "결제",
+            "subtitle": "결제 및 환전"
         },
         "tickets": {
-            "title": "Тасалбар",
-            "subtitle": "Автобус / Галт тэрэг / Үзвэр"
+            "title": "티켓",
+            "subtitle": "버스 / 기차 / 공연"
         },
         "translate": {
-            "title": "Орчуулга",
-            "subtitle": "Дуу хоолой ба Текст"
+            "title": "번역",
+            "subtitle": "음성 & OCR"
         },
         "market": {
-            "title": "Ханш",
-            "subtitle": "Дотоод ханш"
+            "title": "시세",
+            "subtitle": "현지 평균가"
         },
         "map": {
-            "title": "Газрын зураг",
-            "subtitle": "Аюулгүйн бүс"
+            "title": "지도",
+            "subtitle": "안전 구역"
+        },
+        "localMart": {
+            "title": "로컬 마트",
+            "subtitle": "특산품"
         },
         "travelLog": {
-            "title": "Тэмдэглэл",
-            "subtitle": "Миний түүх"
+            "title": "여행 기록",
+            "subtitle": "내 기록"
         }
     },
     "sections": {
-        "quickAccess": "Шуурхай хандалт",
-        "editorsPick": "Редакторын сонголт",
-        "recommended": "Санал болгож буй",
-        "nearby": "Ойр байгаа",
-        "viewAll": "Бүгдийг үзэх",
-        "seeMore": "Дэлгэрэнгүй"
+        "quickAccess": "빠른 접근",
+        "editorsPick": "에디터 추천",
+        "recommended": "추천",
+        "nearby": "내 주변",
+        "viewAll": "전체 보기",
+        "seeMore": "더보기"
     },
     "mock": {
-        "trekTitle": "Хулж хөндийн аялал",
-        "trekFeatures": "3 Өдөр • Мэргэжлийн хөтөч",
-        "bookNow": "Захиалах",
-        "altaiTitle": "Алтай таван богд аялал",
-        "altaiFeatures": "Алслагдсан бүс • 12 Өдөр",
-        "nomadTitle": "Малчин айлд зочлох",
-        "nomadFeatures": "2.5км зайтай • Тал нутгийн харагдац",
-        "night": "Хоног",
-        "person": "Хүн",
-        "cultural": "Соёл",
-        "localStay": "Орон нутаг",
-        "highlyRecommended": "Санал болгож буй"
+        "trekTitle": "히든 밸리 트레킹 체험",
+        "trekFeatures": "3일 • 전문 가이드",
+        "bookNow": "지금 예약",
+        "altaiTitle": "알타이 산맥 탐험",
+        "altaiFeatures": "오지 체험 • 12일",
+        "nomadTitle": "노마드 홈스테이",
+        "nomadFeatures": "2.5km 거리 • 초원 전망",
+        "night": "야간",
+        "person": "인원",
+        "cultural": "문화",
+        "localStay": "로컬 숙소",
+        "highlyRecommended": "강력 추천"
     },
     "tickets": {
-        "title": "Тасалбар",
-        "search": "Арга хэмжээ эсвэл чиглэл хайх",
-        "trending": "Одоо тренд",
-        "upcoming": "Ойролцоох арга хэмжээ",
-        "recommended": "Санал болгох",
+        "title": "티켓",
+        "search": "이벤트 또는 노선 검색",
+        "trending": "지금 인기",
+        "upcoming": "근처 예정",
+        "recommended": "추천",
         "categories": {
-            "all": "Бүгд",
-            "performance": "Тоглолт",
-            "bus": "Автобус",
-            "train": "Галт тэрэг",
-            "flight": "Нислэг",
-            "museum": "Музей"
+            "all": "전체",
+            "performance": "공연",
+            "bus": "버스",
+            "train": "기차",
+            "flight": "항공",
+            "museum": "박물관"
         },
         "details": {
-            "about": "Тухай",
-            "selectDate": "Өдөр ба цаг сонгох",
-            "chooseTicket": "Тасалбар сонгох",
-            "location": "Байршил",
-            "provider": "Үйлчилгээ үзүүлэгч"
+            "about": "소개",
+            "selectDate": "날짜 및 시간 선택",
+            "chooseTicket": "티켓 선택",
+            "location": "장소",
+            "provider": "제공자"
         },
         "options": {
-            "title": "Сонголтууд",
-            "date": "Өдөр",
-            "time": "Цаг",
-            "seat": "Суудлын төрөл",
-            "quantity": "Тоо ширхэг",
-            "next": "Төлбөр төлөх"
+            "title": "옵션 선택",
+            "date": "날짜",
+            "time": "시간대",
+            "seat": "좌석 유형",
+            "quantity": "수량",
+            "next": "결제 진행"
         },
         "checkout": {
-            "title": "Төлбөр",
-            "step": "{{total}}-аас {{current}}-р алхам",
-            "travelerInfo": "Аялагчийн мэдээлэл",
-            "payment": "Төлбөрийн хэлбэр",
-            "recommended": "Санал болгох",
-            "total": "Нийт үнэ",
-            "complete": "Худалдан авах",
+            "title": "결제",
+            "step": "{{current}} / {{total}} 단계",
+            "travelerInfo": "여행자 정보",
+            "payment": "결제 수단",
+            "recommended": "추천",
+            "total": "총 금액",
+            "complete": "결제 완료",
             "methods": {
                 "payme": "PayMe",
-                "card": "Карт",
-                "apple": "Apple Pay",
-                "samsung": "Samsung Pay"
+                "card": "신용/체크카드",
+                "apple": "애플 페이",
+                "samsung": "삼성 페이"
             }
         },
         "success": {
-            "title": "Тасалбар баталгаажлаа!",
-            "qr": "Энэхүү QR кодыг үйлчилгээ үзүүлэгчид үзүүлнэ үү",
-            "wallet": "Wallet-д нэмэх",
-            "viewMy": "Миний тасалбарууд"
+            "title": "예약 완료!",
+            "sentEmail": "티켓이 이메일로 전송되었습니다.",
+            "wallet": "애플 지갑에 추가",
+            "viewMy": "내 티켓 보기",
+            "qrInfo": "현장에서 QR 코드를 제시하세요",
+            "type": "종류",
+            "qty": "수량",
+            "venue": "장소",
+            "refNo": "예약 번호",
+            "help": "도움이 필요하신가요?",
+            "contactSupport": "고객센터 문의"
         },
-        "bookNow": "Одоо захиалах",
-        "bookTicket": "Тасалбар захиалах"
+        "bookNow": "지금 예약",
+        "bookTicket": "티켓 예약"
     },
     "taxi": {
-        "title": "Taxi Call",
-        "searching": "Searching for Drivers...",
-        "found": "Driver Found",
-        "arriving": "Driver is Arriving",
-        "inProgress": "On the Way",
-        "completed": "Trip Completed",
-        "cancelled": "Trip Cancelled",
-        "origin": "Current Location",
-        "originPlaceholder": "Detecting location...",
-        "destination": "Where to?",
-        "destinationPlaceholder": "Enter destination (e.g., Opera House)",
-        "estimatedFare": "Estimated Fare",
-        "callButton": "Call Taxi",
-        "noResults": "No results found",
+        "title": "택시 호출",
+        "searching": "기사님을 찾는 중...",
+        "found": "기사님 배정 완료",
+        "arriving": "기사님 도착 중",
+        "inProgress": "이동 중",
+        "completed": "이용 완료",
+        "cancelled": "이용 취소",
+        "origin": "현재 위치",
+        "originPlaceholder": "위치를 확인하는 중...",
+        "destination": "어디로 갈까요?",
+        "destinationPlaceholder": "목적지 입력 (예: 오페라 하우스)",
+        "estimatedFare": "예상 요금",
+        "callButton": "택시 호출",
+        "noResults": "검색 결과가 없습니다",
         "matching": {
-            "title": "Matching your ride",
-            "eta": "Arriving in {{time}} mins"
+            "title": "차량 배정 중",
+            "eta": "{{time}}분 후 도착"
         },
         "ride": {
-            "stop": "Stop Request",
-            "safety": "Safety Center",
-            "realtime": "Real-time Tracker",
-            "distance": "Distance Left",
-            "time": "Est. Time"
+            "stop": "정차 요청",
+            "safety": "안전 센터",
+            "realtime": "실시간 위치",
+            "distance": "남은 거리",
+            "time": "예상 시간"
         },
         "payment": {
-            "title": "Payment",
-            "automatic": "Automatic Payment",
-            "total": "Total Fare",
-            "breakdown": "Fare Breakdown",
-            "base": "Base Fare",
-            "distance": "Distance",
-            "time": "Time"
+            "title": "결제",
+            "automatic": "자동 결제",
+            "total": "총 요금",
+            "breakdown": "요금 상세",
+            "base": "기본 요금",
+            "distance": "거리",
+            "time": "시간"
         },
         "history": {
-            "title": "Taxi History",
-            "empty": "No recent trips",
-            "rebook": "Rebook"
+            "title": "택시 이용 내역",
+            "empty": "이용 내역이 없습니다",
+            "rebook": "다시 호출"
         },
         "types": {
-            "standard": "Standard",
-            "comfort": "Comfort",
-            "premium": "Premium"
+            "standard": "일반",
+            "comfort": "컴포트",
+            "premium": "프리미엄"
         },
+        "matchFound": "배정 완료!",
+        "reject": "거절",
+        "accept": "탑승 수락",
+        "driverArriving": "기사님이 오고 있습니다",
         "review": {
-            "title": "Rate your ride",
-            "comment": "Leave a comment (optional)",
-            "submit": "Submit Review",
-            "skip": "Skip for now"
+            "title": "이용 평가",
+            "comment": "후기 작성 (선택)",
+            "submit": "리뷰 제출",
+            "skip": "나중에 하기"
         }
     },
+    "tour": {
+        "title": "새로운 모험 발견",
+        "book": "지금 예약",
+        "category": {
+            "all": "전체",
+            "history": "역사",
+            "nature": "자연",
+            "food": "음식",
+            "adventure": "모험"
+        },
+        "details": {
+            "overview": "개요",
+            "itinerary": "일정",
+            "included": "포함 사항"
+        }
+    },
+    "guide": {
+        "title": "나에게 맞는 가이드 찾기",
+        "hire": "가이드 예약",
+        "verified": "검증된 전문가",
+        "about": "소개",
+        "languages": "사용 언어",
+        "services": "제공 서비스",
+        "rate": "시간당 요금"
+    },
     "booking": {
-        "summary": "Захиалгын тойм",
-        "pay": "Төлбөр төлөх",
-        "success": "Амжилттай!",
-        "id": "Захиалгын ID"
+        "summary": "예약 요약",
+        "pay": "결제 및 확정",
+        "success": "모든 준비가 완료되었습니다!",
+        "id": "예약 ID"
     },
     "marketPage": {
-        "title": "Зах зээлийн ханш",
-        "subtitle": "Албан ёсны дундаж үнэ",
-        "updated": "Сүүлд шинэчилсэн: {{date}}",
-        "aboveAverage": "Дунджаас дээгүүр",
-        "disclaimer": "Байршлаас хамааран үнэ өөр байж болно",
-        "source": "Эх сурвалж",
-        "convert": "USD → MNT хөрвүүлэх",
+        "title": "현지 시세",
+        "subtitle": "평균 지역 가격",
+        "updated": "마지막 업데이트: {{date}}",
+        "aboveAverage": "지역 평균보다 높음",
+        "disclaimer": "지역에 따라 가격이 달라질 수 있습니다",
+        "source": "출처",
+        "convert": "USD → MNT 변환",
         "categories": {
-            "transport": "Тээвэр",
-            "food": "Хоол хүнс",
-            "accommodation": "Байр",
-            "dailyGoods": "Өргөн хэрэглээ"
+            "transport": "교통",
+            "food": "음식 및 음료",
+            "accommodation": "숙박",
+            "dailyGoods": "생활용품"
+        }
+    },
+    "log": {
+        "title": "여행 기록",
+        "empty": {
+            "title": "기록이 없습니다",
+            "desc": "택시 이용, 티켓 구매, 결제 내역이 자동으로 기록됩니다."
+        },
+        "tabs": {
+            "timeline": "타임라인",
+            "map": "지도",
+            "photos": "사진",
+            "summary": "요약"
+        },
+        "summary": {
+            "distance": "이동 거리",
+            "spend": "총 사용 금액",
+            "rides": "이용 횟수",
+            "tickets": "티켓",
+            "places": "방문 장소",
+            "highlights": "하이라이트",
+            "duration": "기간"
+        },
+        "status": {
+            "active": "진행 중",
+            "completed": "완료"
+        },
+        "type": {
+            "taxi": "택시 이용",
+            "ticket": "티켓 구매",
+            "payment": "결제 완료",
+            "place": "장소 방문",
+            "note": "메모"
+        },
+        "map": {
+            "noRoute": "이 날짜에는 이동 기록이 없습니다."
         }
     }
 }

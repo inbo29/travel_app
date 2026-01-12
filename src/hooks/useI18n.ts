@@ -5,8 +5,9 @@ import ko from '@/locales/ko.json'
 import mn from '@/locales/mn.json'
 import ja from '@/locales/ja.json'
 import zh from '@/locales/zh.json'
+import my from '@/locales/my.json'
 
-const DICT: Record<Language, any> = { en, ko, mn, ja, zh }
+const DICT: Record<Language, any> = { en, ko, mn, ja, zh, my }
 
 export function useI18n() {
     const context = useContext(LanguageContext)

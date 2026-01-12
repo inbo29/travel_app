@@ -1,85 +1,130 @@
 {
     "header": {
-        "searchPlaceholder": "搜索 行程 / 向导 / 地点"
+        "searchPlaceholder": "搜索 行程 / 向导 / 地点",
+        "searching": "正在查找最佳匹配...",
+        "sorting": "按相关度排序中...",
+        "processing": "处理中...",
+        "escToClose": "按 ESC 关闭",
+        "enterToSearch": "按 ENTER 搜索"
+    },
+    "translate": {
+        "title": "翻译",
+        "subtitle": "文本、语音、相机等",
+        "recentTitle": "最近翻译",
+        "viewAll": "查看全部",
+        "empty": "暂无保存的翻译。",
+        "modes": {
+            "text": "文本",
+            "voice": "语音",
+            "conversation": "对话",
+            "camera": "相机"
+        },
+        "from": "源语言",
+        "to": "目标语言",
+        "placeholder": "请输入要翻译的内容...",
+        "translateBtn": "翻译",
+        "copyBtn": "复制",
+        "saveBtn": "保存",
+        "characters": "字符",
+        "contexts": {
+            "travel": "旅行",
+            "business": "商务",
+            "medical": "医疗",
+            "general": "通用"
+        },
+        "voice": {
+            "title": "语音翻译",
+            "simulated": "模拟模式",
+            "recognized": "识别内容",
+            "translation": "翻译结果",
+            "listening": "正在聆听...",
+            "tapToStart": "点击麦克风开始",
+            "speak": "说话",
+            "translateTo": "翻译成"
+        }
     },
     "nav": {
         "home": "首页",
         "translate": "翻译",
         "map": "地图",
-        "payme": "PayMe",
+        "payme": "支付",
         "my": "我的",
-        "taxi": "出租车"
+        "taxi": "打车"
     },
     "home": {
         "tag": "发现蒙古",
-        "title": "万物皆漂浮",
-        "titleAccent": "于自然之上。",
-        "subtitle": "在高端透明的宁静中，体验广袤的草原和晶莹剔透的湖泊。",
+        "title": "万物皆浮",
+        "titleAccent": "于自然之上",
+        "subtitle": "以高端宁静的方式，体验广阔草原与清澈湖泊。",
         "start": "开始旅程",
         "explore": "探索目的地"
     },
     "quick": {
         "taxi": {
-            "title": "出租车",
-            "subtitle": "即刻用车"
+            "title": "打车",
+            "subtitle": "即时叫车"
         },
         "guide": {
             "title": "向导",
-            "subtitle": "旅游与匹配"
+            "subtitle": "行程 & 匹配"
         },
         "payme": {
-            "title": "PayMe",
-            "subtitle": "支付与汇率"
+            "title": "支付",
+            "subtitle": "支付与换汇"
         },
         "tickets": {
-            "title": "票务",
-            "subtitle": "公交/火车/演出"
+            "title": "门票",
+            "subtitle": "巴士 / 火车 / 演出"
         },
         "translate": {
             "title": "翻译",
-            "subtitle": "语音与识图"
+            "subtitle": "语音 & OCR"
         },
         "market": {
-            "title": "行情",
-            "subtitle": "当地汇率"
+            "title": "市价",
+            "subtitle": "当地平均价格"
         },
         "map": {
             "title": "地图",
             "subtitle": "安全区域"
         },
+        "localMart": {
+            "title": "本地商店",
+            "subtitle": "特色商品"
+        },
         "travelLog": {
-            "title": "日志",
-            "subtitle": "我的历史"
+            "title": "旅行记录",
+            "subtitle": "我的记录"
         }
     },
     "sections": {
-        "quickAccess": "快捷功能",
+        "quickAccess": "快捷入口",
         "editorsPick": "编辑精选",
-        "recommended": "为您推荐",
-        "nearby": "附近推荐",
+        "recommended": "推荐",
+        "nearby": "附近",
         "viewAll": "查看全部",
         "seeMore": "查看更多"
     },
     "mock": {
-        "trekTitle": "幽谷徒步体验",
-        "trekFeatures": "3天 • 专业向导",
+        "trekTitle": "隐秘山谷徒步体验",
+        "trekFeatures": "3天 · 专业向导",
         "bookNow": "立即预订",
         "altaiTitle": "阿尔泰山脉探险",
-        "altaiFeatures": "深度体验 • 12天",
-        "nomadTitle": "游牧民寄宿家庭",
-        "nomadFeatures": "2.5km外 • 草原景观",
-        "night": "晚",
-        "person": "位",
+        "altaiFeatures": "偏远体验 · 12天",
+        "nomadTitle": "游牧家庭住宿",
+        "nomadFeatures": "2.5公里 · 草原景观",
+        "night": "夜晚",
+        "person": "人数",
         "cultural": "文化",
         "localStay": "当地住宿",
-        "highlyRecommended": "特别推荐"
+        "highlyRecommended": "强烈推荐"
     },
     "tickets": {
-        "title": "票务",
+        "title": "门票",
         "search": "搜索活动或路线",
-        "trending": "热门推荐",
-        "upcoming": "附近活动",
-        "recommended": "为您推荐",
+        "trending": "当前热门",
+        "upcoming": "附近即将开始",
+        "recommended": "推荐",
         "categories": {
             "all": "全部",
             "performance": "演出",
@@ -89,11 +134,11 @@
             "museum": "博物馆"
         },
         "details": {
-            "about": "关于",
-            "selectDate": "选择日期与时间",
+            "about": "介绍",
+            "selectDate": "选择日期和时间",
             "chooseTicket": "选择门票",
             "location": "地点",
-            "provider": "提供商"
+            "provider": "提供方"
         },
         "options": {
             "title": "选择选项",
@@ -101,82 +146,175 @@
             "time": "时间段",
             "seat": "座位类型",
             "quantity": "数量",
-            "next": "前往结账"
+            "next": "前往结算"
         },
         "checkout": {
-            "title": "结账",
-            "step": "第 {{current}} 步（共 {{total}} 步）",
-            "travelerInfo": "出行人信息",
+            "title": "结算",
+            "step": "第 {{current}} 步，共 {{total}} 步",
+            "travelerInfo": "旅客信息",
             "payment": "支付方式",
             "recommended": "推荐",
             "total": "总价",
             "complete": "完成购买",
             "methods": {
                 "payme": "PayMe",
-                "card": "信用卡/借记卡",
+                "card": "信用卡 / 借记卡",
                 "apple": "Apple Pay",
                 "samsung": "Samsung Pay"
             }
         },
         "success": {
             "title": "预订成功！",
-            "qr": "请向工作人员出示此二维码",
-            "wallet": "添加到钱包",
-            "viewMy": "查看我的票务"
+            "sentEmail": "门票已发送至您的邮箱。",
+            "wallet": "添加到 Apple 钱包",
+            "viewMy": "查看我的门票",
+            "qrInfo": "向工作人员出示此二维码",
+            "type": "类型",
+            "qty": "数量",
+            "venue": "地点",
+            "refNo": "参考编号",
+            "help": "需要帮助？",
+            "contactSupport": "联系客服"
         },
         "bookNow": "立即预订",
         "bookTicket": "预订门票"
     },
     "taxi": {
-        "title": "Taxi Call",
-        "searching": "Searching for Drivers...",
-        "found": "Driver Found",
-        "arriving": "Driver is Arriving",
-        "inProgress": "On the Way",
-        "completed": "Trip Completed",
-        "cancelled": "Trip Cancelled",
-        "origin": "Current Location",
-        "originPlaceholder": "Detecting location...",
-        "destination": "Where to?",
-        "destinationPlaceholder": "Enter destination (e.g., Opera House)",
-        "estimatedFare": "Estimated Fare",
-        "callButton": "Call Taxi",
-        "noResults": "No results found",
+        "title": "叫车",
+        "searching": "正在寻找司机...",
+        "found": "已找到司机",
+        "arriving": "司机正在前往",
+        "inProgress": "行程中",
+        "completed": "行程完成",
+        "cancelled": "行程已取消",
+        "origin": "当前位置",
+        "originPlaceholder": "正在获取位置...",
+        "destination": "要去哪里？",
+        "destinationPlaceholder": "输入目的地（例如：歌剧院）",
+        "estimatedFare": "预计费用",
+        "callButton": "呼叫出租车",
+        "noResults": "未找到结果",
         "matching": {
-            "title": "Matching your ride",
-            "eta": "Arriving in {{time}} mins"
+            "title": "正在匹配车辆",
+            "eta": "{{time}} 分钟后到达"
         },
         "ride": {
-            "stop": "Stop Request",
-            "safety": "Safety Center",
-            "realtime": "Real-time Tracker",
-            "distance": "Distance Left",
-            "time": "Est. Time"
+            "stop": "请求停车",
+            "safety": "安全中心",
+            "realtime": "实时追踪",
+            "distance": "剩余距离",
+            "time": "预计时间"
         },
         "payment": {
-            "title": "Payment",
-            "automatic": "Automatic Payment",
-            "total": "Total Fare",
-            "breakdown": "Fare Breakdown",
-            "base": "Base Fare",
-            "distance": "Distance",
-            "time": "Time"
+            "title": "支付",
+            "automatic": "自动支付",
+            "total": "总费用",
+            "breakdown": "费用明细",
+            "base": "起步价",
+            "distance": "距离",
+            "time": "时间"
         },
         "history": {
-            "title": "Taxi History",
-            "empty": "No recent trips",
-            "rebook": "Rebook"
+            "title": "打车记录",
+            "empty": "暂无最近行程",
+            "rebook": "再次叫车"
         },
         "types": {
-            "standard": "Standard",
-            "comfort": "Comfort",
-            "premium": "Premium"
+            "standard": "标准",
+            "comfort": "舒适",
+            "premium": "高级"
         },
+        "matchFound": "匹配成功！",
+        "reject": "拒绝",
+        "accept": "接受行程",
+        "driverArriving": "司机正在途中",
         "review": {
-            "title": "Rate your ride",
-            "comment": "Leave a comment (optional)",
-            "submit": "Submit Review",
-            "skip": "Skip for now"
+            "title": "评价行程",
+            "comment": "留下评论（可选）",
+            "submit": "提交评价",
+            "skip": "暂时跳过"
+        }
+    },
+    "tour": {
+        "title": "发现新的冒险",
+        "book": "立即预订",
+        "category": {
+            "all": "全部",
+            "history": "历史",
+            "nature": "自然",
+            "food": "美食",
+            "adventure": "探险"
+        },
+        "details": {
+            "overview": "概览",
+            "itinerary": "行程",
+            "included": "包含内容"
+        }
+    },
+    "guide": {
+        "title": "寻找合适的向导",
+        "hire": "雇佣向导",
+        "verified": "认证专家",
+        "about": "关于我",
+        "languages": "语言",
+        "services": "提供的服务",
+        "rate": "每小时价格"
+    },
+    "booking": {
+        "summary": "预订摘要",
+        "pay": "确认并支付",
+        "success": "一切就绪！",
+        "id": "预订编号"
+    },
+    "marketPage": {
+        "title": "当地市价",
+        "subtitle": "平均本地价格",
+        "updated": "最后更新：{{date}}",
+        "aboveAverage": "高于本地平均",
+        "disclaimer": "价格可能因地区而异",
+        "source": "来源",
+        "convert": "USD → MNT 换算",
+        "categories": {
+            "transport": "交通",
+            "food": "餐饮",
+            "accommodation": "住宿",
+            "dailyGoods": "日用品"
+        }
+    },
+    "log": {
+        "title": "旅行记录",
+        "empty": {
+            "title": "暂无记录",
+            "desc": "您的打车记录、门票购买和支付信息将自动显示在这里。"
+        },
+        "tabs": {
+            "timeline": "时间轴",
+            "map": "地图",
+            "photos": "照片",
+            "summary": "汇总"
+        },
+        "summary": {
+            "distance": "行程距离",
+            "spend": "总花费",
+            "rides": "乘车次数",
+            "tickets": "门票",
+            "places": "到访地点",
+            "highlights": "亮点",
+            "duration": "时长"
+        },
+        "status": {
+            "active": "进行中",
+            "completed": "已完成"
+        },
+        "type": {
+            "taxi": "打车行程",
+            "ticket": "门票购买",
+            "payment": "支付完成",
+            "place": "地点访问",
+            "note": "备注"
+        },
+        "map": {
+            "noRoute": "当天没有移动记录。"
         }
     }
 }
