@@ -47,7 +47,7 @@ export default function TaxiPayment() {
     )
 }
 
-function TaxiPaymentContent() {
+export function TaxiPaymentContent() {
     const { ride, addToHistory, reset } = useTaxiStore()
     const { method } = usePayment()
     const navigate = useNavigate()

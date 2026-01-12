@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { DriverMarker } from './DriverMarker'
 import { RouteLayer } from './RouteLayer'
 import 'leaflet/dist/leaflet.css'
+import { useTheme } from '@/context/ThemeContext'
 
 // Icons
 const originIcon = L.divIcon({
@@ -62,6 +63,13 @@ function MapController({
     return null
 }
 
+
+
+const TILES = {
+    light: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+}
+
 export function TaxiMap({
     userLocation,
     origin,
@@ -70,6 +78,9 @@ export function TaxiMap({
     route = [],
     status
 }: TaxiMapProps) {
+    const { theme } = useTheme()
+    const tileUrl = theme === 'dark' ? TILES.dark : TILES.light
+
     return (
         <MapContainer
             center={[userLocation.lat, userLocation.lng]}
@@ -80,8 +91,9 @@ export function TaxiMap({
             className="taxi-map"
         >
             <TileLayer
+                key={theme}
                 attribution='&copy; OpenStreetMap'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                url={tileUrl}
             />
 
             <MapController

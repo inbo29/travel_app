@@ -6,24 +6,47 @@ import { fetchRoute } from '@/services/map.service'
 import { calculateDistance } from '@/utils/mapUtils'
 
 export const useTaxiSimulator = () => {
-    const { ride, setStatus, updateRideProgress } = useTaxiStore()
-    const intervalRef = useRef<NodeJS.Timeout | null>(null)
+    // Use granular selectors to avoid unnecessary re-renders
+    const status = useTaxiStore(s => s.ride?.status)
+    const ride = useTaxiStore(s => s.ride)
+    const updateRideProgress = useTaxiStore(s => s.updateRideProgress)
+    const setStatus = useTaxiStore(s => s.setStatus)
 
+    // Refs to hold mutable state for intervals without triggering re-renders
     const rideRef = useRef(ride)
     rideRef.current = ride
 
-    // State Transition Logic
+    const intervalRef = useRef<NodeJS.Timeout | null>(null)
+
+    // Cleanup helper
+    const clearSimulator = () => {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current)
+            intervalRef.current = null
+        }
+    }
+
+    // Effect: Status Change Handler
     useEffect(() => {
-        if (!ride) return
+        if (!status) return
+
+        log('TAXI_SIMULATOR', `Status Changed: ${status}`)
+
+        // Always clear previous intervals on status change
+        clearSimulator()
 
         let timeout: NodeJS.Timeout
 
-        log('TAXI_SIMULATOR', `Current Status: ${ride.status}`)
-
-        if (ride.status === 'SEARCHING') {
-            // Simulate finding a driver
+        if (status === 'SEARCHING') {
+            // Find a driver after 3s
             timeout = setTimeout(() => {
-                const mockDriverLoc = { lat: ride.origin.lat + 0.005, lng: ride.origin.lng + 0.005 }
+                // Ensure we are still searching
+                if (rideRef.current?.status !== 'SEARCHING') return
+
+                const origin = rideRef.current?.origin
+                if (!origin) return
+
+                const mockDriverLoc = { lat: origin.lat + 0.005, lng: origin.lng + 0.005 }
                 updateRideProgress({
                     status: 'MATCHED',
                     driver: mockDriver,
@@ -31,124 +54,115 @@ export const useTaxiSimulator = () => {
                     driverLocation: mockDriverLoc
                 })
             }, 3000)
-        } else if (ride.status === 'MATCH_ACCEPTED') {
+        }
+        else if (status === 'MATCH_ACCEPTED') {
+            // Transition to Arriving after 1s
             timeout = setTimeout(() => {
                 setStatus('DRIVER_ARRIVING')
             }, 1000)
-        } else if (ride.status === 'DRIVER_ARRIVING') {
-            // Simulate driver getting closer to user (Pickup)
-            if (!ride.routePath) {
-                fetchRoute(ride.driverLocation!, ride.origin).then(route => {
-                    updateRideProgress({ routePath: route, routeIndex: 0 })
-                })
-            }
-
-            intervalRef.current = setInterval(() => {
-                const currentRide = rideRef.current
-                if (!currentRide || !currentRide.routePath) return
-
-                const currentIndex = currentRide.routeIndex || 0
-                const speed = 10 // Arriving driver is faster for demo
-                const nextIndex = Math.min(currentIndex + speed, currentRide.routePath.length - 1)
-                const newPos = currentRide.routePath[nextIndex]
-                const arrivedAtPickup = nextIndex >= currentRide.routePath.length - 1
-
-                updateRideProgress({
-                    driverLocation: newPos,
-                    routeIndex: nextIndex
-                })
-
-                if (arrivedAtPickup) {
-                    if (intervalRef.current) clearInterval(intervalRef.current)
-                    // Clear intermediate route and start actual ride
-                    updateRideProgress({
-                        status: 'IN_RIDE',
-                        routePath: undefined,
-                        routeIndex: 0,
-                        currentLocation: newPos
-                    })
-                }
-            }, 1000)
-        } else if (ride.status === 'IN_RIDE') {
-            // Fetch real route if not present
-            if (!ride.routePath) {
-                fetchRoute(ride.origin, ride.destination!).then(route => {
-                    updateRideProgress({ routePath: route, routeIndex: 0 })
-                })
-            }
-
-            // Start simulation along the route
-            intervalRef.current = setInterval(() => {
-                const currentRide = rideRef.current
-                if (!currentRide) return
-
-                // If path is ready, move along it
-                if (currentRide.routePath && currentRide.routePath.length > 0) {
-                    const currentIndex = currentRide.routeIndex || 0
-                    // Move faster than 1 point per tick if needed, or skip points.
-                    // Let's assume 1 point per tick is okay for OSRM simplified geometry.
-                    // If OSRM returns too many points, we might want to skip some.
-                    // But for smooth animation, 1 point is good if we run interval fast.
-                    // User said: setInterval 1000ms. OSRM points might be close.
-                    // Let's increment by 3 points to simulate speed.
-
-                    const speedMultiplier = 5
-                    const nextIndex = Math.min(currentIndex + speedMultiplier, currentRide.routePath.length - 1)
-
-                    const newPos = currentRide.routePath[nextIndex]
-                    const isFinished = nextIndex >= currentRide.routePath.length - 1
-
-                    // Calculate realistic distance segment
-                    const segmentDist = calculateDistance(currentRide.currentLocation || currentRide.origin, newPos) || 0
-                    const newTotalDist = (currentRide.distanceKm * 1000 + segmentDist) / 1000
-
-                    // Realistic Pricing: 1500 Base + 1000/km (1 MNT per meter)
-                    const baseFare = 1500
-                    const addedFare = (newTotalDist * 1000) * 1
-                    const newFare = Math.floor(baseFare + addedFare)
-
-                    updateRideProgress({
-                        currentLocation: newPos,
-                        routeIndex: nextIndex,
-                        distanceKm: newTotalDist,
-                        currentFare: newFare,
-                        durationMin: currentRide.durationMin + (1 / 60) * speedMultiplier
-                    })
-
-                    if (isFinished) {
-                        // setStatus('COMPLETED') // Let user finish manually or show arrival modal
-                        // But for now, we just stop the movement. 
-                        // The UI should show "Arrived" and a [Complete] button or automatically trigger something.
-                        // Based on request: "COMPLETED -> Custom Modal -> Payment"
-                        // So we should transition to 'COMPLETED' here? 
-                        // The request says: "Open Modal ('RIDE_COMPLETED')". 
-                        // But we can keep setStatus('COMPLETED') and let the UI handle the modal open.
-
-                        setStatus('COMPLETED')
-                        if (intervalRef.current) clearInterval(intervalRef.current)
-                    }
-                }
-            }, 1000)
-
-            // Fallback timeout just in case
-            timeout = setTimeout(() => {
-                if (intervalRef.current) clearInterval(intervalRef.current)
-                setStatus('COMPLETED')
-            }, 120000) // Increase timeout to 120s for real route
+        }
+        else if (status === 'DRIVER_ARRIVING') {
+            startDriverArrivingSimulation()
+        }
+        else if (status === 'IN_RIDE') {
+            startRideSimulation()
         }
 
         return () => {
             if (timeout) clearTimeout(timeout)
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current)
-            }
+            clearSimulator()
         }
-    }, [ride?.status])
+    }, [status]) // Only re-run when status changes
+
+    // Simulation: Driver Arriving
+    const startDriverArrivingSimulation = () => {
+        const currentRide = rideRef.current
+        if (!currentRide || !currentRide.driverLocation || !currentRide.origin) return
+
+        // Calculate route if missing
+        if (!currentRide.routePath) {
+            fetchRoute(currentRide.driverLocation, currentRide.origin).then(route => {
+                updateRideProgress({ routePath: route, routeIndex: 0 })
+            })
+        }
+
+        intervalRef.current = setInterval(() => {
+            const rideState = rideRef.current
+            if (!rideState || !rideState.routePath) return
+
+            const speed = 5
+            const nextIndex = (rideState.routeIndex || 0) + speed
+
+            if (nextIndex >= rideState.routePath.length) {
+                // Arrived
+                clearSimulator()
+                updateRideProgress({
+                    status: 'IN_RIDE', // Must be confirmed by user? Or auto? Logic says auto-switch for simpler flow here implies 'Arrived' -> 'In Ride' or 'Arrived' -> 'Waiting' etc.
+                    // User request implies seamless flow. Let's assume auto-switch to IN_RIDE for simulator simplicity
+                    // BUT normally driver waits. Let's stick to previous logic: clear route, set IN_RIDE.
+                    routePath: undefined,
+                    routeIndex: 0,
+                    currentLocation: rideState.routePath[rideState.routePath.length - 1]
+                })
+            } else {
+                updateRideProgress({
+                    driverLocation: rideState.routePath[nextIndex],
+                    routeIndex: nextIndex
+                })
+            }
+        }, 1000)
+    }
+
+    // Simulation: In Ride
+    const startRideSimulation = () => {
+        const currentRide = rideRef.current
+        if (!currentRide || !currentRide.destination) return
+
+        // Calculate route if missing
+        if (!currentRide.routePath) {
+            fetchRoute(currentRide.origin, currentRide.destination).then(route => {
+                updateRideProgress({ routePath: route, routeIndex: 0 })
+            })
+        }
+
+        intervalRef.current = setInterval(() => {
+            const rideState = rideRef.current
+            if (!rideState || !rideState.routePath) return
+
+            const speed = 5 // Speed multiplier
+            const nextIndex = (rideState.routeIndex || 0) + speed
+            const isFinished = nextIndex >= rideState.routePath.length
+
+            // Clamp index
+            const safeIndex = Math.min(nextIndex, rideState.routePath.length - 1)
+            const newPos = rideState.routePath[safeIndex]
+
+            // Calculate distance/fare
+            const segmentDist = calculateDistance(rideState.currentLocation || rideState.origin, newPos) || 0
+            const newTotalDist = (rideState.distanceKm * 1000 + segmentDist) / 1000
+
+            // Pricing logic
+            const baseFare = 1500
+            const addedFare = (newTotalDist * 1000) * 1
+            const newFare = Math.floor(baseFare + addedFare)
+
+            updateRideProgress({
+                currentLocation: newPos,
+                routeIndex: safeIndex,
+                distanceKm: newTotalDist,
+                currentFare: newFare,
+                durationMin: rideState.durationMin + (1 / 60) * speed
+            })
+
+            if (isFinished) {
+                clearSimulator()
+                setStatus('COMPLETED')
+            }
+        }, 1000)
+    }
 
     // Cleanup on unmount
     useEffect(() => {
-        return () => {
-            if (intervalRef.current) clearInterval(intervalRef.current)
-        }
+        return () => clearSimulator()
     }, [])
 }

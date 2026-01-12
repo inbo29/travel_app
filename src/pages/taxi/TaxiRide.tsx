@@ -10,7 +10,7 @@ export default function TaxiRide() {
     return <TaxiRideContent />
 }
 
-function TaxiRideContent() {
+export function TaxiRideContent() {
     const { t } = useI18n()
     const navigate = useNavigate()
     const { ride, setStatus, updateRideProgress } = useTaxiStore()

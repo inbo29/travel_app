@@ -168,6 +168,7 @@ export const MapView = ({ className = 'w-full h-full' }: MapViewProps) => {
         >
             <MapController />
             <TileLayer
+                key={theme}
                 attribution='&copy; OpenStreetMap'
                 url={tileUrl}
             />

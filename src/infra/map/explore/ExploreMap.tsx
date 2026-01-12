@@ -5,6 +5,7 @@ import { POILayer } from './POILayer'
 import { SafetyZoneLayer } from './SafetyZoneLayer'
 import { POI, SafetyZone, MapCenter } from '../types'
 import 'leaflet/dist/leaflet.css'
+import { useTheme } from '@/context/ThemeContext'
 
 // User location icon
 const userIcon = L.divIcon({
@@ -32,6 +33,13 @@ function MapController({ center }: { center: MapCenter }) {
     return null
 }
 
+
+
+const TILES = {
+    light: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+}
+
 export function ExploreMap({
     center,
     pois = [],
@@ -39,6 +47,9 @@ export function ExploreMap({
     onPOISelect,
     showUserLocation = true
 }: ExploreMapProps) {
+    const { theme } = useTheme()
+    const tileUrl = theme === 'dark' ? TILES.dark : TILES.light
+
     return (
         <MapContainer
             center={[center.lat, center.lng]}
@@ -49,8 +60,9 @@ export function ExploreMap({
             className="explore-map"
         >
             <TileLayer
+                key={theme}
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                url={tileUrl}
             />
 
             <MapController center={center} />

@@ -8,7 +8,7 @@ export default function TaxiMatching() {
     return <TaxiMatchingContent />
 }
 
-function TaxiMatchingContent() {
+export function TaxiMatchingContent() {
     const { t } = useI18n()
     const navigate = useNavigate()
     const { ride, reset, setStatus } = useTaxiStore()

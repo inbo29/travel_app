@@ -6,57 +6,53 @@ import { useTaxiStore } from '@/store/taxiStore'
 import { requestTaxi } from '@/services/taxi.service'
 import { useMap } from '@/infra/map/MapProvider'
 import { MOCK_PLACES } from '@/mocks/taxi/places.mock'
-
-
+import { useRef } from 'react'
+import { TaxiMatchingContent } from './TaxiMatching'
+import { TaxiRideContent } from './TaxiRide'
+import { TaxiPaymentContent } from './TaxiPayment'
+import TaxiCompletion from './TaxiCompletion'
 
 export default function TaxiHome() {
+    const { ride } = useTaxiStore()
+
+    // TAXI STATE MACHINE CONTROLLER
+    // Route is shell, UI is State.
+    if (ride?.status === 'SEARCHING' || ride?.status === 'MATCHED' || ride?.status === 'MATCH_ACCEPTED' || ride?.status === 'DRIVER_ARRIVING') {
+        return <TaxiMatchingContent />
+    }
+    if (ride?.status === 'IN_RIDE') {
+        return <TaxiRideContent />
+    }
+    if (ride?.status === 'PAYING') {
+        return <TaxiPaymentContent />
+    }
+    if (ride?.status === 'COMPLETED') {
+        return <TaxiCompletion />
+    }
+
     return <TaxiHomeContent />
 }
 
-function TaxiHomeContent() {
+export function TaxiHomeContent() {
     const { t } = useI18n()
     const navigate = useNavigate()
-    const { ride, setRide } = useTaxiStore()
-    const { setDestination: setMapDestination, setOrigin: setMapOrigin } = useMap()
+    const { ride, setRide, searchOrigin, searchDestination, setSearchOrigin, setSearchDestination } = useTaxiStore()
+    // No MapProvider dependency
 
-    const [origin, setOrigin] = useState<{ name: string, lat: number, lng: number }>({ name: 'Gobi Hotel (Current)', lat: 47.9186, lng: 106.9170 })
-    const [destination, setDestination] = useState<{ name: string, lat: number, lng: number } | null>(null)
+    // Local UI state for Search Input
     const [searchQuery, setSearchQuery] = useState('')
     const [searchMode, setSearchMode] = useState<'origin' | 'destination'>('destination')
     const [vehicleType, setVehicleType] = useState<'standard' | 'comfort' | 'premium'>('standard')
     const [results, setResults] = useState(MOCK_PLACES)
 
-    // Active Ride Redirection (Step Restoration)
-    useEffect(() => {
-        if (!ride) return
-
-        switch (ride.status) {
-            case 'SEARCHING':
-            case 'MATCHED':
-            case 'MATCH_ACCEPTED':
-            case 'DRIVER_ARRIVING':
-                navigate('/taxi/matching')
-                break
-            case 'IN_RIDE':
-                navigate('/taxi/ride')
-                break
-            case 'COMPLETED':
-                navigate('/taxi/completion')
-                break
-            case 'PAYING':
-                navigate('/taxi/payment')
-                break
-            default:
-                break
-        }
-    }, [ride?.status, navigate])
+    // State-based redirect logic is now handled by the parent TaxiHome component returning the correct view.
+    // We can remove the navigate logic here or keep it as backup, but the parent switcher is primary.
+    // For safety, if we are in "HomeContent" but state says otherwise, we let the parent re-render.
+    // But since TaxiHomeContent is a child of TaxiHome, it will be unmounted when TaxiHome switches.
+    // So we don't need effects here!
 
     // Initial Focus
-    useEffect(() => {
-        if (!ride || ride.status === 'IDLE') {
-            // Initial focus on "current location" (Mocked at DEFAULT_CENTER)
-        }
-    }, [ride?.status])
+
 
     const fares = {
         standard: 12.5,
@@ -80,26 +76,25 @@ function TaxiHomeContent() {
     const handleSelectPlace = (place: typeof MOCK_PLACES[0]) => {
         const selected = { name: place.name, lat: place.lat, lng: place.lng }
         if (searchMode === 'origin') {
-            setOrigin(selected)
-            setMapOrigin(selected)
+            setSearchOrigin(selected)
         } else {
-            setDestination(selected)
-            setMapDestination(selected)
+            setSearchDestination(selected)
         }
         setSearchQuery('')
         setResults([])
     }
 
     const handleCallTaxi = async () => {
-        if (!destination) return
+        if (!searchDestination) return
+        if (!searchOrigin) return
 
         try {
             const ride = await requestTaxi(
-                { lat: origin.lat, lng: origin.lng },
-                { lat: destination.lat, lng: destination.lng }
+                { lat: searchOrigin!.lat, lng: searchOrigin!.lng },
+                { lat: searchDestination!.lat, lng: searchDestination!.lng }
             )
             setRide(ride)
-            navigate('/taxi/matching')
+            // Parent will auto-switch to Matching View
         } catch (error) {
             console.error('Failed to request taxi', error)
         }
@@ -178,18 +173,18 @@ function TaxiHomeContent() {
                             <div className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-transform ${searchMode === 'origin' ? 'bg-accent text-white scale-110 shadow-lg' : 'bg-accent/20 text-accent'}`}>📍</div>
                             <div className="flex-1">
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('taxi.origin')}</p>
-                                <p className={`font-black ${searchMode === 'origin' ? 'text-accent' : 'text-slate-900 dark:text-white'}`}>{origin.name}</p>
+                                <p className={`font-black ${searchMode === 'origin' ? 'text-accent' : 'text-slate-900 dark:text-white'}`}>{searchOrigin?.name || 'Set Origin'}</p>
                             </div>
                         </button>
                         <button
                             onClick={() => { setSearchMode('destination'); setSearchQuery(''); }}
-                            className={`w-full text-left flex items-center gap-4 p-5 rounded-3xl border-2 transition-all ${destination ? (searchMode === 'destination' ? 'border-accent bg-accent/5' : 'border-slate-100 dark:border-white/10 bg-slate-50 dark:bg-white/5') : 'border-dashed border-slate-200 dark:border-white/10 shadow-inner'}`}
+                            className={`w-full text-left flex items-center gap-4 p-5 rounded-3xl border-2 transition-all ${searchDestination ? (searchMode === 'destination' ? 'border-accent bg-accent/5' : 'border-slate-100 dark:border-white/10 bg-slate-50 dark:bg-white/5') : 'border-dashed border-slate-200 dark:border-white/10 shadow-inner'}`}
                         >
-                            <div className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${destination ? (searchMode === 'destination' ? 'bg-accent text-white scale-110 shadow-lg' : 'bg-slate-200 dark:bg-white/10 text-slate-400') : 'bg-slate-200 dark:bg-white/10 text-slate-400'}`}>🏁</div>
+                            <div className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${searchDestination ? (searchMode === 'destination' ? 'bg-accent text-white scale-110 shadow-lg' : 'bg-slate-200 dark:bg-white/10 text-slate-400') : 'bg-slate-200 dark:bg-white/10 text-slate-400'}`}>🏁</div>
                             <div className="flex-1">
-                                <p className={`text-[10px] font-black uppercase tracking-widest ${destination ? 'text-accent' : 'text-slate-400'}`}>{t('taxi.destination')}</p>
-                                <p className={`font-black ${destination ? (searchMode === 'destination' ? 'text-accent text-lg' : 'text-slate-900 dark:text-white text-lg') : 'text-slate-300 dark:text-white/10'}`}>
-                                    {destination?.name || t('taxi.destinationPlaceholder')}
+                                <p className={`text-[10px] font-black uppercase tracking-widest ${searchDestination ? 'text-accent' : 'text-slate-400'}`}>{t('taxi.destination')}</p>
+                                <p className={`font-black ${searchDestination ? (searchMode === 'destination' ? 'text-accent text-lg' : 'text-slate-900 dark:text-white text-lg') : 'text-slate-300 dark:text-white/10'}`}>
+                                    {searchDestination?.name || t('taxi.destinationPlaceholder')}
                                 </p>
                             </div>
                         </button>
@@ -224,10 +219,10 @@ function TaxiHomeContent() {
 
                     <button
                         onClick={handleCallTaxi}
-                        disabled={!destination}
+                        disabled={!searchDestination}
                         className={`
                             w-full py-7 rounded-[2.5rem] font-black text-2xl flex items-center justify-center gap-4 transition-all
-                            ${destination
+                            ${searchDestination
                                 ? 'bg-accent text-white shadow-2xl shadow-accent/40 hover:scale-[1.02] active:scale-[0.98]'
                                 : 'bg-slate-200 dark:bg-white/10 text-slate-400 cursor-not-allowed'
                             }
