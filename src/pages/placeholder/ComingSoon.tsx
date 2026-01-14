@@ -39,49 +39,52 @@ export default function ComingSoon({ category, icon }: ComingSoonProps) {
     const displayIcon = icon || CATEGORY_ICONS[category] || CATEGORY_ICONS.default
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-6">
-            <div className="max-w-md w-full text-center space-y-8">
+        <div className="relative min-h-screen flex items-center justify-center bg-bg-light dark:bg-bg-dark transition-colors duration-300 overflow-hidden">
+            {/* Background Pattern */}
+            <div className="fixed inset-0 z-0 bg-pattern-dark opacity-[0.03] dark:opacity-[0.05] pointer-events-none" />
+
+            <div className="relative z-10 pt-20 max-w-md w-full text-center px-6 space-y-10 animate-fade-in-up">
                 {/* Icon */}
-                <div className="relative inline-block">
-                    <div className="w-32 h-32 mx-auto rounded-3xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-6xl shadow-2xl shadow-accent/10">
+                <div className="relative inline-block group">
+                    <div className="w-36 h-36 mx-auto rounded-[2.5rem] bg-gradient-to-br from-accent/20 to-accent/5 backdrop-blur-xl border border-white/20 dark:border-white/5 flex items-center justify-center text-7xl shadow-2xl shadow-accent/10 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6">
                         {displayIcon}
                     </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-accent rounded-full flex items-center justify-center animate-pulse">
-                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    <div className="absolute -top-3 -right-3 w-10 h-10 bg-accent rounded-full flex items-center justify-center shadow-lg animate-pulse ring-4 ring-white/50 dark:ring-black/50">
+                        <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                         </svg>
                     </div>
                 </div>
 
                 {/* Title */}
-                <div className="space-y-3">
-                    <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+                <div className="space-y-4">
+                    <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">
                         {t(`placeholder.${category}.title`, t('placeholder.comingSoon'))}
                     </h1>
-                    <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
+                    <p className="text-lg text-slate-500 dark:text-slate-400 font-medium leading-relaxed max-w-sm mx-auto">
                         {t(`placeholder.${category}.description`, t('placeholder.description'))}
                     </p>
                 </div>
 
                 {/* Coming Soon Badge */}
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-accent/10 border border-accent/20 rounded-full">
-                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                    <span className="text-accent font-semibold text-sm uppercase tracking-wider">
+                <div className="inline-flex items-center gap-3 px-8 py-3.5 bg-accent/10 border-2 border-accent/20 rounded-full shadow-lg shadow-accent/5">
+                    <span className="w-3 h-3 rounded-full bg-accent animate-pulse"></span>
+                    <span className="text-accent font-black text-xs uppercase tracking-[0.2em]">
                         {t('placeholder.comingSoonBadge')}
                     </span>
                 </div>
 
                 {/* Actions */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
                     <button
                         onClick={() => navigate(-1)}
-                        className="px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                        className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-white/5 text-slate-700 dark:text-white/80 font-black rounded-2xl hover:bg-slate-50 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 shadow-sm transition-all active:scale-95"
                     >
                         {t('placeholder.goBack')}
                     </button>
                     <button
                         onClick={() => navigate('/home')}
-                        className="px-6 py-3 bg-accent text-white font-semibold rounded-xl hover:bg-accent/90 transition-colors"
+                        className="w-full sm:w-auto px-10 py-4 bg-accent text-white font-black rounded-2xl hover:bg-accent/90 shadow-xl shadow-accent/20 transition-all active:scale-95"
                     >
                         {t('placeholder.goHome')}
                     </button>

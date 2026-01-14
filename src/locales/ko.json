@@ -171,7 +171,10 @@
         "quickActions": {
             "benefits": "Moril 혜택",
             "coupon": "이번 달 쿠폰",
-            "events": "이벤트 보기"
+            "events": "이벤트 보기",
+            "notice": "공지사항",
+            "support": "고객센터",
+            "sos": "SOS 응급"
         },
         "recommend": {
             "destination": "여행지 추천",

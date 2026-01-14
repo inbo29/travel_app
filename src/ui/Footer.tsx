@@ -46,13 +46,13 @@ export default function Footer() {
                         </h3>
                         <ul className="space-y-3">
                             <li className="flex items-center gap-2">
-                                <span className="text-accent">✉</span> info@moril.com
+                                <span className="text-accent"></span> info@moril.com
                             </li>
                             <li className="flex items-center gap-2">
-                                <span className="text-accent">🌐</span> www.moril.com
+                                <span className="text-accent"></span> www.moril.com
                             </li>
                             <li className="flex items-center gap-2">
-                                <span className="text-accent">📍</span> Ulaanbaatar, Mongolia
+                                <span className="text-accent"></span> Ulaanbaatar, Mongolia
                             </li>
                         </ul>
                     </div>
@@ -63,10 +63,6 @@ export default function Footer() {
                     <p className="text-sm">
                         © {new Date().getFullYear()} Me Tech Studio. All rights reserved.
                     </p>
-                    <div className="flex items-center gap-3">
-                        <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest">{t('footer.theme')}</span>
-                        <ThemeToggle />
-                    </div>
                 </div>
             </div>
         </footer>

@@ -30,14 +30,13 @@ export default function AppDownloadSection() {
 
                         <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 justify-center md:justify-start">
                             {/* QR Code (Hidden on mobile) */}
-                            <div className="hidden md:block p-3 bg-white rounded-2xl shadow-lg shrink-0">
+                            {/* <div className="hidden md:block p-3 bg-white rounded-2xl shadow-lg shrink-0">
                                 <div className="w-24 h-24 bg-slate-100 rounded-xl flex items-center justify-center">
-                                    {/* Mock QR */}
                                     <svg className="w-20 h-20 text-slate-900" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M4 4h6v6H4V4zm2 2v2h2V6H6zm-2 8h6v6H4v-6zm2 2v2h2v-2H6zM14 4h6v6h-6V4zm2 2v2h2V6h-2zm-2 8h2v2h2v-2h2v6h-2v-2h-2v2h-2v-6zm2 2h2v2h-2v-2z" />
                                     </svg>
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Buttons */}
                             <div className="flex flex-col gap-3 w-full sm:w-auto">

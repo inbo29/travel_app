@@ -171,7 +171,10 @@
         "quickActions": {
             "benefits": "Moril Benefits",
             "coupon": "Monthly Coupons",
-            "events": "View Events"
+            "events": "View Events",
+            "notice": "Notices",
+            "support": "Support Center",
+            "sos": "SOS Emergency"
         },
         "recommend": {
             "destination": "Destination",

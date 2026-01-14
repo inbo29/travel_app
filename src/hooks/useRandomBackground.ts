@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const BACKGROUNDS = {
     nature: 12, // nt1...nt12
@@ -10,6 +11,7 @@ type Category = keyof typeof BACKGROUNDS
 
 export function useRandomBackground() {
     const [bgImage, setBgImage] = useState('')
+    const location = useLocation()
 
     useEffect(() => {
         // 1. Pick a random category
@@ -28,7 +30,7 @@ export function useRandomBackground() {
         if (randomCategory === 'people') prefix = 'pp'
 
         setBgImage(`/${randomCategory}/${prefix}${randomNum}.png`)
-    }, [])
+    }, [location.pathname])
 
     return bgImage
 }

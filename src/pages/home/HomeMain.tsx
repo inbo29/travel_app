@@ -8,16 +8,20 @@ import AppDownloadSection from '@/ui/AppDownloadSection'
 
 // Quick Access Items for horizontal scroll bar (NOL style)
 const QUICK_CATEGORIES = [
+    { key: 'payme', icon: '💳', path: '/exchange' },
+    { key: 'transport', icon: '🚌', path: '/transport/bus' },
     { key: 'taxi', icon: '🚕', path: '/taxi' },
-    { key: 'tickets', icon: '🎫', path: '/tickets' },
-    { key: 'accommodation', icon: '🏨', path: '/accommodation/hotel' },
     { key: 'travel', icon: '✈️', path: '/guides/tours' },
+    { key: 'accommodation', icon: '🏨', path: '/accommodation/hotel' },
+    { key: 'tickets', icon: '🎫', path: '/tickets' },
     { key: 'guide', icon: '🧭', path: '/guides' },
-    { key: 'translate', icon: '🌐', path: '/translate' },
+    { key: 'localProduct', icon: '🛍️', path: '/local-mart' },
+    { key: 'service', icon: '🔌', path: '/service/charger' },
     { key: 'market', icon: '📊', path: '/market-rates' },
     { key: 'travelLog', icon: '📔', path: '/travel-log' },
+    { key: 'map', icon: '🗺️', path: '/map' },
     { key: 'insurance', icon: '🛡️', path: '/insurance/domestic' },
-    { key: 'localMart', icon: '🛍️', path: '/local-mart' },
+    { key: 'translate', icon: '🌐', path: '/translate' },
 ]
 
 // Quick Action Buttons (below categories)
@@ -25,6 +29,9 @@ const QUICK_ACTIONS = [
     { key: 'benefits', icon: '🎁', label: 'home.quickActions.benefits' },
     { key: 'coupon', icon: '🎟️', label: 'home.quickActions.coupon' },
     { key: 'events', icon: '🎉', label: 'home.quickActions.events' },
+    { key: 'notice', icon: '📢', label: 'home.quickActions.notice' },
+    { key: 'support', icon: '🎧', label: 'home.quickActions.support' },
+    { key: 'sos', icon: '🚨', label: 'home.quickActions.sos' },
 ]
 
 // Mock Banner Data
@@ -95,55 +102,55 @@ export default function HomeMain() {
 
     return (
         <div className="relative min-h-screen">
-            {/* Background */}
-            <div className="absolute inset-0 z-[-1] overflow-hidden">
-                {/* Hero Background with Random Image */}
-                <div className="absolute top-0 left-0 right-0 h-[600px] md:h-[700px] transition-all duration-1000">
-                    {bgImage && (
-                        <img
-                            src={bgImage}
-                            alt="Hero Background"
-                            className="w-full h-full object-cover animate-fade-in"
-                        />
-                    )}
-                    {/* Gradient Overlay for Fade to Bottom */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-bg-light dark:to-bg-dark" />
-                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg-light dark:from-bg-dark to-transparent" />
-                </div>
-
-                {/* Dark Pattern Background for lower sections (optional, or just let default bg take over) */}
-                <div className="absolute top-[600px] md:top-[700px] bottom-0 left-0 right-0 bg-bg-light dark:bg-bg-dark" />
+            {/* Hero Background Layer (z-0) */}
+            <div className="absolute top-0 left-0 right-0 h-[600px] md:h-[700px] z-0 overflow-hidden">
+                {bgImage && (
+                    <img
+                        key={bgImage}
+                        src={bgImage}
+                        alt="Hero Background"
+                        className="w-full h-full object-cover animate-fade-in"
+                    />
+                )}
+                {/* Hero Overlay (z-10) */}
+                <div className="absolute inset-0 bg-black/40 z-10" />
+                {/* Bottom Fade Gradient (z-10) */}
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg-light dark:from-bg-dark to-transparent z-10" />
             </div>
 
-            <div className="relative z-10 pt-4">
-                {/* ========== 1. HERO SECTION ========== */}
-                <section className="px-6 py-12 max-w-7xl mx-auto">
-                    <div className="text-center space-y-6">
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+            {/* Content Layers (z-10) */}
+            <div className="relative z-10">
+                {/* ========== 1. HERO SECTION CONTENT ========== */}
+                <section className="h-[600px] md:h-[700px] flex items-center justify-center px-6">
+                    <div className="text-center space-y-6 max-w-3xl">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
                             {t('home.heroTitle')}
                             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent to-emerald-400">
                                 Moril
                             </span>
                         </h1>
-                        <p className="text-lg text-slate-600 dark:text-white/60 max-w-xl mx-auto">
+
+                        <p className="text-lg text-white/80 max-w-xl mx-auto">
                             {t('home.heroSubtitle')}
                         </p>
+
                         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
                             <button
                                 onClick={() => navigate('/guides/tours')}
-                                className="px-8 py-4 bg-accent text-white font-bold rounded-2xl hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/20 active:scale-[0.98] transition-all duration-300"
+                                className="px-8 py-4 bg-accent text-white font-bold rounded-2xl hover:scale-[1.02] transition-all"
                             >
                                 {t('home.start')}
                             </button>
                             <button
                                 onClick={() => navigate('/map')}
-                                className={`${glassClasses} px-8 py-4 font-bold rounded-2xl hover:bg-black/5 dark:hover:bg-white/10`}
+                                className={`${glassClasses} px-8 py-4 font-bold rounded-2xl`}
                             >
                                 {t('home.explore')}
                             </button>
                         </div>
                     </div>
                 </section>
+
 
                 {/* ========== 2. QUICK CATEGORY BAR (NOL Style) ========== */}
                 <section className="px-4 py-6 border-y border-slate-100 dark:border-slate-800/50 bg-white/50 dark:bg-slate-900/30 backdrop-blur-sm">

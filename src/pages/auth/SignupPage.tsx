@@ -247,9 +247,10 @@ export default function SignupPage() {
             <div className="absolute inset-0 z-0 overflow-hidden">
                 {bgImage && (
                     <img
+                        key={bgImage}
                         src={bgImage}
                         alt="Background"
-                        className="w-full h-full object-cover transition-opacity duration-1000"
+                        className="w-full h-full object-cover animate-fade-in"
                     />
                 )}
                 {/* Blur Overlay */}
