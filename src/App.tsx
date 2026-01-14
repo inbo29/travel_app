@@ -4,6 +4,10 @@ import Home from '@/pages/home'
 import { useI18n } from '@/hooks/useI18n'
 import { useTaxiSimulator } from '@/hooks/useTaxiSimulator'
 
+// Auth Pages
+import LoginPage from '@/pages/auth/LoginPage'
+import SignupPage from '@/pages/auth/SignupPage'
+
 // Tickets Module
 import TicketsHome from '@/pages/tickets/TicketsHome'
 import TicketDetail from '@/pages/tickets/TicketDetail'
@@ -45,6 +49,9 @@ import LogHome from '@/pages/log/LogHome'
 import JourneyDetail from '@/pages/log/JourneyDetail'
 import LocalMart from '@/pages/market/LocalMart'
 
+// Placeholder Component
+import ComingSoon from '@/pages/placeholder/ComingSoon'
+
 export default function App() {
     const { t } = useI18n()
 
@@ -53,6 +60,10 @@ export default function App() {
 
     return (
         <Routes>
+            {/* Auth Routes (outside MainLayout) */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+
             <Route element={<MainLayout />}>
                 <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path="/home/*" element={<Home />} />
@@ -107,8 +118,41 @@ export default function App() {
 
                 {/* Map Module */}
                 <Route path="/map" element={<MapPage />} />
+
+                {/* ========== PLACEHOLDER ROUTES ========== */}
+
+                {/* Transport */}
+                <Route path="/transport/bus" element={<ComingSoon category="bus" />} />
+                <Route path="/transport/train" element={<ComingSoon category="train" />} />
+                <Route path="/transport/flight" element={<ComingSoon category="flight" />} />
+
+                {/* Travel */}
+                <Route path="/travel/family" element={<ComingSoon category="family" />} />
+                <Route path="/travel/cruise" element={<ComingSoon category="cruise" />} />
+                <Route path="/travel/healing" element={<ComingSoon category="healing" />} />
+                <Route path="/travel/activity" element={<ComingSoon category="activity" />} />
+
+                {/* Accommodation */}
+                <Route path="/accommodation/hotel" element={<ComingSoon category="hotel" />} />
+                <Route path="/accommodation/motel" element={<ComingSoon category="motel" />} />
+                <Route path="/accommodation/airbnb" element={<ComingSoon category="airbnb" />} />
+
+                {/* Services */}
+                <Route path="/service/charger" element={<ComingSoon category="charger" />} />
+                <Route path="/service/rental" element={<ComingSoon category="rental" />} />
+                <Route path="/service/scooter" element={<ComingSoon category="scooter" />} />
+
+                {/* Insurance */}
+                <Route path="/insurance/domestic" element={<ComingSoon category="domestic" />} />
+                <Route path="/insurance/international" element={<ComingSoon category="international" />} />
+                <Route path="/insurance/essential" element={<ComingSoon category="essential" />} />
+
+                {/* Exchange sub-routes */}
+                <Route path="/exchange/taxfree" element={<ComingSoon category="taxfree" />} />
+                <Route path="/exchange/topup" element={<ComingSoon category="topup" />} />
+                <Route path="/exchange/card" element={<ComingSoon category="card" />} />
+                <Route path="/exchange/history" element={<ComingSoon category="history" />} />
             </Route>
         </Routes>
     )
 }
-

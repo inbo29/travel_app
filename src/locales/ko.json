@@ -7,6 +7,39 @@
         "escToClose": "ESC로 닫기",
         "enterToSearch": "ENTER로 검색"
     },
+    "auth": {
+        "login": "로그인",
+        "signUp": "회원가입",
+        "loginSubtitle": "여행의 모든 순간을 함께, Moril",
+        "signupSubtitle": "새 계정을 만들어 여행을 시작하세요",
+        "email": "이메일",
+        "emailPlaceholder": "이메일을 입력해주세요",
+        "password": "비밀번호",
+        "passwordPlaceholder": "비밀번호를 입력해주세요",
+        "confirmPassword": "비밀번호 확인",
+        "confirmPasswordPlaceholder": "비밀번호를 다시 입력해주세요",
+        "country": "국가",
+        "selectCountry": "국가를 선택해주세요",
+        "rememberMe": "로그인 상태 유지",
+        "forgotPassword": "비밀번호 찾기",
+        "or": "또는",
+        "noAccount": "계정이 없으신가요?",
+        "hasAccount": "이미 계정이 있으신가요?",
+        "createAccount": "계정 만들기",
+        "agreeTerms": "이용약관에 동의합니다",
+        "agreePrivacy": "개인정보 처리방침에 동의합니다",
+        "error": {
+            "invalidCredentials": "이메일 또는 비밀번호가 올바르지 않습니다",
+            "passwordMismatch": "비밀번호가 일치하지 않습니다",
+            "agreeRequired": "약관에 동의해주세요"
+        }
+    },
+    "appPopup": {
+        "tagline": "놀수록 놀라운 세상",
+        "title": "앱으로 더 편하게\nMoril을 즐겨요",
+        "openApp": "앱에서 보기",
+        "continueWeb": "오늘은 웹으로 볼게요"
+    },
     "translate": {
         "title": "번역",
         "subtitle": "텍스트, 음성, 카메라 등",
@@ -48,16 +81,180 @@
         "translate": "번역",
         "map": "지도",
         "payme": "결제",
-        "my": "내 정보",
-        "taxi": "택시"
+        "my": "마이",
+        "taxi": "택시",
+        "category": "카테고리"
     },
     "home": {
-        "tag": "몽골 발견하기",
+        "tag": "여행을 시작하세요",
         "title": "모든 것이 떠다닙니다",
         "titleAccent": "자연 위에서",
         "subtitle": "광활한 초원과 맑은 호수를 프리미엄한 평온함으로 경험하세요.",
         "start": "여행 시작",
-        "explore": "목적지 탐색"
+        "explore": "목적지 탐색",
+        "heroTitle": "여행의 모든 순간을 하나로,",
+        "heroSubtitle": "이동 · 결제 · 예약 · 기록이 자연스럽게 연결되는 Travel OS",
+        "editorPickSub": "엄선된 추천 여행 경험",
+        "packages": {
+            "domestic": "국내 인기 Top 5",
+            "international": "해외 인기 Top 5"
+        },
+        "promo": {
+            "hotel80": "호텔 최대 80% 할인",
+            "hotel80Sub": "쿠폰 받으러 가기",
+            "package3": "해외 패키지 3% 추가 할인",
+            "package3Sub": "한 해 시작을 특별하게"
+        },
+        "quickActions": {
+            "benefits": "Moril 혜택",
+            "coupon": "이번 달 쿠폰",
+            "events": "이벤트 보기"
+        },
+        "recommend": {
+            "destination": "여행지 추천",
+            "discount": "할인 상품",
+            "ticket": "할인 티켓",
+            "souvenir": "기념품 추천",
+            "insurance": "필수 보험"
+        },
+        "banners": {
+            "destinationTitle": "이달의 추천 여행지",
+            "destination1": "제주도의 숨겨진 명소",
+            "destinationSub1": "지금 가장 인기 있는 여행지",
+            "destination2": "고비 사막 어드벤처",
+            "destinationSub2": "모험이 기다리는 곳",
+            "destination3": "서울 도심 투어",
+            "destinationSub3": "K-컬처의 중심에서",
+            "eventTitle": "진행중인 이벤트",
+            "event1": "신규가입 10% 쿠폰",
+            "event2": "주간 한정 특가",
+            "event3": "친구 초대 이벤트",
+            "discountTitle": "지금 할인 중",
+            "ticketTitle": "할인 티켓",
+            "souvenirTitle": "기념품 추천",
+            "insuranceTag": "이 여행엔 이 보험이 필요해요",
+            "insuranceTitle": "여행자 보험 추천",
+            "insuranceSubtitle": "안전한 여행을 위한 필수 보험을 확인하세요"
+        },
+        "products": {
+            "hotel": "숙소 특가",
+            "tour": "투어 할인",
+            "ticket": "티켓 세일",
+            "activity": "액티비티"
+        },
+        "app": {
+            "title": "Moril 앱으로 더 편리하게",
+            "subtitle": "앱에서만 제공하는 특별 혜택을 받아보세요",
+            "openApp": "앱으로 열기",
+            "continueWeb": "웹으로 계속"
+        }
+    },
+    "footer": {
+        "description": "여행의 모든 순간을 하나로 연결하는 Travel OS. Moril과 함께 더 쉽고 편리한 여행 라이프를 경험하세요.",
+        "company": "회사",
+        "terms": "이용약관",
+        "privacy": "개인정보처리방침",
+        "support": "고객센터",
+        "contact": "연락처"
+    },
+    "category": {
+        "title": "카테고리",
+        "searchPlaceholder": "카테고리 검색",
+        "payme": {
+            "title": "결제 / 지갑",
+            "payment": "결제",
+            "taxfree": "Tax Free",
+            "topup": "충전",
+            "card": "카드 연동",
+            "history": "결제 내역"
+        },
+        "transport": {
+            "title": "교통",
+            "bus": "버스",
+            "train": "기차",
+            "flight": "항공권"
+        },
+        "taxi": {
+            "title": "택시"
+        },
+        "travel": {
+            "title": "여행",
+            "family": "가족여행",
+            "cruise": "크루즈",
+            "healing": "힐링",
+            "activity": "액티비티",
+            "tour": "투어"
+        },
+        "accommodation": {
+            "title": "숙소",
+            "hotel": "호텔",
+            "motel": "모텔 / 여관",
+            "airbnb": "에어비앤비"
+        },
+        "tickets": {
+            "title": "티켓",
+            "performance": "공연",
+            "concert": "콘서트",
+            "museum": "박물관",
+            "opera": "오페라",
+            "admission": "입장권"
+        },
+        "guide": {
+            "title": "가이드",
+            "guide": "가이드",
+            "interpreter": "번역 & 통역"
+        },
+        "localProduct": {
+            "title": "로컬 제품",
+            "souvenir": "기념품",
+            "food": "식품",
+            "clothing": "의류"
+        },
+        "service": {
+            "title": "서비스",
+            "charger": "충전기 대여",
+            "rental": "차량 렌탈",
+            "scooter": "전동 킥보드"
+        },
+        "market": {
+            "title": "시세",
+            "exchange": "환율",
+            "price": "물가",
+            "transport": "교통비",
+            "calculator": "계산기"
+        },
+        "travelLog": {
+            "title": "여행 기록",
+            "auto": "자동 기록",
+            "manual": "수기 기록",
+            "ai": "AI 일정 생성",
+            "export": "PDF 추출"
+        },
+        "map": {
+            "title": "지도"
+        },
+        "insurance": {
+            "title": "보험",
+            "domestic": "국내",
+            "international": "국외",
+            "essential": "필수 보험"
+        },
+        "translate": {
+            "title": "번역",
+            "text": "텍스트",
+            "voice": "음성",
+            "conversation": "대화",
+            "ocr": "OCR"
+        }
+    },
+    "placeholder": {
+        "comingSoon": "곧 제공 예정",
+        "comingSoonBadge": "준비 중",
+        "description": "이 기능은 현재 개발 중입니다. 곧 모릴에서 만나보실 수 있습니다!",
+        "goBack": "돌아가기",
+        "goHome": "홈으로",
+        "notifyMe": "알림 받기",
+        "notifyMeHint": "출시되면 알려드릴게요"
     },
     "quick": {
         "taxi": {

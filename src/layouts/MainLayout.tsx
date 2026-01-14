@@ -1,5 +1,7 @@
+import { useState, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { Header, BottomNav } from '@/ui'
+import { Header, BottomNav, CategorySideMenu } from '@/ui'
+import MobileAppPopup from '@/ui/MobileAppPopup'
 import { useTaxiSimulator } from '@/hooks/useTaxiSimulator'
 import { MapProvider } from '@/infra/map/MapProvider'
 import { MapView } from '@/infra/map/MapView'
@@ -15,11 +17,14 @@ export default function MainLayout() {
 function MainLayoutContent() {
     useTaxiSimulator() // Global Simulator
     const location = useLocation()
+    const [isCategoryOpen, setIsCategoryOpen] = useState(false)
 
-    // Determine if we should show the map. 
-    // For now, let's say map is always there, but maybe hidden on specific text-heavy pages if needed.
-    // The user request implies "MapLayer ... Always Maintain".
-    const isMapVisible = true
+    // Listen for category menu open events from Home page
+    useEffect(() => {
+        const handleOpenCategory = () => setIsCategoryOpen(true)
+        window.addEventListener('openCategoryMenu', handleOpenCategory)
+        return () => window.removeEventListener('openCategoryMenu', handleOpenCategory)
+    }, [])
 
     return (
         <div className="h-full w-full bg-bg-light dark:bg-bg-dark text-text-light dark:text-text-dark transition-colors duration-300 overflow-hidden relative flex flex-col">
@@ -55,8 +60,17 @@ function MainLayoutContent() {
 
             {/* Bottom Navigation Area (Fixed) */}
             <footer className="flex-none z-50 pointer-events-auto">
-                <BottomNav />
+                <BottomNav onCategoryClick={() => setIsCategoryOpen(true)} />
             </footer>
+
+            {/* Category Side Menu */}
+            <CategorySideMenu
+                isOpen={isCategoryOpen}
+                onClose={() => setIsCategoryOpen(false)}
+            />
+
+            {/* Mobile App Popup */}
+            <MobileAppPopup />
         </div>
     )
 }

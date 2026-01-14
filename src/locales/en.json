@@ -7,6 +7,39 @@
         "escToClose": "ESC to close",
         "enterToSearch": "ENTER to search"
     },
+    "auth": {
+        "login": "Login",
+        "signUp": "Sign Up",
+        "loginSubtitle": "Every moment of your journey, with Moril",
+        "signupSubtitle": "Create an account to start your journey",
+        "email": "Email",
+        "emailPlaceholder": "Enter your email",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPlaceholder": "Re-enter your password",
+        "country": "Country",
+        "selectCountry": "Select your country",
+        "rememberMe": "Remember me",
+        "forgotPassword": "Forgot password?",
+        "or": "or",
+        "noAccount": "Don't have an account?",
+        "hasAccount": "Already have an account?",
+        "createAccount": "Create Account",
+        "agreeTerms": "I agree to the Terms of Service",
+        "agreePrivacy": "I agree to the Privacy Policy",
+        "error": {
+            "invalidCredentials": "Invalid email or password",
+            "passwordMismatch": "Passwords do not match",
+            "agreeRequired": "Please agree to the terms"
+        }
+    },
+    "appPopup": {
+        "tagline": "The more you explore",
+        "title": "Better with the app\nEnjoy Moril",
+        "openApp": "Open in App",
+        "continueWeb": "Continue on Web"
+    },
     "translate": {
         "title": "Translate",
         "subtitle": "Text, Voice, Camera & More",
@@ -49,15 +82,179 @@
         "map": "Map",
         "payme": "PayMe",
         "my": "My",
-        "taxi": "Taxi"
+        "taxi": "Taxi",
+        "category": "Category"
     },
     "home": {
-        "tag": "DISCOVER MONGOLIA",
+        "tag": "START YOUR JOURNEY",
         "title": "Everything floats",
         "titleAccent": "on nature.",
         "subtitle": "Experience the vast steppes and crystal clear lakes through premium, transparent calmness.",
         "start": "Start Journey",
-        "explore": "Explore Destinations"
+        "explore": "Explore Destinations",
+        "heroTitle": "Every moment of your journey, together with",
+        "heroSubtitle": "Travel OS connecting movement, payment, booking, and memories seamlessly",
+        "editorPickSub": "Curated travel experiences for you",
+        "packages": {
+            "domestic": "Domestic Top 5",
+            "international": "International Top 5"
+        },
+        "promo": {
+            "hotel80": "Up to 80% Off Hotels",
+            "hotel80Sub": "Get your coupon now",
+            "package3": "Extra 3% Off International Packages",
+            "package3Sub": "Start the year special"
+        },
+        "quickActions": {
+            "benefits": "Moril Benefits",
+            "coupon": "Monthly Coupons",
+            "events": "View Events"
+        },
+        "recommend": {
+            "destination": "Destination",
+            "discount": "Discounts",
+            "ticket": "Discount Tickets",
+            "souvenir": "Souvenirs",
+            "insurance": "Insurance"
+        },
+        "banners": {
+            "destinationTitle": "Recommended Destinations",
+            "destination1": "Hidden Gems of Jeju",
+            "destinationSub1": "Most popular destination right now",
+            "destination2": "Gobi Desert Adventure",
+            "destinationSub2": "Where adventure awaits",
+            "destination3": "Seoul City Tour",
+            "destinationSub3": "Heart of K-Culture",
+            "eventTitle": "Ongoing Events",
+            "event1": "New Member 10% Coupon",
+            "event2": "Weekly Limited Deals",
+            "event3": "Refer a Friend Event",
+            "discountTitle": "On Sale Now",
+            "ticketTitle": "Discount Tickets",
+            "souvenirTitle": "Souvenir Picks",
+            "insuranceTag": "This trip needs this insurance",
+            "insuranceTitle": "Travel Insurance",
+            "insuranceSubtitle": "Check essential insurance for safe travels"
+        },
+        "products": {
+            "hotel": "Hotel Deals",
+            "tour": "Tour Discounts",
+            "ticket": "Ticket Sale",
+            "activity": "Activities"
+        },
+        "app": {
+            "title": "Better with Moril App",
+            "subtitle": "Get exclusive app-only benefits",
+            "openApp": "Open in App",
+            "continueWeb": "Continue on Web"
+        }
+    },
+    "footer": {
+        "description": "Travel OS connecting every moment of your journey. Experience easier and more convenient travel life with Moril.",
+        "company": "Company",
+        "terms": "Terms of Service",
+        "privacy": "Privacy Policy",
+        "support": "Support",
+        "contact": "Contact"
+    },
+    "category": {
+        "title": "Category",
+        "searchPlaceholder": "Search categories",
+        "payme": {
+            "title": "PayMe / Wallet",
+            "payment": "Payment",
+            "taxfree": "Tax Free",
+            "topup": "Top Up",
+            "card": "Card Link",
+            "history": "Payment History"
+        },
+        "transport": {
+            "title": "Transport",
+            "bus": "Bus",
+            "train": "Train",
+            "flight": "Flights"
+        },
+        "taxi": {
+            "title": "Taxi"
+        },
+        "travel": {
+            "title": "Travel",
+            "family": "Family Travel",
+            "cruise": "Cruise",
+            "healing": "Healing",
+            "activity": "Activity",
+            "tour": "Tour"
+        },
+        "accommodation": {
+            "title": "Accommodation",
+            "hotel": "Hotel",
+            "motel": "Motel / Inn",
+            "airbnb": "Airbnb"
+        },
+        "tickets": {
+            "title": "Tickets",
+            "performance": "Performance",
+            "concert": "Concert",
+            "museum": "Museum",
+            "opera": "Opera",
+            "admission": "Admission"
+        },
+        "guide": {
+            "title": "Guide",
+            "guide": "Guide",
+            "interpreter": "Translation & Interpretation"
+        },
+        "localProduct": {
+            "title": "Local Products",
+            "souvenir": "Souvenirs",
+            "food": "Food",
+            "clothing": "Clothing"
+        },
+        "service": {
+            "title": "Services",
+            "charger": "Charger Rental",
+            "rental": "Car Rental",
+            "scooter": "Electric Scooter"
+        },
+        "market": {
+            "title": "Market Rates",
+            "exchange": "Exchange Rate",
+            "price": "Prices",
+            "transport": "Transport Cost",
+            "calculator": "Calculator"
+        },
+        "travelLog": {
+            "title": "Travel Log",
+            "auto": "Auto Record",
+            "manual": "Manual Record",
+            "ai": "AI Schedule",
+            "export": "Export PDF"
+        },
+        "map": {
+            "title": "Map"
+        },
+        "insurance": {
+            "title": "Insurance",
+            "domestic": "Domestic",
+            "international": "International",
+            "essential": "Essential Insurance"
+        },
+        "translate": {
+            "title": "Translate",
+            "text": "Text",
+            "voice": "Voice",
+            "conversation": "Conversation",
+            "ocr": "OCR"
+        }
+    },
+    "placeholder": {
+        "comingSoon": "Coming Soon",
+        "comingSoonBadge": "In Development",
+        "description": "This feature is currently under development. Stay tuned for updates on Moril!",
+        "goBack": "Go Back",
+        "goHome": "Go Home",
+        "notifyMe": "Notify Me",
+        "notifyMeHint": "We'll let you know when it's ready"
     },
     "quick": {
         "taxi": {
