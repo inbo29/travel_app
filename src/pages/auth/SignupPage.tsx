@@ -1,214 +1,316 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useI18n } from '@/hooks/useI18n'
-import { LanguageSwitcher } from '@/ui'
+import { useAuthStore } from '@/stores/authStore'
+import { glassClasses } from '@/styles/glass'
+import { useRandomBackground } from '@/hooks/useRandomBackground'
+import Header from '@/ui/Header'
 
-const COUNTRIES = [
-    { code: 'KR', name: '대한민국', flag: '🇰🇷' },
-    { code: 'MN', name: 'Mongolia', flag: '🇲🇳' },
-    { code: 'US', name: 'United States', flag: '🇺🇸' },
-    { code: 'JP', name: '日本', flag: '🇯🇵' },
-    { code: 'CN', name: '中国', flag: '🇨🇳' },
-]
+type Step = 'email' | 'verify' | 'password' | 'complete'
 
 export default function SignupPage() {
     const { t } = useI18n()
     const navigate = useNavigate()
+    const login = useAuthStore((state) => state.login)
 
+    const [step, setStep] = useState<Step>('email')
     const [email, setEmail] = useState('')
+    const [verifyCode, setVerifyCode] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [country, setCountry] = useState('')
     const [agreeTerms, setAgreeTerms] = useState(false)
-    const [agreePrivacy, setAgreePrivacy] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+    const [sentCode, setSentCode] = useState('')
 
-    const handleSignup = async (e: React.FormEvent) => {
-        e.preventDefault()
+    const bgImage = useRandomBackground()
+
+    const handleSendCode = () => {
+        if (!email.includes('@')) {
+            setError(t('auth.error.invalidEmail'))
+            return
+        }
+        setLoading(true)
+        // Mock: Generate random 6-digit code
+        const mockCode = Math.random().toString().slice(2, 8)
+        setSentCode(mockCode)
+        console.log('Verification code:', mockCode) // For testing
+        setTimeout(() => {
+            setLoading(false)
+            setStep('verify')
+            setError('')
+        }, 1000)
+    }
+
+    const handleVerifyCode = () => {
+        if (verifyCode !== sentCode) {
+            setError(t('auth.error.invalidCode'))
+            return
+        }
         setError('')
+        setStep('password')
+    }
 
+    const handleCreateAccount = () => {
+        if (password.length < 6) {
+            setError(t('auth.error.passwordTooShort'))
+            return
+        }
         if (password !== confirmPassword) {
             setError(t('auth.error.passwordMismatch'))
             return
         }
-
-        if (!agreeTerms || !agreePrivacy) {
+        if (!agreeTerms) {
             setError(t('auth.error.agreeRequired'))
             return
         }
 
         setLoading(true)
-
-        // Simulate signup - replace with actual API call
         setTimeout(() => {
-            navigate('/login')
+            login({
+                id: Date.now().toString(),
+                email,
+                name: email.split('@')[0],
+            })
+            setStep('complete')
             setLoading(false)
         }, 1000)
     }
 
-    return (
-        <div className="min-h-screen relative overflow-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/90 via-teal-500/80 to-accent/90" />
-                <div className="absolute inset-0 bg-[url('/nature/nt3.png')] bg-cover bg-center opacity-20" />
-            </div>
+    const handleBackStep = () => {
+        if (step === 'verify') setStep('email')
+        else if (step === 'password') setStep('verify')
+        else if (step === 'email') navigate(-1) // Should be handled by Header, but just in case
+    }
 
-            {/* Top Bar */}
-            <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between">
-                <button
-                    onClick={() => navigate(-1)}
-                    className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-                >
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl">
-                    <LanguageSwitcher />
-                </div>
-            </div>
-
-            {/* Signup Card */}
-            <div className="relative z-10 min-h-screen flex items-center justify-center p-6 py-20">
-                <div className="w-full max-w-md">
-                    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
-                        {/* Logo */}
+    const renderStep = () => {
+        switch (step) {
+            case 'email':
+                return (
+                    <>
                         <div className="text-center mb-8">
-                            <h1 className="text-3xl font-bold text-white mb-2">Moril</h1>
-                            <p className="text-white/70 text-sm">{t('auth.signupSubtitle')}</p>
+                            <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                                <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <h2 className="text-xl font-bold text-slate-900 dark:text-white">{t('auth.signup.enterEmail')}</h2>
+                            <p className="text-slate-500 dark:text-white/60 text-sm mt-2">{t('auth.signup.emailDesc')}</p>
                         </div>
 
-                        {/* Form */}
-                        <form onSubmit={handleSignup} className="space-y-4">
-                            {/* Email */}
-                            <div>
-                                <label className="block text-white/80 text-sm font-medium mb-2">
-                                    {t('auth.email')}
-                                </label>
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder={t('auth.emailPlaceholder')}
-                                    required
-                                    className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all"
-                                />
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder={t('auth.emailPlaceholder')}
+                            className="w-full px-4 py-3.5 bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent/50 mb-4"
+                        />
+
+                        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
+
+                        <button
+                            onClick={handleSendCode}
+                            disabled={loading || !email}
+                            className="w-full py-4 bg-accent text-white font-bold rounded-xl disabled:opacity-50 transition-all"
+                        >
+                            {loading ? t('common.loading') : t('auth.signup.sendCode')}
+                        </button>
+                    </>
+                )
+
+            case 'verify':
+                return (
+                    <>
+                        <div className="text-center mb-8">
+                            <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-4">
+                                <svg className="w-8 h-8 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
                             </div>
+                            <h2 className="text-xl font-bold text-slate-900 dark:text-white">{t('auth.signup.verifyEmail')}</h2>
+                            <p className="text-slate-500 dark:text-white/60 text-sm mt-2">
+                                {t('auth.signup.codeSentTo')} <span className="text-accent font-medium">{email}</span>
+                            </p>
+                        </div>
 
-                            {/* Password */}
-                            <div>
-                                <label className="block text-white/80 text-sm font-medium mb-2">
-                                    {t('auth.password')}
-                                </label>
-                                <input
-                                    type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    placeholder={t('auth.passwordPlaceholder')}
-                                    required
-                                    className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all"
-                                />
+                        <input
+                            type="text"
+                            value={verifyCode}
+                            onChange={(e) => setVerifyCode(e.target.value)}
+                            placeholder={t('auth.signup.enterCode')}
+                            maxLength={6}
+                            className="w-full px-4 py-3.5 bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white text-center text-2xl tracking-[0.5em] placeholder:text-slate-400 placeholder:tracking-normal placeholder:text-base focus:outline-none focus:ring-2 focus:ring-accent/50 mb-4"
+                        />
+
+                        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
+
+                        <button
+                            onClick={handleVerifyCode}
+                            disabled={verifyCode.length < 6}
+                            className="w-full py-4 bg-accent text-white font-bold rounded-xl disabled:opacity-50 transition-all mb-3"
+                        >
+                            {t('auth.signup.verify')}
+                        </button>
+
+                        <button
+                            onClick={handleSendCode}
+                            className="w-full py-3 text-slate-500 dark:text-white/60 text-sm hover:text-accent transition-colors"
+                        >
+                            {t('auth.signup.resendCode')}
+                        </button>
+                    </>
+                )
+
+            case 'password':
+                return (
+                    <>
+                        <div className="text-center mb-8">
+                            <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                                <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
                             </div>
+                            <h2 className="text-xl font-bold text-slate-900 dark:text-white">{t('auth.signup.setPassword')}</h2>
+                            <p className="text-slate-500 dark:text-white/60 text-sm mt-2">{t('auth.signup.passwordDesc')}</p>
+                        </div>
 
-                            {/* Confirm Password */}
-                            <div>
-                                <label className="block text-white/80 text-sm font-medium mb-2">
-                                    {t('auth.confirmPassword')}
-                                </label>
-                                <input
-                                    type="password"
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    placeholder={t('auth.confirmPasswordPlaceholder')}
-                                    required
-                                    className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all"
-                                />
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder={t('auth.passwordPlaceholder')}
+                            className="w-full px-4 py-3.5 bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent/50 mb-3"
+                        />
+
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            placeholder={t('auth.confirmPasswordPlaceholder')}
+                            className="w-full px-4 py-3.5 bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent/50 mb-4"
+                        />
+
+                        <label className="flex items-start gap-3 cursor-pointer mb-4">
+                            <input
+                                type="checkbox"
+                                checked={agreeTerms}
+                                onChange={(e) => setAgreeTerms(e.target.checked)}
+                                className="w-5 h-5 mt-0.5 rounded border-slate-300 dark:border-white/30 bg-slate-100 dark:bg-white/10 text-accent focus:ring-accent/50"
+                            />
+                            <span className="text-slate-600 dark:text-white/70 text-sm leading-relaxed">
+                                {t('auth.agreeTerms')} 및 {t('auth.agreePrivacy')}
+                            </span>
+                        </label>
+
+                        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
+
+                        <button
+                            onClick={handleCreateAccount}
+                            disabled={loading}
+                            className="w-full py-4 bg-accent text-white font-bold rounded-xl disabled:opacity-50 transition-all"
+                        >
+                            {loading ? t('common.loading') : t('auth.createAccount')}
+                        </button>
+                    </>
+                )
+
+            case 'complete':
+                return (
+                    <>
+                        <div className="text-center">
+                            <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-6">
+                                <svg className="w-10 h-10 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
                             </div>
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{t('auth.signup.welcome')}</h2>
+                            <p className="text-slate-500 dark:text-white/60 mb-8">{t('auth.signup.welcomeDesc')}</p>
 
-                            {/* Country */}
-                            <div>
-                                <label className="block text-white/80 text-sm font-medium mb-2">
-                                    {t('auth.country')}
-                                </label>
-                                <select
-                                    value={country}
-                                    onChange={(e) => setCountry(e.target.value)}
-                                    required
-                                    className="w-full px-4 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all appearance-none"
-                                >
-                                    <option value="" className="text-slate-900">{t('auth.selectCountry')}</option>
-                                    {COUNTRIES.map((c) => (
-                                        <option key={c.code} value={c.code} className="text-slate-900">
-                                            {c.flag} {c.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            {/* Terms */}
-                            <div className="space-y-3 pt-2">
-                                <label className="flex items-start gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={agreeTerms}
-                                        onChange={(e) => setAgreeTerms(e.target.checked)}
-                                        className="w-5 h-5 mt-0.5 rounded border-white/30 bg-white/10 text-accent focus:ring-accent/50"
-                                    />
-                                    <span className="text-white/70 text-sm leading-relaxed">
-                                        {t('auth.agreeTerms')}{' '}
-                                        <a href="#" className="text-white underline">{t('footer.terms')}</a>
-                                    </span>
-                                </label>
-                                <label className="flex items-start gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={agreePrivacy}
-                                        onChange={(e) => setAgreePrivacy(e.target.checked)}
-                                        className="w-5 h-5 mt-0.5 rounded border-white/30 bg-white/10 text-accent focus:ring-accent/50"
-                                    />
-                                    <span className="text-white/70 text-sm leading-relaxed">
-                                        {t('auth.agreePrivacy')}{' '}
-                                        <a href="#" className="text-white underline">{t('footer.privacy')}</a>
-                                    </span>
-                                </label>
-                            </div>
-
-                            {/* Error */}
-                            {error && (
-                                <div className="p-3 bg-red-500/20 border border-red-500/30 rounded-xl text-red-200 text-sm text-center">
-                                    {error}
-                                </div>
-                            )}
-
-                            {/* Submit */}
                             <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-full py-4 bg-white text-accent font-bold rounded-xl hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 mt-2"
+                                onClick={() => navigate('/home')}
+                                className="w-full py-4 bg-accent text-white font-bold rounded-xl transition-all"
                             >
-                                {loading ? (
-                                    <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                                    </svg>
-                                ) : (
-                                    t('auth.createAccount')
-                                )}
+                                {t('auth.signup.goToHome')}
                             </button>
-                        </form>
+                        </div>
+                    </>
+                )
+        }
+    }
+
+    return (
+        <div className="min-h-screen bg-bg-light dark:bg-bg-dark transition-colors duration-300 relative">
+            {/* Global Header */}
+            <Header />
+
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                {bgImage && (
+                    <img
+                        src={bgImage}
+                        alt="Background"
+                        className="w-full h-full object-cover transition-opacity duration-1000"
+                    />
+                )}
+                {/* Blur Overlay */}
+                <div className="absolute inset-0 bg-black/40 backdrop-blur-[3px]" />
+            </div>
+
+            {/* Step Indicator */}
+            {step !== 'complete' && (
+                <div className="relative z-10 flex items-center justify-center gap-2 pt-20 pb-4">
+                    {['email', 'verify', 'password'].map((s, idx) => (
+                        <div key={s} className="flex items-center">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${step === s ? 'bg-accent text-white' :
+                                ['email', 'verify', 'password'].indexOf(step) > idx ? 'bg-emerald-500 text-white' :
+                                    'bg-slate-200 dark:bg-white/10 text-slate-400'
+                                }`}>
+                                {['email', 'verify', 'password'].indexOf(step) > idx ? '✓' : idx + 1}
+                            </div>
+                            {idx < 2 && (
+                                <div className={`w-8 h-0.5 transition-colors ${['email', 'verify', 'password'].indexOf(step) > idx ? 'bg-emerald-500' : 'bg-slate-200 dark:bg-white/10'
+                                    }`} />
+                            )}
+                        </div>
+                    ))}
+                </div>
+            )}
+
+            {/* Card */}
+            <div className="relative z-10 flex items-center justify-center px-6 py-4">
+                <div className="w-full max-w-md">
+                    <div className={`${glassClasses} rounded-3xl p-8 border border-slate-200/50 dark:border-white/10 shadow-2xl animate-fade-in-up relative`}>
+                        {/* Step Back Button */}
+                        {step !== 'email' && step !== 'complete' && (
+                            <button
+                                onClick={handleBackStep}
+                                className="absolute top-8 left-8 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors"
+                            >
+                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                        )}
+
+                        {/* Logo */}
+                        <div className="text-center mb-4">
+                            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Moril</h1>
+                        </div>
+
+                        {renderStep()}
 
                         {/* Login Link */}
-                        <div className="text-center mt-6">
-                            <span className="text-white/60 text-sm">{t('auth.hasAccount')}</span>
-                            <button
-                                onClick={() => navigate('/login')}
-                                className="text-white font-semibold text-sm ml-1 hover:underline"
-                            >
-                                {t('auth.login')}
-                            </button>
-                        </div>
+                        {step === 'email' && (
+                            <div className="text-center mt-6">
+                                <span className="text-slate-500 dark:text-white/60 text-sm">{t('auth.hasAccount')}</span>
+                                <button
+                                    onClick={() => navigate('/login')}
+                                    className="text-accent font-semibold text-sm ml-1 hover:underline"
+                                >
+                                    {t('auth.login')}
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { glassClasses } from '@/styles/glass'
 import { useI18n } from '@/hooks/useI18n'
+import { useRandomBackground } from '@/hooks/useRandomBackground'
 import Footer from '@/ui/Footer'
+import AppDownloadSection from '@/ui/AppDownloadSection'
 
 // Quick Access Items for horizontal scroll bar (NOL style)
 const QUICK_CATEGORIES = [
@@ -81,6 +83,7 @@ export default function HomeMain() {
     const { t } = useI18n()
     const navigate = useNavigate()
     const [currentDestBanner, setCurrentDestBanner] = useState(0)
+    const bgImage = useRandomBackground()
 
     // Banner auto-slide
     useEffect(() => {
@@ -93,8 +96,23 @@ export default function HomeMain() {
     return (
         <div className="relative min-h-screen">
             {/* Background */}
-            <div className="absolute inset-0 z-[-1] bg-bg-light dark:bg-bg-dark overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 via-white/0 to-emerald-50/50 dark:from-indigo-950/30 dark:to-emerald-950/30" />
+            <div className="absolute inset-0 z-[-1] overflow-hidden">
+                {/* Hero Background with Random Image */}
+                <div className="absolute top-0 left-0 right-0 h-[600px] md:h-[700px] transition-all duration-1000">
+                    {bgImage && (
+                        <img
+                            src={bgImage}
+                            alt="Hero Background"
+                            className="w-full h-full object-cover animate-fade-in"
+                        />
+                    )}
+                    {/* Gradient Overlay for Fade to Bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-bg-light dark:to-bg-dark" />
+                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg-light dark:from-bg-dark to-transparent" />
+                </div>
+
+                {/* Dark Pattern Background for lower sections (optional, or just let default bg take over) */}
+                <div className="absolute top-[600px] md:top-[700px] bottom-0 left-0 right-0 bg-bg-light dark:bg-bg-dark" />
             </div>
 
             <div className="relative z-10 pt-4">
@@ -476,6 +494,9 @@ export default function HomeMain() {
                         </div>
                     </div>
                 </section>
+
+                {/* ========== 12. APP DOWNLOAD INDUCEMENT ========== */}
+                <AppDownloadSection />
 
                 {/* Bottom Padding for BottomNav */}
                 <div className="h-28" />

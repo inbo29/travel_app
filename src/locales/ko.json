@@ -28,11 +28,74 @@
         "createAccount": "계정 만들기",
         "agreeTerms": "이용약관에 동의합니다",
         "agreePrivacy": "개인정보 처리방침에 동의합니다",
+        "socialNotReady": "준비 중인 기능입니다",
+        "socialNotReadyDesc": "{provider} 로그인은 현재 준비 중입니다. 이메일로 가입해 주세요.",
+        "signup": {
+            "enterEmail": "이메일 입력",
+            "emailDesc": "인증 코드를 받을 이메일을 입력하세요",
+            "sendCode": "인증 코드 발송",
+            "verifyEmail": "이메일 인증",
+            "codeSentTo": "인증 코드가 발송되었습니다:",
+            "enterCode": "인증 코드 입력",
+            "verify": "인증하기",
+            "resendCode": "코드 재발송",
+            "setPassword": "비밀번호 설정",
+            "passwordDesc": "안전한 비밀번호를 설정해주세요 (6자 이상)",
+            "welcome": "가입을 환영합니다!",
+            "welcomeDesc": "Moril과 함께 여행을 시작하세요",
+            "goToHome": "홈으로 이동"
+        },
         "error": {
             "invalidCredentials": "이메일 또는 비밀번호가 올바르지 않습니다",
             "passwordMismatch": "비밀번호가 일치하지 않습니다",
-            "agreeRequired": "약관에 동의해주세요"
+            "agreeRequired": "약관에 동의해주세요",
+            "invalidEmail": "올바른 이메일을 입력해주세요",
+            "invalidCode": "인증 코드가 올바르지 않습니다",
+            "passwordTooShort": "비밀번호는 6자 이상이어야 합니다"
         }
+    },
+    "common": {
+        "confirm": "확인",
+        "cancel": "취소",
+        "delete": "삭제",
+        "save": "저장",
+        "loading": "로딩 중..."
+    },
+    "mypage": {
+        "loginRequired": "로그인이 필요합니다",
+        "loginRequiredDesc": "마이페이지를 이용하려면 로그인해주세요",
+        "settings": {
+            "title": "설정",
+            "theme": "테마 변경",
+            "location": "위치 공유",
+            "notifications": "알림",
+            "marketing": "뉴스 및 마케팅 알림"
+        },
+        "profile": {
+            "title": "내 정보",
+            "email": "이메일",
+            "joinMethod": "가입 방식",
+            "deleteAccount": "회원 탈퇴"
+        },
+        "sos": {
+            "title": "응급 연락처 (SOS)",
+            "locationOn": "위치 공유 ON",
+            "locationOff": "위치 공유 OFF",
+            "addContact": "연락처 추가"
+        },
+        "activity": {
+            "title": "내 활동 기록",
+            "taxi": "택시 이용",
+            "payment": "결제 내역",
+            "tickets": "티켓 구매",
+            "log": "여행 기록",
+            "guides": "가이드/서비스"
+        },
+        "logout": "로그아웃",
+        "logoutConfirm": "로그아웃 하시겠습니까?",
+        "logoutConfirmDesc": "다시 로그인하면 이전 기록을 확인할 수 있습니다.",
+        "deleteConfirm": "정말 탈퇴하시겠습니까?",
+        "deleteConfirmDesc": "계정을 삭제하면 모든 데이터가 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다."
     },
     "appPopup": {
         "tagline": "놀수록 놀라운 세상",

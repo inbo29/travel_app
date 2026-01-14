@@ -28,11 +28,74 @@
         "createAccount": "Create Account",
         "agreeTerms": "I agree to the Terms of Service",
         "agreePrivacy": "I agree to the Privacy Policy",
+        "socialNotReady": "Coming Soon",
+        "socialNotReadyDesc": "{provider} login is coming soon. Please sign up with email.",
+        "signup": {
+            "enterEmail": "Enter Email",
+            "emailDesc": "Enter your email to receive a verification code",
+            "sendCode": "Send Code",
+            "verifyEmail": "Verify Email",
+            "codeSentTo": "Verification code sent to:",
+            "enterCode": "Enter code",
+            "verify": "Verify",
+            "resendCode": "Resend Code",
+            "setPassword": "Set Password",
+            "passwordDesc": "Create a secure password (6+ characters)",
+            "welcome": "Welcome to Moril!",
+            "welcomeDesc": "Start your journey with Moril",
+            "goToHome": "Go to Home"
+        },
         "error": {
             "invalidCredentials": "Invalid email or password",
             "passwordMismatch": "Passwords do not match",
-            "agreeRequired": "Please agree to the terms"
+            "agreeRequired": "Please agree to the terms",
+            "invalidEmail": "Please enter a valid email",
+            "invalidCode": "Invalid verification code",
+            "passwordTooShort": "Password must be at least 6 characters"
         }
+    },
+    "common": {
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "save": "Save",
+        "loading": "Loading..."
+    },
+    "mypage": {
+        "loginRequired": "Login Required",
+        "loginRequiredDesc": "Please login to access My Page",
+        "settings": {
+            "title": "Settings",
+            "theme": "Theme",
+            "location": "Location Sharing",
+            "notifications": "Notifications",
+            "marketing": "News & Marketing"
+        },
+        "profile": {
+            "title": "My Profile",
+            "email": "Email",
+            "joinMethod": "Join Method",
+            "deleteAccount": "Delete Account"
+        },
+        "sos": {
+            "title": "Emergency Contacts (SOS)",
+            "locationOn": "Location ON",
+            "locationOff": "Location OFF",
+            "addContact": "Add Contact"
+        },
+        "activity": {
+            "title": "My Activity",
+            "taxi": "Taxi History",
+            "payment": "Payment History",
+            "tickets": "Ticket Purchases",
+            "log": "Travel Log",
+            "guides": "Guides/Services"
+        },
+        "logout": "Logout",
+        "logoutConfirm": "Are you sure you want to logout?",
+        "logoutConfirmDesc": "You can check your history again after logging in.",
+        "deleteConfirm": "Delete your account?",
+        "deleteConfirmDesc": "Deleting your account will permanently remove all your data. This action cannot be undone."
     },
     "appPopup": {
         "tagline": "The more you explore",

@@ -4,7 +4,7 @@ import { LanguageSwitcher } from './LanguageSwitcher'
 import { useI18n } from '@/hooks/useI18n'
 import { useAuthStore } from '@/stores/authStore'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SearchModal } from './SearchModal'
 
 export default function Header() {
@@ -12,12 +12,21 @@ export default function Header() {
     const navigate = useNavigate()
     const location = useLocation()
     const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false)
 
     // Auth state
     const { isAuthenticated, user, logout } = useAuthStore()
 
     const isHome = location.pathname === '/home' || location.pathname === '/'
-    const isTopLevel = isHome || ['/taxi', '/map', '/translate', '/translator', '/exchange', '/profile'].some(path => location.pathname === path)
+
+    // Check scroll for transparency
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10)
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
 
     const handleBack = () => {
         if (window.history.length > 2) {
@@ -27,8 +36,15 @@ export default function Header() {
         }
     }
 
+    const isAuthPage = ['/login', '/signup'].includes(location.pathname)
+
+    // Dynamic classes based on scroll and page
+    const containerClasses = isScrolled
+        ? "bg-white/70 dark:bg-black/60 backdrop-blur-xl border-b border-black/[0.03] dark:border-white/[0.03]"
+        : "bg-transparent border-transparent"
+
     return (
-        <header className="relative w-full z-50 h-16 bg-white/70 dark:bg-bg-dark/50 backdrop-blur-xl border-b border-black/[0.03] dark:border-white/[0.03] transition-all duration-300">
+        <header className={`fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ${containerClasses}`}>
             <div className="max-w-7xl mx-auto h-full px-4 md:px-6 flex items-center justify-between gap-4">
                 {/* Left Area: Always Logo */}
                 <div className="flex items-center gap-2 shrink-0 min-w-[100px]">
@@ -36,7 +52,7 @@ export default function Header() {
                         onClick={() => navigate('/home')}
                         className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
                     >
-                        <span className="font-bold text-2xl tracking-tighter text-slate-900 dark:text-white">
+                        <span className={`font-bold text-2xl tracking-tighter ${isScrolled || !isHome ? 'text-slate-900 dark:text-white' : 'text-slate-900 dark:text-white'}`}>
                             Moril
                         </span>
                     </div>
@@ -65,30 +81,34 @@ export default function Header() {
                         </button>
                     )}
 
-                    {/* Search Button */}
-                    <button
-                        onClick={() => setIsSearchOpen(true)}
-                        className="w-9 h-9 flex items-center justify-center
-                   text-slate-500 dark:text-white/70
-                   hover:text-accent
-                   hover:bg-black/5 dark:hover:bg-white/10
-                   rounded-xl transition-all group"
-                    >
-                        <svg
-                            className="w-5 h-5 group-hover:scale-110 transition-transform"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </button>
+                    {!isAuthPage && (
+                        <>
+                            {/* Search Button */}
+                            <button
+                                onClick={() => setIsSearchOpen(true)}
+                                className="w-9 h-9 flex items-center justify-center
+                        text-slate-500 dark:text-white/70
+                        hover:text-accent
+                        hover:bg-black/5 dark:hover:bg-white/10
+                        rounded-xl transition-all group"
+                            >
+                                <svg
+                                    className="w-5 h-5 group-hover:scale-110 transition-transform"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </button>
 
-                    <SearchModal
-                        isOpen={isSearchOpen}
-                        onClose={() => setIsSearchOpen(false)}
-                    />
+                            <SearchModal
+                                isOpen={isSearchOpen}
+                                onClose={() => setIsSearchOpen(false)}
+                            />
+                        </>
+                    )}
 
                     <LanguageSwitcher />
                     <ThemeToggle />
@@ -114,7 +134,7 @@ export default function Header() {
                             <button
                                 onClick={() => navigate('/profile')}
                                 className="w-9 h-9 rounded-xl bg-black/5 dark:bg-white/10 overflow-hidden
-                   ring-2 ring-transparent hover:ring-accent/50 transition-all p-0.5"
+                    ring-2 ring-transparent hover:ring-accent/50 transition-all p-0.5"
                             >
                                 <img
                                     src={user?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.name || 'User'}`}
@@ -124,13 +144,15 @@ export default function Header() {
                             </button>
                         </>
                     ) : (
-                        /* Login Button (when logged out) */
-                        <button
-                            onClick={() => navigate('/login')}
-                            className="px-4 py-2 bg-accent text-white text-sm font-semibold rounded-xl hover:bg-accent/90 transition-colors"
-                        >
-                            {t('auth.login')}
-                        </button>
+                        /* Login Button (when logged out, hide on auth pages) */
+                        !isAuthPage && (
+                            <button
+                                onClick={() => navigate('/login')}
+                                className="px-4 py-2 bg-accent text-white text-sm font-semibold rounded-xl hover:bg-accent/90 transition-colors"
+                            >
+                                {t('auth.login')}
+                            </button>
+                        )
                     )}
                 </div>
 
@@ -139,3 +161,4 @@ export default function Header() {
         </header>
     )
 }
+

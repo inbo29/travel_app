@@ -48,6 +48,7 @@ import SavedTranslations from '@/pages/translate/saved'
 import LogHome from '@/pages/log/LogHome'
 import JourneyDetail from '@/pages/log/JourneyDetail'
 import LocalMart from '@/pages/market/LocalMart'
+import MyPage from '@/pages/profile/MyPage'
 
 // Placeholder Component
 import ComingSoon from '@/pages/placeholder/ComingSoon'
@@ -102,7 +103,7 @@ export default function App() {
 
                 {/* Market & Log */}
                 <Route path="/exchange" element={<div className="pt-8 px-6 text-2xl font-bold">{t('nav.payme')}</div>} />
-                <Route path="/profile" element={<div className="pt-8 px-6 text-2xl font-bold">{t('nav.my')}</div>} />
+                <Route path="/profile" element={<MyPage />} />
                 <Route path="/market-rates" element={<MarketRates />} />
                 <Route path="/local-mart" element={<LocalMart />} />
                 <Route path="/travel-log" element={<LogHome />} />
